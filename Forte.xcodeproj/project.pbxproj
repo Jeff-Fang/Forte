@@ -8,22 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */; };
-		E507AC7D1CA7CB7300EF850C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC7C1CA7CB7300EF850C /* ViewController.swift */; };
 		E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC7E1CA7CB7300EF850C /* Main.storyboard */; };
 		E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */; };
 		E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E507AC841CA7CB7300EF850C /* Assets.xcassets */; };
 		E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */; };
+		E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */; };
+		E507AC941CA7CE7900EF850C /* AllGlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E507AC771CA7CB7300EF850C /* Forte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E507AC7C1CA7CB7300EF850C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E507AC7F1CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Forte.xcdatamodel; sourceTree = "<group>"; };
 		E507AC841CA7CB7300EF850C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E507AC871CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewCell.swift; sourceTree = "<group>"; };
+		E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */,
-				E507AC7C1CA7CB7300EF850C /* ViewController.swift */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */,
+				E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */,
 				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
 				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
@@ -139,9 +142,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */,
 				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
-				E507AC7D1CA7CB7300EF850C /* ViewController.swift in Sources */,
 				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
+				E507AC941CA7CE7900EF850C /* AllGlossaryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +295,7 @@
 				E507AC8E1CA7CB7300EF850C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
