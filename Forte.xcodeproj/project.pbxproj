@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */; };
+		E507AC7D1CA7CB7300EF850C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC7C1CA7CB7300EF850C /* ViewController.swift */; };
+		E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC7E1CA7CB7300EF850C /* Main.storyboard */; };
+		E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */; };
+		E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E507AC841CA7CB7300EF850C /* Assets.xcassets */; };
+		E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E507AC771CA7CB7300EF850C /* Forte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forte.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E507AC7C1CA7CB7300EF850C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E507AC7F1CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Forte.xcdatamodel; sourceTree = "<group>"; };
+		E507AC841CA7CB7300EF850C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E507AC871CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E507AC741CA7CB7300EF850C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E507AC6E1CA7CB7300EF850C = {
+			isa = PBXGroup;
+			children = (
+				E507AC791CA7CB7300EF850C /* Forte */,
+				E507AC781CA7CB7300EF850C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E507AC781CA7CB7300EF850C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E507AC771CA7CB7300EF850C /* Forte.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E507AC791CA7CB7300EF850C /* Forte */ = {
+			isa = PBXGroup;
+			children = (
+				E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */,
+				E507AC7C1CA7CB7300EF850C /* ViewController.swift */,
+				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
+				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
+				E507AC891CA7CB7300EF850C /* Info.plist */,
+				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
+			);
+			path = Forte;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E507AC761CA7CB7300EF850C /* Forte */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E507AC8C1CA7CB7300EF850C /* Build configuration list for PBXNativeTarget "Forte" */;
+			buildPhases = (
+				E507AC731CA7CB7300EF850C /* Sources */,
+				E507AC741CA7CB7300EF850C /* Frameworks */,
+				E507AC751CA7CB7300EF850C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Forte;
+			productName = Forte;
+			productReference = E507AC771CA7CB7300EF850C /* Forte.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E507AC6F1CA7CB7300EF850C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = swordx;
+				TargetAttributes = {
+					E507AC761CA7CB7300EF850C = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = G2VU26L9YP;
+					};
+				};
+			};
+			buildConfigurationList = E507AC721CA7CB7300EF850C /* Build configuration list for PBXProject "Forte" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E507AC6E1CA7CB7300EF850C;
+			productRefGroup = E507AC781CA7CB7300EF850C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E507AC761CA7CB7300EF850C /* Forte */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E507AC751CA7CB7300EF850C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */,
+				E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */,
+				E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E507AC731CA7CB7300EF850C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
+				E507AC7D1CA7CB7300EF850C /* ViewController.swift in Sources */,
+				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E507AC7E1CA7CB7300EF850C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E507AC7F1CA7CB7300EF850C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E507AC871CA7CB7300EF850C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E507AC8A1CA7CB7300EF850C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E507AC8B1CA7CB7300EF850C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E507AC8D1CA7CB7300EF850C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Forte/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.Forte;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E507AC8E1CA7CB7300EF850C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Forte/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.Forte;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E507AC721CA7CB7300EF850C /* Build configuration list for PBXProject "Forte" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E507AC8A1CA7CB7300EF850C /* Debug */,
+				E507AC8B1CA7CB7300EF850C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E507AC8C1CA7CB7300EF850C /* Build configuration list for PBXNativeTarget "Forte" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E507AC8D1CA7CB7300EF850C /* Debug */,
+				E507AC8E1CA7CB7300EF850C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */,
+			);
+			currentVersion = E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */;
+			path = Forte.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = E507AC6F1CA7CB7300EF850C /* Project object */;
+}
