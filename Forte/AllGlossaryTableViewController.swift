@@ -10,8 +10,18 @@ import UIKit
 
 class AllGlossaryTableViewController: UITableViewController {
 
+    var glossary:[GlossaryItem] = [
+        GlossaryItem(term: "Forte", meaning: "Strong (i.e. to be played or sung loudly)"),
+        GlossaryItem(term: "Piano", meaning: "Gently (i.e. played or sung softly) (see dynamics)"),
+        GlossaryItem(term: "più", meaning: "More; see mosso")
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Enable self sizing cells
+        // tableView.estimatedRowHeight = 66.0
+        // tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func didReceiveMemoryWarning() {
@@ -25,14 +35,15 @@ class AllGlossaryTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return glossary.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell",forIndexPath: indexPath) as! AllGlossaryTableViewCell
+        
         // Configure the cell
-        cell.termLabel.text = "TermTest"
-        cell.meaningLabel.text = "MeaningTest"
+        cell.termLabel.text = glossary[indexPath.row].term
+        cell.meaningLabel.text = glossary[indexPath.row].meaning
         
         return cell
     }
