@@ -7,13 +7,9 @@
 //
 
 import Foundation
+import CoreData
 
-class GlossaryItem {
-    var term = ""
-    var meaning = ""
-    
-    init(term:String, meaning:String) {
-        self.term = term
-        self.meaning = meaning 
-    }
+class GlossaryItem:NSManagedObject {
+    @NSManaged var term:String?
+    @NSManaged var meaning:String?
 }

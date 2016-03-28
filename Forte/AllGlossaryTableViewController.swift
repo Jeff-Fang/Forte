@@ -10,11 +10,13 @@ import UIKit
 
 class AllGlossaryTableViewController: UITableViewController {
 
-    var glossary:[GlossaryItem] = [
-        GlossaryItem(term: "Forte", meaning: "Strong (i.e. to be played or sung loudly)"),
-        GlossaryItem(term: "Piano", meaning: "Gently (i.e. played or sung softly) (see dynamics)"),
-        GlossaryItem(term: "più", meaning: "More; see mosso")
-    ]
+//    var glossary:[GlossaryItem] = [
+//        GlossaryItem(term: "Forte", meaning: "Strong (i.e. to be played or sung loudly)"),
+//        GlossaryItem(term: "Piano", meaning: "Gently (i.e. played or sung softly) (see dynamics)"),
+//        GlossaryItem(term: "più", meaning: "More; see mosso")
+//    ]
+    
+    var glossary:[GlossaryItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
