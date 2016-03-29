@@ -16,6 +16,8 @@ class AllGlossaryTableViewController: UITableViewController, UISearchResultsUpda
     var searchController:UISearchController!
     var searchResults:[GlossaryItem] = []
     
+    var selectedIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,8 +39,9 @@ class AllGlossaryTableViewController: UITableViewController, UISearchResultsUpda
         searchController.dimsBackgroundDuringPresentation = false
         
         // Enable self sizing cells
-        // tableView.estimatedRowHeight = 66.0
-        // tableView.rowHeight = UITableViewAutomaticDimension
+//         tableView.rowHeight = UITableViewAutomaticDimension
+         tableView.estimatedRowHeight = 54
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,13 +65,29 @@ class AllGlossaryTableViewController: UITableViewController, UISearchResultsUpda
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell",forIndexPath: indexPath) as! AllGlossaryTableViewCell
-        let glossaryItem = (searchController.active) ? searchResults[indexPath.row] : glossary[indexPath.row]
+        let displayItem = (searchController.active) ? searchResults[indexPath.row] : glossary[indexPath.row]
         
         // Configure the cell
-        cell.termLabel.text = glossaryItem.term
-        cell.meaningLabel.text = glossaryItem.meaning
+            cell.termLabel.text = displayItem.term
+            cell.meaningLabel.text = displayItem.meaning
         
         return cell
+    }
+    
+    // MARK: - UITableView Delegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedIndexPath = indexPath
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+            return UITableViewAutomaticDimension
+        } else {
+            return 53
+        }
     }
     
     // MARK: - UISearchResultsUpdating Protocal

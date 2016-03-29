@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Forte-->
         <scene sceneID="4aw-PS-K3L">
             <objects>
                 <tableViewController id="Ftq-Wd-Klb" customClass="AllGlossaryTableViewController" customModule="Forte" customModuleProvider="target" sceneMemberID="viewController">
@@ -14,26 +14,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="66" id="Dch-OM-yj0" customClass="AllGlossaryTableViewCell" customModule="Forte" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="66" id="Dch-OM-yj0" customClass="AllGlossaryTableViewCell" customModule="Forte" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dch-OM-yj0" id="Etd-pW-xjb">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="65"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-tZ-e62">
-                                            <rect key="frame" x="8" y="0.0" width="584" height="24"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bv-tZ-e62">
+                                            <rect key="frame" x="20" y="5" width="560" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meaning" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-LQ-7g1">
-                                            <rect key="frame" x="8" y="22" width="584" height="35"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Meaning" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u1P-LQ-7g1">
+                                            <rect key="frame" x="20" y="30" width="560" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="u1P-LQ-7g1" firstAttribute="leading" secondItem="Etd-pW-xjb" secondAttribute="leading" constant="20" id="8MJ-cx-0lG"/>
+                                        <constraint firstAttribute="trailing" secondItem="u1P-LQ-7g1" secondAttribute="trailing" constant="20" id="CrV-fm-DSd"/>
+                                        <constraint firstItem="u1P-LQ-7g1" firstAttribute="top" secondItem="8Bv-tZ-e62" secondAttribute="bottom" constant="1" id="L6X-hx-Z0B"/>
+                                        <constraint firstItem="8Bv-tZ-e62" firstAttribute="top" secondItem="Etd-pW-xjb" secondAttribute="top" constant="5" id="LmT-ZD-kbE"/>
+                                        <constraint firstAttribute="trailing" secondItem="8Bv-tZ-e62" secondAttribute="trailing" constant="20" id="RbG-0J-2Wc"/>
+                                        <constraint firstAttribute="bottom" secondItem="u1P-LQ-7g1" secondAttribute="bottom" constant="5" id="X5t-un-Ufy"/>
+                                        <constraint firstItem="8Bv-tZ-e62" firstAttribute="leading" secondItem="Etd-pW-xjb" secondAttribute="leading" constant="20" id="utE-4E-wCZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="meaningLabel" destination="u1P-LQ-7g1" id="gfK-qY-5hl"/>
@@ -46,7 +55,7 @@
                             <outlet property="delegate" destination="Ftq-Wd-Klb" id="FtE-Oe-1wc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="wzb-Aj-Hxa"/>
+                    <navigationItem key="navigationItem" title="Forte" id="wzb-Aj-Hxa"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jrJ-Qw-RTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
