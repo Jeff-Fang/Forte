@@ -13,10 +13,14 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    let dataSourceName = "A_MusicTerms"
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        preloadData()
+        
+        print(applicationDocumentsDirectory.path)
+
         return true
     }
 
@@ -104,6 +108,111 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
+        }
+    }
+    
+    // MARK: - CSV Parsing support
+    
+    func parseCSV(contentsOfURL: NSURL, encoding: NSStringEncoding) -> [(term:String, meaning:String)]? {
+        
+        // Load the CSV file and parse it
+        let delimiter = ","
+        var items:[(term:String, meaning:String)]?
+        
+        do {
+            let content = try String(contentsOfURL: contentsOfURL, encoding: encoding)
+            items = []
+            let lines:[String] = content.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet()) as [String]
+            
+            for line in lines {
+                var values:[String] = []
+                if line != "" {
+                    // For a line with double quotes
+                    // we use NSScanner to perform the parsing
+                    if line.rangeOfString("\"") != nil {
+                        var textToScan:String = line
+                        var value:NSString?
+                        var textScanner:NSScanner = NSScanner(string: textToScan)
+                        while textScanner.string != "" {
+                            
+                            if (textScanner.string as NSString).substringToIndex(1) == "\"" {
+                                textScanner.scanLocation += 1
+                                textScanner.scanUpToString("\"", intoString: &value)
+                                textScanner.scanLocation += 1
+                            } else {
+                                textScanner.scanUpToString(delimiter, intoString: &value)
+                            }
+                            
+                            // Store the value into the values array
+                            values.append(value as! String)
+                            
+                            // Retrieve the unscanned remainder of the string
+                            if textScanner.scanLocation < textScanner.string.characters.count {
+                                textToScan = (textScanner.string as NSString).substringFromIndex(textScanner.scanLocation + 1)
+                            } else {
+                                textToScan = ""
+                            }
+                            textScanner = NSScanner(string: textToScan)
+                        }
+                        
+                        // For a line without double quotes, we can simply separate the string
+                        // by using the delimiter (e.g. comma)
+                    } else  {
+                        values = line.componentsSeparatedByString(delimiter)
+                    }
+                    
+                    // Put the values into the tuple and add it to the items array
+                    let item = (term: values[0], meaning: values[1])
+                    items?.append(item)
+                }
+            }
+        } catch {
+            print(error)
+        }
+        
+        return items
+    }
+    
+    // MARK: - Data Preloading support
+    
+    func preloadData () {
+        
+        // Load the data file. For any reasons it can't be loaded, we just return
+        guard let contentsOfURL = NSBundle.mainBundle().URLForResource(dataSourceName, withExtension: "csv") else {
+            print("get contents URL failed! ")
+            return
+        }
+        
+        // Remove all the menu items before preloading
+        removeData()
+        if let items = parseCSV(contentsOfURL, encoding: NSUTF8StringEncoding) {
+            // Preload the menu items
+            for item in items {
+                let glossaryItem = NSEntityDescription.insertNewObjectForEntityForName("GlossaryItem", inManagedObjectContext: managedObjectContext) as! GlossaryItem
+                glossaryItem.term = item.term
+                glossaryItem.meaning = item.meaning
+                
+                do {
+                    try managedObjectContext.save()
+                } catch {
+                    print(error)
+                }
+            }
+            
+        }
+    }
+    
+    func removeData () {
+        // Remove the existing items
+        let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
+        
+        do {
+            let menuItems = try managedObjectContext.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+            for menuItem in menuItems {
+                managedObjectContext.deleteObject(menuItem)
+            }
+        } catch {
+            print(error)
         }
     }
 

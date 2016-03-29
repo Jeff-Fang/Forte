@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class AllGlossaryTableViewController: UITableViewController {
 
@@ -17,9 +18,21 @@ class AllGlossaryTableViewController: UITableViewController {
 //    ]
     
     var glossary:[GlossaryItem] = []
+    var fetchResultController:NSFetchedResultsController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Load menu items from database
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+            let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
+            do {
+                glossary = try managedObjectContext.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+            } catch {
+                print("Failed to retrieve record")
+                print(error)
+            }
+        }
         
         // Enable self sizing cells
         // tableView.estimatedRowHeight = 66.0

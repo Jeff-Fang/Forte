@@ -15,6 +15,7 @@
 		E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */; };
 		E507AC941CA7CE7900EF850C /* AllGlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */; };
 		E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E540B7A31CA9657000AC556F /* GlossaryItem.swift */; };
+		E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewCell.swift; sourceTree = "<group>"; };
 		E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
+		E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A_MusicTerms.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
+				E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */,
 			);
 			path = Forte;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			files = (
 				E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */,
 				E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */,
+				E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */,
 				E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
