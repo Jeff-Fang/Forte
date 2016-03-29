@@ -21,6 +21,7 @@ class AllGlossaryTableViewController: UITableViewController, UISearchResultsUpda
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.contentInset.top = 20
+        tableView.contentInset.bottom = 66
         
         // Load menu items from database
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
