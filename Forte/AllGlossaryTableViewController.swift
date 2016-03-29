@@ -9,16 +9,12 @@
 import UIKit
 import CoreData
 
-class AllGlossaryTableViewController: UITableViewController {
-
-//    var glossary:[GlossaryItem] = [
-//        GlossaryItem(term: "Forte", meaning: "Strong (i.e. to be played or sung loudly)"),
-//        GlossaryItem(term: "Piano", meaning: "Gently (i.e. played or sung softly) (see dynamics)"),
-//        GlossaryItem(term: "più", meaning: "More; see mosso")
-//    ]
+class AllGlossaryTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var glossary:[GlossaryItem] = []
-    var fetchResultController:NSFetchedResultsController!
+    
+    var searchController:UISearchController!
+    var searchResults:[GlossaryItem] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +29,12 @@ class AllGlossaryTableViewController: UITableViewController {
                 print(error)
             }
         }
+        
+        // Configure the search bar
+        searchController = UISearchController(searchResultsController: nil)
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
         
         // Enable self sizing cells
         // tableView.estimatedRowHeight = 66.0
@@ -50,16 +52,40 @@ class AllGlossaryTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return glossary.count
+        if searchController.active {
+            print("\(searchResults.count) items in searchResults")
+            return searchResults.count
+        } else {
+            return glossary.count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell",forIndexPath: indexPath) as! AllGlossaryTableViewCell
+        let glossaryItem = (searchController.active) ? searchResults[indexPath.row] : glossary[indexPath.row]
         
         // Configure the cell
-        cell.termLabel.text = glossary[indexPath.row].term
-        cell.meaningLabel.text = glossary[indexPath.row].meaning
+        cell.termLabel.text = glossaryItem.term
+        cell.meaningLabel.text = glossaryItem.meaning
         
         return cell
+    }
+    
+    // MARK: - UISearchResultsUpdating Protocal
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            print(searchText)
+            print("searchResults.count = \(searchResults.count)")
+            filterContentForSearchText(searchText)
+            tableView.reloadData()
+        }
+    }
+    
+    func filterContentForSearchText(searchText: String) {
+        searchResults = glossary.filter({(glossaryItem:GlossaryItem) -> Bool in
+            let nameMatch = glossaryItem.term!.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
+            return nameMatch != nil
+        })
     }
 }
