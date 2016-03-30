@@ -25,7 +25,8 @@ class SearchViewController: UIViewController {
         
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
-        tableView.rowHeight = 66
+        tableView.estimatedRowHeight = 66
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         let briefCellNib = UINib(nibName: briefCellIdentifier, bundle: nil)
         tableView.registerNib(briefCellNib, forCellReuseIdentifier: briefCellIdentifier)
