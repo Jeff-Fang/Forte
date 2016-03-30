@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E501CBCC1CABCB91002D5E58 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */; };
 		E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */; };
 		E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC7E1CA7CB7300EF850C /* Main.storyboard */; };
 		E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E507AC771CA7CB7300EF850C /* Forte.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forte.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E507AC7F1CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 			children = (
 				E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */,
 				E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */,
+				E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */,
 				E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */,
 				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
@@ -149,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E501CBCC1CABCB91002D5E58 /* SearchViewController.swift in Sources */,
 				E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */,
 				E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */,
 				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
