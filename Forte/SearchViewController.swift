@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    var briefCellIdentifier = "GlossaryItemBriefTableViewCell"
+    
     var glossary:[GlossaryItem] = []
     
     var searchResults:[GlossaryItem] = []
@@ -20,8 +22,13 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
+        tableView.rowHeight = 66
+        
+        let briefCellNib = UINib(nibName: briefCellIdentifier, bundle: nil)
+        tableView.registerNib(briefCellNib, forCellReuseIdentifier: briefCellIdentifier)
         
         // Load menu items from database
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
@@ -33,7 +40,6 @@ class SearchViewController: UIViewController {
                 print(error)
             }
         }
-        
         
     }
     
@@ -88,17 +94,14 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cellIdentifier = "SearchResultCell"
-        var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)
-        if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
-        }
+        let cell = tableView.dequeueReusableCellWithIdentifier(briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
         
         if hasSearched {
-            cell.textLabel!.text = searchResults[indexPath.row].term
+            cell.termLabel.text = searchResults[indexPath.row].term
+            cell.meaningLabel.text = searchResults[indexPath.row].meaning
         } else {
-            cell.textLabel!.text = glossary[indexPath.row].term
+            cell.termLabel.text = glossary[indexPath.row].term
+            cell.meaningLabel.text = glossary[indexPath.row].meaning
         }
         
         return cell
