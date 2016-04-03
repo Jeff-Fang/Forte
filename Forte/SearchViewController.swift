@@ -21,19 +21,16 @@ class SearchViewController: UIViewController {
     }
     
     var glossary:[GlossaryItem] = []
-    
     var searchResults:[GlossaryItem] = []
     var hasSearched = false
     
     var selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
-//        tableView.estimatedRowHeight = 66
-//        tableView.rowHeight = UITableViewAutomaticDimension
         
         // Load nib files
         var cellNib = UINib(nibName: TableViewCellIdentifiers.briefCellIdentifier, bundle: nil)
@@ -60,6 +57,8 @@ class SearchViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 }
+
+// MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -96,6 +95,8 @@ extension SearchViewController: UISearchBarDelegate {
         return .TopAttached
     }
 }
+
+// MARK: - UITableViewDataSource
 
 extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,6 +136,7 @@ extension SearchViewController: UITableViewDataSource {
             let detailedCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
             detailedCell.termLabel.text = glossary[indexPath.row].term
             detailedCell.meaningLabel.text = glossary[indexPath.row].meaning
+            
             return detailedCell
         } else {
             if hasSearched {
@@ -155,12 +157,39 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
+
+// MARK: - UITableViewDelegate
+
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
-        tableView.reloadData()
-        tableView.beginUpdates()
-        tableView.endUpdates()
+        if selectedIndexPath != indexPath {
+            selectedIndexPath = indexPath
+            tableView.reloadData()
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        } else {
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                let glossaryItem = glossary[indexPath.row]
+                var markSign: Bool {
+                    get {
+                        return glossaryItem.isMarked.boolValue
+                    }
+                    set(value) {
+                        glossaryItem.isMarked = value
+                    }
+                }
+                
+                markSign ? print("*** 001 markSign True") : print("*** 001 markSign False")
+                markSign = !markSign
+                markSign ? print("*** 002 markSign True") : print("*** 002 markSign False")
+                
+                configureMarkSignForCell(cell, indexPath: indexPath)
+                }
+            }
+        }
+    func configureMarkSignForCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+        
     }
     
 }
+
