@@ -13,6 +13,9 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     
+    @IBAction func tag(sender: UIButton) {
+        print("*** Tag!")
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

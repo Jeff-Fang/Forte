@@ -111,20 +111,21 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let defaultRowHeight:CGFloat = 50
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            tableView.estimatedRowHeight = 37
+            tableView.estimatedRowHeight = defaultRowHeight
             return UITableViewAutomaticDimension
         } else {
             if hasSearched {
                 if searchResults.count == 0 {
                     return 88
                 } else {
-                    tableView.estimatedRowHeight = 37
-                    return UITableViewAutomaticDimension
+                    tableView.estimatedRowHeight = defaultRowHeight
+                    return defaultRowHeight
                 }
             } else {
-                tableView.estimatedRowHeight = 37
-                return UITableViewAutomaticDimension
+                tableView.estimatedRowHeight = defaultRowHeight
+                return defaultRowHeight
             }
         }
     }
