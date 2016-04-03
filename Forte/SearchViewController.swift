@@ -14,9 +14,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Identifiers for nib files
-    var briefCellIdentifier = "GlossaryItemBriefTableViewCell"
-    var nothingFoundCellIdentifier = "NothingFoundTableViewCell"
-    var detailedCellIdentifier = "GlossaryItemDetailedTableViewCell"
+    struct TableViewCellIdentifiers {
+        static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
+        static let nothingFoundCellIdentifier = "NothingFoundTableViewCell"
+        static let detailedCellIdentifier = "GlossaryItemDetailedTableViewCell"
+    }
     
     var glossary:[GlossaryItem] = []
     
@@ -34,12 +36,12 @@ class SearchViewController: UIViewController {
 //        tableView.rowHeight = UITableViewAutomaticDimension
         
         // Load nib files
-        let briefCellNib = UINib(nibName: briefCellIdentifier, bundle: nil)
-        tableView.registerNib(briefCellNib, forCellReuseIdentifier: briefCellIdentifier)
-        let nothingFoundCellNib = UINib(nibName: nothingFoundCellIdentifier, bundle: nil)
-        tableView.registerNib(nothingFoundCellNib, forCellReuseIdentifier: nothingFoundCellIdentifier)
-        let detailedCellNib = UINib(nibName: detailedCellIdentifier, bundle: nil)
-        tableView.registerNib(detailedCellNib, forCellReuseIdentifier: detailedCellIdentifier)
+        var cellNib = UINib(nibName: TableViewCellIdentifiers.briefCellIdentifier, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.briefCellIdentifier)
+        cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCellIdentifier, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCellIdentifier)
+        cellNib = UINib(nibName: TableViewCellIdentifiers.detailedCellIdentifier, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.detailedCellIdentifier)
         
         // Load menu items from database
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
@@ -109,51 +111,47 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-//            return 120
-//        } else {
-//            if hasSearched {
-//                if searchResults.count == 0 {
-//                    return 66
-//                } else {
-//                    return UITableViewAutomaticDimension
-//                }
-//            } else {
-//                return UITableViewAutomaticDimension
-//            }
-//        }
-        
-        tableView.estimatedRowHeight = 66
-        return UITableViewAutomaticDimension
+        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+            return 120
+        } else {
+            if hasSearched {
+                if searchResults.count == 0 {
+                    return 66
+                } else {
+                    return UITableViewAutomaticDimension
+                }
+            } else {
+                return UITableViewAutomaticDimension
+            }
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let briefCell = tableView.dequeueReusableCellWithIdentifier(briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
-        let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(nothingFoundCellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
-        let detailedCell = tableView.dequeueReusableCellWithIdentifier(detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-        
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            return detailedCell
+            return tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
         } else {
             if hasSearched {
-                if searchResults.count > 0 {
+                if hasSearched && searchResults.count == 0 {
+                    let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.nothingFoundCellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
+                    return nothingFoundCell
+                } else {
+                    let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
                     briefCell.termLabel.text = searchResults[indexPath.row].term
                     briefCell.meaningLabel.text = searchResults[indexPath.row].meaning
-                } else {
-                    return nothingFoundCell
+                    return briefCell
                 }
             } else {
+                let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
                 briefCell.termLabel.text = glossary[indexPath.row].term
                 briefCell.meaningLabel.text = glossary[indexPath.row].meaning
+                return briefCell
             }
-            return briefCell
         }
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         selectedIndexPath = indexPath
         tableView.reloadData()
         tableView.beginUpdates()
