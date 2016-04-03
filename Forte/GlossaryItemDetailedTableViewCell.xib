@@ -3,25 +3,45 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GlossaryItemDetailedTableViewCell" id="KGk-i7-Jjw" customClass="GlossaryItemDetailedTableViewCell" customModule="Forte" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="GlossaryItemDetailedTableViewCell" rowHeight="184" id="KGk-i7-Jjw" customClass="GlossaryItemDetailedTableViewCell" customModule="Forte" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detailed Cell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNX-HL-vRg">
-                        <rect key="frame" x="112" y="11" width="97" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Detailed Cell" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNX-HL-vRg">
+                        <rect key="frame" x="16" y="16" width="288" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuG-Kz-Dnd">
+                        <rect key="frame" x="20" y="45" width="284" height="120"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="YuG-Kz-Dnd" firstAttribute="top" secondItem="CNX-HL-vRg" secondAttribute="bottom" constant="8" id="2Jp-1A-9wJ"/>
+                    <constraint firstItem="CNX-HL-vRg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="4Ep-Me-QK6"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="CNX-HL-vRg" secondAttribute="trailing" constant="8" id="DUj-Va-ADm"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="YuG-Kz-Dnd" secondAttribute="trailing" constant="8" id="Kp7-BG-3jn"/>
+                    <constraint firstItem="YuG-Kz-Dnd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="NP0-i6-19j"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="YuG-Kz-Dnd" secondAttribute="bottom" constant="10" id="efa-2b-uU2"/>
+                    <constraint firstItem="CNX-HL-vRg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="tBq-ey-KNX"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="meaningLabel" destination="YuG-Kz-Dnd" id="iFx-q8-9ft"/>
+                <outlet property="termLabel" destination="CNX-HL-vRg" id="OCs-f7-hmK"/>
+            </connections>
+            <point key="canvasLocation" x="441" y="460"/>
         </tableViewCell>
     </objects>
 </document>

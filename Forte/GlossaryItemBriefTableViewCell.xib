@@ -15,31 +15,21 @@
                 <rect key="frame" x="0.0" y="0.0" width="313" height="79"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Brief meaning" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zk3-IP-H17">
-                        <rect key="frame" x="16" y="37" width="281" height="34"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PeJ-pm-g4j">
-                        <rect key="frame" x="16" y="8" width="281" height="21"/>
+                        <rect key="frame" x="16" y="8" width="281" height="63"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Zk3-IP-H17" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="317-qy-gps"/>
                     <constraint firstItem="PeJ-pm-g4j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="6Bk-PW-G77"/>
                     <constraint firstItem="PeJ-pm-g4j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="9vu-Ib-bid"/>
-                    <constraint firstItem="Zk3-IP-H17" firstAttribute="top" secondItem="PeJ-pm-g4j" secondAttribute="bottom" constant="8" id="LIu-nR-62l"/>
                     <constraint firstItem="PeJ-pm-g4j" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="TBX-Op-R1j"/>
-                    <constraint firstItem="Zk3-IP-H17" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="bO1-Yy-QCs"/>
-                    <constraint firstItem="Zk3-IP-H17" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="-8" id="jd0-dP-Aii"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="PeJ-pm-g4j" secondAttribute="bottom" id="rRd-Lm-3p2"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="meaningLabel" destination="Zk3-IP-H17" id="LWv-k1-LI2"/>
                 <outlet property="termLabel" destination="PeJ-pm-g4j" id="zxN-6Z-wnI"/>
             </connections>
             <point key="canvasLocation" x="35.5" y="273"/>

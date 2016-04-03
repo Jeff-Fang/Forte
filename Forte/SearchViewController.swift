@@ -112,15 +112,18 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            return 120
+            tableView.estimatedRowHeight = 37
+            return UITableViewAutomaticDimension
         } else {
             if hasSearched {
                 if searchResults.count == 0 {
-                    return 66
+                    return 88
                 } else {
+                    tableView.estimatedRowHeight = 37
                     return UITableViewAutomaticDimension
                 }
             } else {
+                tableView.estimatedRowHeight = 37
                 return UITableViewAutomaticDimension
             }
         }
@@ -128,7 +131,10 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            return tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+            let detailedCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+            detailedCell.termLabel.text = glossary[indexPath.row].term
+            detailedCell.meaningLabel.text = glossary[indexPath.row].meaning
+            return detailedCell
         } else {
             if hasSearched {
                 if hasSearched && searchResults.count == 0 {
@@ -137,13 +143,11 @@ extension SearchViewController: UITableViewDataSource {
                 } else {
                     let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
                     briefCell.termLabel.text = searchResults[indexPath.row].term
-                    briefCell.meaningLabel.text = searchResults[indexPath.row].meaning
                     return briefCell
                 }
             } else {
                 let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
                 briefCell.termLabel.text = glossary[indexPath.row].term
-                briefCell.meaningLabel.text = glossary[indexPath.row].meaning
                 return briefCell
             }
         }

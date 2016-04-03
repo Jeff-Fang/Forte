@@ -10,6 +10,9 @@ import UIKit
 
 class GlossaryItemDetailedTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var termLabel: UILabel!
+    @IBOutlet weak var meaningLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
