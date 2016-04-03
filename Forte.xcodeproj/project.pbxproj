@@ -13,8 +13,6 @@
 		E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */; };
 		E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E507AC841CA7CB7300EF850C /* Assets.xcassets */; };
 		E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */; };
-		E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */; };
-		E507AC941CA7CE7900EF850C /* AllGlossaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */; };
 		E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E540B7A31CA9657000AC556F /* GlossaryItem.swift */; };
 		E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */; };
 		E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */; };
@@ -34,8 +32,6 @@
 		E507AC841CA7CB7300EF850C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E507AC871CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewCell.swift; sourceTree = "<group>"; };
-		E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllGlossaryTableViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
 		E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A_MusicTerms.csv; sourceTree = "<group>"; };
 		E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemBriefTableViewCell.swift; sourceTree = "<group>"; };
@@ -77,24 +73,38 @@
 			isa = PBXGroup;
 			children = (
 				E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */,
-				E507AC931CA7CE7900EF850C /* AllGlossaryTableViewController.swift */,
-				E507AC911CA7CE4100EF850C /* AllGlossaryTableViewCell.swift */,
 				E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */,
-				E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */,
-				E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */,
 				E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */,
 				E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */,
+				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
+				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
+				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E524A08F1CB1100800DECC25 /* Support */,
+				E524A08E1CB10FBB00DECC25 /* SimpleTableViewCells */,
+			);
+			path = Forte;
+			sourceTree = "<group>";
+		};
+		E524A08E1CB10FBB00DECC25 /* SimpleTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */,
+				E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */,
 				E576F8981CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift */,
 				E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */,
-				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
-				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+			);
+			name = SimpleTableViewCells;
+			sourceTree = "<group>";
+		};
+		E524A08F1CB1100800DECC25 /* Support */ = {
+			isa = PBXGroup;
+			children = (
 				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
 				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
-				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */,
 			);
-			path = Forte;
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,13 +185,11 @@
 			files = (
 				E576F89A1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift in Sources */,
 				E501CBCC1CABCB91002D5E58 /* SearchViewController.swift in Sources */,
-				E507AC921CA7CE4100EF850C /* AllGlossaryTableViewCell.swift in Sources */,
 				E576F89E1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift in Sources */,
 				E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */,
 				E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */,
 				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
 				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
-				E507AC941CA7CE7900EF850C /* AllGlossaryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -17,7 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        preloadData()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let isPreloaded = defaults.boolForKey("isPreloaded")
+        if !isPreloaded {
+            preloadData()
+            defaults.setBool(true, forKey: "isPreloaded")
+        }
         
         print(applicationDocumentsDirectory.path)
 
@@ -185,12 +190,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Remove all the menu items before preloading
         removeData()
+        
         if let items = parseCSV(contentsOfURL, encoding: NSUTF8StringEncoding) {
             // Preload the menu items
             for item in items {
                 let glossaryItem = NSEntityDescription.insertNewObjectForEntityForName("GlossaryItem", inManagedObjectContext: managedObjectContext) as! GlossaryItem
                 glossaryItem.term = item.term
                 glossaryItem.meaning = item.meaning
+                glossaryItem.isMarked = false
                 
                 do {
                     try managedObjectContext.save()

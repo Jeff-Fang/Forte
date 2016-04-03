@@ -22,7 +22,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuG-Kz-Dnd">
-                        <rect key="frame" x="20" y="45" width="284" height="76"/>
+                        <rect key="frame" x="20" y="45" width="284" height="46"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,9 +39,9 @@
                     <constraint firstItem="CNX-HL-vRg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="4Ep-Me-QK6"/>
                     <constraint firstAttribute="trailingMargin" secondItem="CNX-HL-vRg" secondAttribute="trailing" constant="8" id="DUj-Va-ADm"/>
                     <constraint firstAttribute="bottomMargin" secondItem="5Cc-AT-1Vu" secondAttribute="bottom" constant="14" id="HQY-6N-brB"/>
-                    <constraint firstItem="5Cc-AT-1Vu" firstAttribute="top" secondItem="YuG-Kz-Dnd" secondAttribute="bottom" constant="10" id="HRC-wo-yXf"/>
                     <constraint firstAttribute="trailingMargin" secondItem="YuG-Kz-Dnd" secondAttribute="trailing" constant="8" id="Kp7-BG-3jn"/>
                     <constraint firstItem="YuG-Kz-Dnd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="12" id="NP0-i6-19j"/>
+                    <constraint firstItem="5Cc-AT-1Vu" firstAttribute="top" secondItem="YuG-Kz-Dnd" secondAttribute="bottom" constant="40" id="gtS-If-TvN"/>
                     <constraint firstItem="CNX-HL-vRg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="tBq-ey-KNX"/>
                     <constraint firstItem="5Cc-AT-1Vu" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xB6-h5-GcL"/>
                 </constraints>
