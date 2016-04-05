@@ -161,6 +161,7 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension SearchViewController: UITableViewDelegate {
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if selectedIndexPath != indexPath {
             selectedIndexPath = indexPath
@@ -168,6 +169,9 @@ extension SearchViewController: UITableViewDelegate {
             tableView.beginUpdates()
             tableView.endUpdates()
         } else {
+            
+            // The detailedCell is currently designed tappable for convenience to make the connection between the tableView and the Controller. Later this will be replaced by a toggle button.
+            
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 let glossaryItem = glossary[indexPath.row]
                 var markSign: Bool {
@@ -178,16 +182,22 @@ extension SearchViewController: UITableViewDelegate {
                         glossaryItem.isMarked = value
                     }
                 }
-                
-                markSign ? print("*** 001 markSign True") : print("*** 001 markSign False")
+
                 markSign = !markSign
-                markSign ? print("*** 002 markSign True") : print("*** 002 markSign False")
+                markSign ? print("*** markSign is now True") : print("*** markSign is now False")
                 
-                configureMarkSignForCell(cell, indexPath: indexPath)
+                configureMarkSignForCell()
                 }
             }
         }
-    func configureMarkSignForCell(cell: UITableViewCell, indexPath: NSIndexPath) {
+    func configureMarkSignForCell() {
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
         
     }
     
