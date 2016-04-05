@@ -11,6 +11,26 @@ import UIKit
 class GlossaryItemDetailedTableViewCell: UITableViewCell {
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
+    @IBOutlet weak var starIconOutlet: UIButton!
+    
+    @IBAction func starIcon(sender: UIButton) {
+        print("Star Pressed!")
+        toggleStar()
+    }
+    
+    let currentStarState = UserData()
+    
+    func toggleStar() {
+        if currentStarState.currentStarState == .grey {
+            starIconOutlet.setImage(UserData.starState.yellow.image(), forState: .Normal)
+            currentStarState.currentStarState == .yellow
+            print("turned Yellow")
+        } else {
+            starIconOutlet.setImage(UserData.starState.grey.image(), forState: .Normal)
+            currentStarState.currentStarState == .grey
+            print("turned grey")
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
