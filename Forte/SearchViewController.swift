@@ -9,15 +9,11 @@
 import UIKit
 import CoreData
 
-protocol SearchViewItemCellController {
-    func setStarState(state: starState)
-}
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    var itemCellController: SearchViewItemCellController?
 
     // Identifiers for nib files
     struct TableViewCellIdentifiers {
@@ -141,6 +137,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
             let detailedCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+            detailedCell.indexPath = indexPath
             
             if hasSearched {
                 // ERROR: Index could somehow out of range:
@@ -174,6 +171,8 @@ extension SearchViewController: UITableViewDataSource {
                 }
             }
             
+            detailedCell.delegate = self
+            
             return detailedCell
             
         } else {
@@ -201,67 +200,63 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if selectedIndexPath != indexPath {
-            selectedIndexPath = indexPath
-            tableView.reloadData()
-            tableView.beginUpdates()
-            tableView.endUpdates()
-        } else {
-            
-            // The detailedCell is currently designed tappable for convenience to make the connection between the TableView and the CoreData. Later this will be replaced by a toggle button.
-            
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? GlossaryItemDetailedTableViewCell {
-                // WTF: !!!!!!!!!
-                var glossaryItem: GlossaryItem = glossary[indexPath.row]
-                
-                    if hasSearched {
-                        let searchedItem = searchResults[indexPath.row]
-                        for item in glossary {
-                            if item == searchedItem {
-                                glossaryItem = item
-                            }
-                        }
-                        
-                    } else {
-                        glossaryItem = glossary[indexPath.row]
-                    }
-                
-                var markSign: Bool {
-                    get {
-                        return glossaryItem.isMarked.boolValue
-                    }
-                    set(value) {
-                        glossaryItem.isMarked = value
-                    }
-                }
+        selectedIndexPath = indexPath
+        tableView.reloadData()
+        tableView.beginUpdates()
+        tableView.endUpdates()
+    }
+    
+    
+}
 
-                markSign = !markSign
-                
-                if markSign {
-                    print("*** markSign is now True")
-                    cell.setStarState(.yellow)
-                } else {
-                    print("*** markSign is now False")
-                    cell.setStarState(.grey)
-                }
-//                markSign ? print("*** markSign is now True") : print("*** markSign is now False")
-                
-                configureMarkSignForCell()
-//                tableView.reloadData()
-                }
-            }
+func configureMarkSignForCell() {
+    if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error)
         }
-    func configureMarkSignForCell() {
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                print(error)
-            }
-        }
-        
     }
     
 }
 
-
+extension SearchViewController: InCellFunctionalityDelegate {
+    func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
+        print("^^^ InCellButtonIsPressed!")
+        let indexPath = cell.indexPath
+        var glossaryItem: GlossaryItem = glossary[indexPath.row]
+        
+        if hasSearched {
+            let searchedItem = searchResults[indexPath.row]
+            for item in glossary {
+                if item == searchedItem {
+                    glossaryItem = item
+                }
+            }
+            
+        } else {
+            glossaryItem = glossary[indexPath.row]
+        }
+        
+        var markSign: Bool {
+            get {
+                return glossaryItem.isMarked.boolValue
+            }
+            set(value) {
+                glossaryItem.isMarked = value
+            }
+        }
+        
+        markSign = !markSign
+        
+        if markSign {
+            print("*** markSign is now True")
+            cell.setStarState(.yellow)
+        } else {
+            print("*** markSign is now False")
+            cell.setStarState(.grey)
+        }
+        
+        configureMarkSignForCell()
+    }
+}

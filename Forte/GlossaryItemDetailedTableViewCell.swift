@@ -8,14 +8,22 @@
 
 import UIKit
 
-class GlossaryItemDetailedTableViewCell: UITableViewCell, SearchViewItemCellController {
+protocol InCellFunctionalityDelegate {
+    func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell)
+}
+
+class GlossaryItemDetailedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var starIconOutlet: UIButton!
     
+    var delegate:InCellFunctionalityDelegate?
+    var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+    
     @IBAction func starIcon(sender: UIButton) {
         print("Star Pressed!")
+        delegate?.inCellButtonIsPressed(self)
     }
     
     func setStarState(state: starState) {
@@ -28,36 +36,6 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell, SearchViewItemCellCont
             starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
         }
     }
-
-    
-    
-//    var currentStarState : starState = .grey
-    
-//    func findIfStared() {
-//        print("*** findIfStared!")
-//        if let isMarked: Bool = detailedCellInfo?.itermIsMarked {
-//            print("*** Protocol Correct!")
-//            if isMarked {
-//                currentStarState = .yellow
-//            } else {
-//                currentStarState = .grey
-//            }
-//        } else {
-//            print("*** Error Protocol!")
-//        }
-//    }
-    
-//    func toggleStar() {
-//        if currentStarState == .grey {
-//            starIconOutlet.setImage(starState.yellow.image(), forState: .Normal)
-//            currentStarState == .yellow
-//            print("turned Yellow")
-//        } else {
-//            starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
-//            currentStarState == .grey
-//            print("turned grey")
-//        }
-//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
