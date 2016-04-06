@@ -18,21 +18,34 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
         toggleStar()
     }
     
-    let currentStarState = UserData()
+    enum starState {
+        case grey, yellow
+        func image() -> UIImage {
+            switch self {
+            case .grey :
+                return UIImage(named: "greyStar")!
+            case .yellow :
+                return UIImage(named: "yellowStar")!
+            }
+        }
+    }
+    
+    var currentStarState : starState = .grey
     
     func toggleStar() {
-        if currentStarState.currentStarState == .grey {
-            starIconOutlet.setImage(UserData.starState.yellow.image(), forState: .Normal)
-            currentStarState.currentStarState == .yellow
+        if currentStarState == .grey {
+            starIconOutlet.setImage(starState.yellow.image(), forState: .Normal)
+            currentStarState == .yellow
             print("turned Yellow")
         } else {
-            starIconOutlet.setImage(UserData.starState.grey.image(), forState: .Normal)
-            currentStarState.currentStarState == .grey
+            starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
+            currentStarState == .grey
             print("turned grey")
         }
     }
     
     override func awakeFromNib() {
+        currentStarState = .grey
         super.awakeFromNib()
         // Initialization code
     }
