@@ -198,26 +198,16 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension SearchViewController: UITableViewDelegate {
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
-        tableView.reloadData()
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
-    
-    
-}
-
-func configureMarkSignForCell() {
-    if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-        do {
-            try managedObjectContext.save()
-        } catch {
-            print(error)
+        if selectedIndexPath != indexPath {
+            selectedIndexPath = indexPath
+            tableView.reloadData()
+            tableView.beginUpdates()
+            tableView.endUpdates()
+        } else {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
-    
 }
 
 extension SearchViewController: InCellFunctionalityDelegate {
@@ -258,5 +248,16 @@ extension SearchViewController: InCellFunctionalityDelegate {
         }
         
         configureMarkSignForCell()
+    }
+    
+    func configureMarkSignForCell() {
+        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+            do {
+                try managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
+        
     }
 }
