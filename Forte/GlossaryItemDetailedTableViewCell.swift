@@ -8,44 +8,58 @@
 
 import UIKit
 
-class GlossaryItemDetailedTableViewCell: UITableViewCell {
+class GlossaryItemDetailedTableViewCell: UITableViewCell, SearchViewItemCellController {
+    
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var starIconOutlet: UIButton!
     
     @IBAction func starIcon(sender: UIButton) {
         print("Star Pressed!")
-        toggleStar()
     }
     
-    enum starState {
-        case grey, yellow
-        func image() -> UIImage {
-            switch self {
-            case .grey :
-                return UIImage(named: "greyStar")!
-            case .yellow :
-                return UIImage(named: "yellowStar")!
-            }
-        }
-    }
-    
-    var currentStarState : starState = .grey
-    
-    func toggleStar() {
-        if currentStarState == .grey {
+    func setStarState(state: starState) {
+        switch state{
+        case .yellow:
+            print("**** case .yellow!")
             starIconOutlet.setImage(starState.yellow.image(), forState: .Normal)
-            currentStarState == .yellow
-            print("turned Yellow")
-        } else {
+        case .grey:
+            print("**** case .grey!")
             starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
-            currentStarState == .grey
-            print("turned grey")
         }
     }
+
+    
+    
+//    var currentStarState : starState = .grey
+    
+//    func findIfStared() {
+//        print("*** findIfStared!")
+//        if let isMarked: Bool = detailedCellInfo?.itermIsMarked {
+//            print("*** Protocol Correct!")
+//            if isMarked {
+//                currentStarState = .yellow
+//            } else {
+//                currentStarState = .grey
+//            }
+//        } else {
+//            print("*** Error Protocol!")
+//        }
+//    }
+    
+//    func toggleStar() {
+//        if currentStarState == .grey {
+//            starIconOutlet.setImage(starState.yellow.image(), forState: .Normal)
+//            currentStarState == .yellow
+//            print("turned Yellow")
+//        } else {
+//            starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
+//            currentStarState == .grey
+//            print("turned grey")
+//        }
+//    }
     
     override func awakeFromNib() {
-        currentStarState = .grey
         super.awakeFromNib()
         // Initialization code
     }

@@ -9,10 +9,16 @@
 import UIKit
 import CoreData
 
+protocol SearchViewItemCellController {
+    func setStarState(state: starState)
+}
+
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+    var itemCellController: SearchViewItemCellController?
+
     // Identifiers for nib files
     struct TableViewCellIdentifiers {
         static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
@@ -63,6 +69,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
         tableView.reloadData()
     }
     
@@ -134,10 +141,41 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
             let detailedCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-            detailedCell.termLabel.text = glossary[indexPath.row].term
-            detailedCell.meaningLabel.text = glossary[indexPath.row].meaning
+            
+            if hasSearched {
+                // ERROR: Index could somehow out of range:
+                detailedCell.termLabel.text = searchResults[indexPath.row].term
+                detailedCell.meaningLabel.text = searchResults[indexPath.row].term
+                
+                if let temp = searchResults[indexPath.row].isMarked {
+                    let starIsYellow = temp.boolValue
+                    print("*** starIsYellow is now \(starIsYellow)")
+                    
+                    if starIsYellow {
+                        detailedCell.setStarState(.yellow)
+                    } else {
+                        detailedCell.setStarState(.grey)
+                    }
+                }
+            } else {
+                
+                detailedCell.termLabel.text = glossary[indexPath.row].term
+                detailedCell.meaningLabel.text = glossary[indexPath.row].meaning
+                
+                if let temp = glossary[indexPath.row].isMarked {
+                    let starIsYellow = temp.boolValue
+                    print("*** starIsYellow is now \(starIsYellow)")
+                    
+                    if starIsYellow {
+                        detailedCell.setStarState(.yellow)
+                    } else {
+                        detailedCell.setStarState(.grey)
+                    }
+                }
+            }
             
             return detailedCell
+            
         } else {
             if hasSearched {
                 if hasSearched && searchResults.count == 0 {
@@ -170,10 +208,24 @@ extension SearchViewController: UITableViewDelegate {
             tableView.endUpdates()
         } else {
             
-            // The detailedCell is currently designed tappable for convenience to make the connection between the tableView and the Controller. Later this will be replaced by a toggle button.
+            // The detailedCell is currently designed tappable for convenience to make the connection between the TableView and the CoreData. Later this will be replaced by a toggle button.
             
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                let glossaryItem = glossary[indexPath.row]
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? GlossaryItemDetailedTableViewCell {
+                // WTF: !!!!!!!!!
+                var glossaryItem: GlossaryItem = glossary[indexPath.row]
+                
+                    if hasSearched {
+                        let searchedItem = searchResults[indexPath.row]
+                        for item in glossary {
+                            if item == searchedItem {
+                                glossaryItem = item
+                            }
+                        }
+                        
+                    } else {
+                        glossaryItem = glossary[indexPath.row]
+                    }
+                
                 var markSign: Bool {
                     get {
                         return glossaryItem.isMarked.boolValue
@@ -184,9 +236,18 @@ extension SearchViewController: UITableViewDelegate {
                 }
 
                 markSign = !markSign
-                markSign ? print("*** markSign is now True") : print("*** markSign is now False")
+                
+                if markSign {
+                    print("*** markSign is now True")
+                    cell.setStarState(.yellow)
+                } else {
+                    print("*** markSign is now False")
+                    cell.setStarState(.grey)
+                }
+//                markSign ? print("*** markSign is now True") : print("*** markSign is now False")
                 
                 configureMarkSignForCell()
+//                tableView.reloadData()
                 }
             }
         }
@@ -202,4 +263,5 @@ extension SearchViewController: UITableViewDelegate {
     }
     
 }
+
 
