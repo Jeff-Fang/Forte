@@ -31,6 +31,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure search bar
+        
+        // Configure table view
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
         
@@ -42,7 +45,7 @@ class SearchViewController: UIViewController {
         cellNib = UINib(nibName: TableViewCellIdentifiers.detailedCellIdentifier, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.detailedCellIdentifier)
         
-        // Load menu items from database
+        // Load glossary items from database
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
             let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
             do {
@@ -65,22 +68,33 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = true
         selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
         tableView.reloadData()
         return true
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
-        tableView.reloadData()
+//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+//        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+//        tableView.reloadData()
+//    }
+    
+    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = false
+        return true
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        hasSearched = false
         searchBar.resignFirstResponder()
         tableView.reloadData()
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+        
         if searchBar.text == "" {
             hasSearched = false
         } else {
@@ -96,6 +110,11 @@ extension SearchViewController: UISearchBarDelegate {
             tableView.reloadData()
         }
         
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
     }
     
     func filterContentForSearchText(searchText: String) {
