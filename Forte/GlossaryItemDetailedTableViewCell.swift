@@ -22,17 +22,14 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
     var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: -1)
     
     @IBAction func starIcon(sender: UIButton) {
-        print("Star Pressed!")
         delegate?.inCellButtonIsPressed(self)
     }
     
     func setStarState(state: starState) {
         switch state{
         case .highlighted:
-            print("**** case .highlighted!")
             starIconOutlet.setImage(starState.highlighted.image(), forState: .Normal)
         case .normal:
-            print("**** case .normal!")
             starIconOutlet.setImage(starState.normal.image(), forState: .Normal)
         }
     }

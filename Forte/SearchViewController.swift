@@ -104,9 +104,7 @@ extension SearchViewController: UISearchBarDelegate {
         searchResults = [GlossaryItem]()
         
         if let searchText = searchBar.text {
-            print(searchText)
             filterContentForSearchText(searchText)
-            print("searchResults.count = \(searchResults.count)")
             tableView.reloadData()
         }
         
@@ -177,10 +175,8 @@ extension SearchViewController: UITableViewDataSource {
             cell.delegate = self
             
             if let temp = dataSource[indexPath.row].isMarked {
-                let starIsYellow = temp.boolValue
-                print("*** starIsYellow is now \(starIsYellow)")
-                
-                starIsYellow ? cell.setStarState(.highlighted) : cell.setStarState(.normal)
+                let starIsHighlighted = temp.boolValue
+                starIsHighlighted ? cell.setStarState(.highlighted) : cell.setStarState(.normal)
             }
         }
         
@@ -226,7 +222,6 @@ extension SearchViewController: UITableViewDelegate {
 
 extension SearchViewController: InCellFunctionalityDelegate {
     func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
-        print("^^^ InCellButtonIsPressed!")
         let indexPath = cell.indexPath
         var glossaryItem: GlossaryItem = glossary[indexPath.row]
         
@@ -254,10 +249,8 @@ extension SearchViewController: InCellFunctionalityDelegate {
         markSign = !markSign
         
         if markSign {
-            print("*** markSign is now True")
             cell.setStarState(.highlighted)
         } else {
-            print("*** markSign is now False")
             cell.setStarState(.normal)
         }
         
