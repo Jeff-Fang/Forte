@@ -63,9 +63,20 @@ class SearchViewController: UIViewController {
 // MARK: - UISearchBarDelegate
 
 extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+        tableView.reloadData()
+        return true
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+        tableView.reloadData()
+    }
+    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
-        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
         tableView.reloadData()
     }
     
@@ -116,80 +127,61 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let defaultRowHeight:CGFloat = 50
-        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+        
+        if hasSearched && searchResults.count == 0 {
+            // for NoResultFoundCell
+            return 88
+        } else if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+            // for DetailedCell
             tableView.estimatedRowHeight = defaultRowHeight
             return UITableViewAutomaticDimension
         } else {
-            if hasSearched {
-                if searchResults.count == 0 {
-                    return 88
-                } else {
-                    tableView.estimatedRowHeight = defaultRowHeight
-                    return defaultRowHeight
-                }
-            } else {
-                tableView.estimatedRowHeight = defaultRowHeight
-                return defaultRowHeight
-            }
+            return defaultRowHeight
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            let detailedCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.detailedCellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-            detailedCell.indexPath = indexPath
+        var dataSource = [GlossaryItem]()
+        var cellIdentifier: String
+        
+        if hasSearched {
+            dataSource = searchResults
+        } else {
+            dataSource = glossary
+        }
+        
+        func configureInfoForDetailedCell(cell:GlossaryItemDetailedTableViewCell) {
+            cell.termLabel.text = dataSource[indexPath.row].term
+            cell.meaningLabel.text = dataSource[indexPath.row].meaning
             
-            if hasSearched {
-                // ERROR: Index could somehow out of range:
-                detailedCell.termLabel.text = searchResults[indexPath.row].term
-                detailedCell.meaningLabel.text = searchResults[indexPath.row].term
+            cell.indexPath = indexPath
+            cell.delegate = self
+            
+            if let temp = dataSource[indexPath.row].isMarked {
+                let starIsYellow = temp.boolValue
+                print("*** starIsYellow is now \(starIsYellow)")
                 
-                if let temp = searchResults[indexPath.row].isMarked {
-                    let starIsYellow = temp.boolValue
-                    print("*** starIsYellow is now \(starIsYellow)")
-                    
-                    if starIsYellow {
-                        detailedCell.setStarState(.yellow)
-                    } else {
-                        detailedCell.setStarState(.grey)
-                    }
-                }
-            } else {
-                
-                detailedCell.termLabel.text = glossary[indexPath.row].term
-                detailedCell.meaningLabel.text = glossary[indexPath.row].meaning
-                
-                if let temp = glossary[indexPath.row].isMarked {
-                    let starIsYellow = temp.boolValue
-                    print("*** starIsYellow is now \(starIsYellow)")
-                    
-                    if starIsYellow {
-                        detailedCell.setStarState(.yellow)
-                    } else {
-                        detailedCell.setStarState(.grey)
-                    }
-                }
+                starIsYellow ? cell.setStarState(.yellow) : cell.setStarState(.grey)
             }
-            
-            detailedCell.delegate = self
-            
-            return detailedCell
+        }
+        
+        guard dataSource.count != 0 else {
+            cellIdentifier = TableViewCellIdentifiers.nothingFoundCellIdentifier
+            let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
+            return nothingFoundCell
+        }
+        
+        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+            cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+            configureInfoForDetailedCell(cell)
+            return cell
             
         } else {
-            if hasSearched {
-                if hasSearched && searchResults.count == 0 {
-                    let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.nothingFoundCellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
-                    return nothingFoundCell
-                } else {
-                    let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
-                    briefCell.termLabel.text = searchResults[indexPath.row].term
-                    return briefCell
-                }
-            } else {
-                let briefCell = tableView.dequeueReusableCellWithIdentifier(TableViewCellIdentifiers.briefCellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
-                briefCell.termLabel.text = glossary[indexPath.row].term
-                return briefCell
-            }
+            cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
+            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
+            cell.termLabel.text = dataSource[indexPath.row].term
+            return cell
         }
     }
 }
@@ -205,7 +197,10 @@ extension SearchViewController: UITableViewDelegate {
             tableView.beginUpdates()
             tableView.endUpdates()
         } else {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+            tableView.reloadData()
+            tableView.beginUpdates()
+            tableView.endUpdates()
         }
     }
 }
