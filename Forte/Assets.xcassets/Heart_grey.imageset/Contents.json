@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "yellowStar.png",
+      "filename" : "Heart_grey.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yellowStar-1.png",
+      "filename" : "Heart_grey-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "yellowStar-2.png",
+      "filename" : "Heart_grey-2.png",
       "scale" : "3x"
     }
   ],

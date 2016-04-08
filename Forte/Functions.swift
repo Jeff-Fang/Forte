@@ -9,13 +9,14 @@
 import UIKit
 
 enum starState {
-    case grey, yellow
+    case normal, highlighted
     func image() -> UIImage {
         switch self {
-        case .grey :
-            return UIImage(named: "greyStar")!
-        case .yellow :
-            return UIImage(named: "yellowStar")!
+        case .normal :
+            return UIImage(named: "Heart_grey")!
+        case .highlighted :
+            return UIImage(named: "Heart_blue")!
         }
     }
+    
 }

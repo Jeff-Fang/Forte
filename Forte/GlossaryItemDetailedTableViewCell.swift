@@ -28,12 +28,12 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
     
     func setStarState(state: starState) {
         switch state{
-        case .yellow:
-            print("**** case .yellow!")
-            starIconOutlet.setImage(starState.yellow.image(), forState: .Normal)
-        case .grey:
-            print("**** case .grey!")
-            starIconOutlet.setImage(starState.grey.image(), forState: .Normal)
+        case .highlighted:
+            print("**** case .highlighted!")
+            starIconOutlet.setImage(starState.highlighted.image(), forState: .Normal)
+        case .normal:
+            print("**** case .normal!")
+            starIconOutlet.setImage(starState.normal.image(), forState: .Normal)
         }
     }
     

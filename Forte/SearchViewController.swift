@@ -180,7 +180,7 @@ extension SearchViewController: UITableViewDataSource {
                 let starIsYellow = temp.boolValue
                 print("*** starIsYellow is now \(starIsYellow)")
                 
-                starIsYellow ? cell.setStarState(.yellow) : cell.setStarState(.grey)
+                starIsYellow ? cell.setStarState(.highlighted) : cell.setStarState(.normal)
             }
         }
         
@@ -255,10 +255,10 @@ extension SearchViewController: InCellFunctionalityDelegate {
         
         if markSign {
             print("*** markSign is now True")
-            cell.setStarState(.yellow)
+            cell.setStarState(.highlighted)
         } else {
             print("*** markSign is now False")
-            cell.setStarState(.grey)
+            cell.setStarState(.normal)
         }
         
         configureMarkSignForCell()
