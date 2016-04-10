@@ -14,7 +14,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-
     // Identifiers for nib files
     struct TableViewCellIdentifiers {
         static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
@@ -32,6 +31,8 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         // Configure search bar
+        searchBar.barTintColor = UIColor(colorLiteralRed: 100/255 , green: 180/255 , blue: 230/255 , alpha: 1)
+        searchBar.tintColor = UIColor.whiteColor()
         
         // Configure table view
         tableView.contentInset.top = 64
@@ -55,7 +56,6 @@ class SearchViewController: UIViewController {
                 print(error)
             }
         }
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -265,6 +265,5 @@ extension SearchViewController: InCellFunctionalityDelegate {
                 print(error)
             }
         }
-        
     }
 }

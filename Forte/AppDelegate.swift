@@ -198,6 +198,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 glossaryItem.term = item.term
                 glossaryItem.meaning = item.meaning
                 glossaryItem.isMarked = false
+                glossaryItem.note = ""
                 
                 do {
                     try managedObjectContext.save()

@@ -18,6 +18,8 @@
 		E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */; };
 		E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */; };
 		E557FFD31CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */; };
+		E55D4E7D1CBA52E10044D7EA /* MarkedItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */; };
+		E55D4E7F1CBA6E660044D7EA /* MarkedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */; };
 		E576F89A1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F8981CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift */; };
 		E576F89B1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */; };
 		E576F89E1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */; };
@@ -38,6 +40,8 @@
 		E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A_MusicTerms.csv; sourceTree = "<group>"; };
 		E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemBriefTableViewCell.swift; sourceTree = "<group>"; };
 		E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlossaryItemBriefTableViewCell.xib; sourceTree = "<group>"; };
+		E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkedItemTableViewController.swift; sourceTree = "<group>"; };
+		E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkedItemTableViewCell.swift; sourceTree = "<group>"; };
 		E576F8981CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NothingFoundTableViewCell.swift; sourceTree = "<group>"; };
 		E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingFoundTableViewCell.xib; sourceTree = "<group>"; };
 		E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemDetailedTableViewCell.swift; sourceTree = "<group>"; };
@@ -76,27 +80,29 @@
 			children = (
 				E507AC7A1CA7CB7300EF850C /* AppDelegate.swift */,
 				E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */,
-				E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */,
+				E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */,
+				E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */,
 				E51AF1C11CB526A2000CE430 /* Functions.swift */,
-				E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */,
 				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
-				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E524A08F1CB1100800DECC25 /* Support */,
-				E524A08E1CB10FBB00DECC25 /* SimpleTableViewCells */,
+				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
 			);
 			path = Forte;
 			sourceTree = "<group>";
 		};
-		E524A08E1CB10FBB00DECC25 /* SimpleTableViewCells */ = {
+		E524A08E1CB10FBB00DECC25 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */,
+				E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */,
 				E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */,
 				E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */,
 				E576F8981CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.swift */,
 				E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */,
 			);
-			name = SimpleTableViewCells;
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		E524A08F1CB1100800DECC25 /* Support */ = {
@@ -192,8 +198,10 @@
 				E51AF1C21CB526A2000CE430 /* Functions.swift in Sources */,
 				E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */,
 				E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */,
+				E55D4E7F1CBA6E660044D7EA /* MarkedItemTableViewCell.swift in Sources */,
 				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
 				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
+				E55D4E7D1CBA52E10044D7EA /* MarkedItemTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

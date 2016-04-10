@@ -3,9 +3,11 @@
     <entity name="GlossaryItem" representedClassName=".GlossaryItem" syncable="YES">
         <attribute name="isMarked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="term" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <fetchRequest name="MarkedItem" entity="GlossaryItem" predicateString="isMarked != 0"/>
     <elements>
-        <element name="GlossaryItem" positionX="-54" positionY="-9" width="128" height="90"/>
+        <element name="GlossaryItem" positionX="-54" positionY="-9" width="128" height="105"/>
     </elements>
 </model>
