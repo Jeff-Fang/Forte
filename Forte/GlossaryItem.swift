@@ -10,8 +10,9 @@ import Foundation
 import CoreData
 
 class GlossaryItem:NSManagedObject {
-    @NSManaged var term:String?
-    @NSManaged var meaning:String?
+    @NSManaged var term:String
+    @NSManaged var meaning:String
     @NSManaged var isMarked:NSNumber!
     @NSManaged var note:String?
+    @NSManaged var markedDate: NSDate?
 }

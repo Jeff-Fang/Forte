@@ -23,5 +23,19 @@ class MarkedItemTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func configureForItem(item: GlossaryItem) {
+        if item.term.isEmpty {
+            markedTermLabel.text = "(No Term)"
+        } else {
+            markedTermLabel.text = item.term
+        }
+        
+        if item.meaning.isEmpty {
+            markedMeaningLabel.text = "(No Term)"
+        } else {
+            markedMeaningLabel.text = item.meaning
+        }
+    }
 
 }

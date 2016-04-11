@@ -117,7 +117,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func filterContentForSearchText(searchText: String) {
         searchResults = glossary.filter({(glossaryItem:GlossaryItem) -> Bool in
-            let nameMatch = glossaryItem.term!.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
+            let nameMatch = glossaryItem.term.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
             return nameMatch != nil
         })
     }
@@ -243,21 +243,18 @@ extension SearchViewController: InCellFunctionalityDelegate {
             }
             set(value) {
                 glossaryItem.isMarked = value
+                glossaryItem.markedDate = NSDate()
+                print("**** Saved date is ", glossaryItem.markedDate)
             }
         }
         
         markSign = !markSign
+        markSign ? cell.setStarState(.highlighted) : cell.setStarState(.normal)
         
-        if markSign {
-            cell.setStarState(.highlighted)
-        } else {
-            cell.setStarState(.normal)
-        }
-        
-        configureMarkSignForCell()
+        saveData()
     }
     
-    func configureMarkSignForCell() {
+    func saveData() {
         if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
             do {
                 try managedObjectContext.save()
