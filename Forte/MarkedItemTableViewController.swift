@@ -66,6 +66,26 @@ class MarkedItemTableViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let item = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+
+            item.isMarked = false
+            
+            do {
+                try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: - Table view Delegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 }
 
 extension MarkedItemTableViewController: NSFetchedResultsControllerDelegate {
