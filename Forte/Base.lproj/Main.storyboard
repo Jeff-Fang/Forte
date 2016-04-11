@@ -24,7 +24,7 @@
             </objects>
             <point key="canvasLocation" x="-271" y="718"/>
         </scene>
-        <!--Item-->
+        <!--Glossary-->
         <scene sceneID="WJH-f0-JdU">
             <objects>
                 <viewController id="cPj-b0-2bA" customClass="SearchViewController" customModule="Forte" customModuleProvider="target" sceneMemberID="viewController">
@@ -63,7 +63,7 @@
                             <constraint firstItem="Gl4-Uk-LUi" firstAttribute="leading" secondItem="Saq-0V-huq" secondAttribute="leading" id="jzW-RI-Tr5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="O5X-ym-JWW"/>
+                    <tabBarItem key="tabBarItem" title="Glossary" id="O5X-ym-JWW"/>
                     <connections>
                         <outlet property="searchBar" destination="Gl4-Uk-LUi" id="B9c-Wt-MYr"/>
                         <outlet property="tableView" destination="bxM-Tv-x2Y" id="cM8-68-smm"/>
@@ -73,11 +73,11 @@
             </objects>
             <point key="canvasLocation" x="517" y="278"/>
         </scene>
-        <!--Item-->
+        <!--Favorite-->
         <scene sceneID="DOI-7E-ewa">
             <objects>
                 <navigationController id="qN0-la-iBc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="2du-Wc-u6E"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" id="2du-Wc-u6E"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YYp-pe-i9F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

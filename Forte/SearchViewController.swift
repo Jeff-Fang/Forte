@@ -244,7 +244,6 @@ extension SearchViewController: InCellFunctionalityDelegate {
             set(value) {
                 glossaryItem.isMarked = value
                 glossaryItem.markedDate = NSDate()
-                print("**** Saved date is ", glossaryItem.markedDate)
             }
         }
         

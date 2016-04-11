@@ -61,7 +61,6 @@ class MarkedItemTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("MarkedItemCell", forIndexPath: indexPath) as! MarkedItemTableViewCell
         
         let markedItem = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
-        print("*** The markedItem about to show is \(markedItem)")
         cell.configureForItem(markedItem)
         
         return cell
@@ -70,8 +69,9 @@ class MarkedItemTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let item = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
-
+            
             item.isMarked = false
+            item.markedDate = nil
             
             do {
                 try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
@@ -90,7 +90,6 @@ class MarkedItemTableViewController: UITableViewController {
 
 extension MarkedItemTableViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        print("*** controllerWillChangeContent")
         tableView.beginUpdates()
     }
     

@@ -32,7 +32,7 @@ class MarkedItemTableViewCell: UITableViewCell {
         }
         
         if item.meaning.isEmpty {
-            markedMeaningLabel.text = "(No Term)"
+            markedMeaningLabel.text = "(No Meaning)"
         } else {
             markedMeaningLabel.text = item.meaning
         }
