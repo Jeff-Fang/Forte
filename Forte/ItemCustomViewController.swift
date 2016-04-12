@@ -30,6 +30,23 @@ class ItemCustomTableViewController: UITableViewController {
 //                print("Failed to retrieve record")
 //                print(error)
 //            }
+        
+        noteTakingField.text = "You can take notes here..."
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            tableView.estimatedRowHeight = 200
+            return UITableViewAutomaticDimension
+        } else if indexPath.section == 1 {
+            return 200
+        } else {
+            return 44
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
 }
