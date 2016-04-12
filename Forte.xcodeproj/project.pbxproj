@@ -14,6 +14,7 @@
 		E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E507AC841CA7CB7300EF850C /* Assets.xcassets */; };
 		E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */; };
 		E51AF1C21CB526A2000CE430 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51AF1C11CB526A2000CE430 /* Functions.swift */; };
+		E53555E11CBC9E5900BBD205 /* ItemCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */; };
 		E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E540B7A31CA9657000AC556F /* GlossaryItem.swift */; };
 		E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */; };
 		E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */; };
@@ -36,6 +37,7 @@
 		E507AC871CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E51AF1C11CB526A2000CE430 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
 		E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A_MusicTerms.csv; sourceTree = "<group>"; };
 		E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemBriefTableViewCell.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				E51AF1C11CB526A2000CE430 /* Functions.swift */,
 				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */,
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E524A08F1CB1100800DECC25 /* Support */,
 				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
@@ -201,6 +204,7 @@
 				E55D4E7F1CBA6E660044D7EA /* MarkedItemTableViewCell.swift in Sources */,
 				E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */,
 				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
+				E53555E11CBC9E5900BBD205 /* ItemCustomViewController.swift in Sources */,
 				E55D4E7D1CBA52E10044D7EA /* MarkedItemTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
