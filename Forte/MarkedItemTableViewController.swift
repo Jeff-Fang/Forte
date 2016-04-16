@@ -56,6 +56,26 @@ class MarkedItemTableViewController: UITableViewController {
             controller.termToDisplay = cell.markedTermLabel.text!
             controller.meaningToDisplay = cell.markedMeaningLabel.text!
             controller.noteToDisplay = cell.markedItemNote
+            controller.itemIndex = cell.cellIndexPath
+        }
+    }
+    
+    @IBAction func itemCustomVCDidFinishEditing(segue: UIStoryboardSegue) {
+        let controller = segue.sourceViewController as! ItemCustomTableViewController
+        let itemNote = controller.noteToDisplay
+        let itemIndex = controller.itemIndex
+        
+        saveNote(itemNote, atIndexPath: itemIndex!)
+    }
+    
+    func saveNote(note: String?, atIndexPath path: NSIndexPath) {
+        let item = fetchedResultsController.objectAtIndexPath(path) as! GlossaryItem
+        item.note = note
+        
+        do {
+            try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
+        } catch {
+            print(error)
         }
     }
     
@@ -71,6 +91,7 @@ class MarkedItemTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("MarkedItemCell", forIndexPath: indexPath) as! MarkedItemTableViewCell
         
         let markedItem = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+        cell.cellIndexPath = indexPath
         cell.configureForItem(markedItem)
         
         return cell

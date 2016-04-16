@@ -13,6 +13,7 @@ class MarkedItemTableViewCell: UITableViewCell {
     @IBOutlet weak var markedTermLabel: UILabel!
     @IBOutlet weak var markedMeaningLabel: UILabel!
     var markedItemNote: String?
+    var cellIndexPath: NSIndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()

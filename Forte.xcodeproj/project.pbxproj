@@ -84,10 +84,8 @@
 				E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */,
 				E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */,
 				E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */,
-				E51AF1C11CB526A2000CE430 /* Functions.swift */,
-				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
-				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
 				E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */,
+				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E524A08F1CB1100800DECC25 /* Support */,
 				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
@@ -112,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
+				E51AF1C11CB526A2000CE430 /* Functions.swift */,
+				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
 				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
 				E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */,

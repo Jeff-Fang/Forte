@@ -14,8 +14,9 @@ class ItemCustomTableViewController: UITableViewController {
     @IBOutlet weak var itemDetailCell: UITableViewCell!
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var noteTakingField: UITextView!
+    @IBOutlet weak var noteTakingTextView: UITextView!
     
+    var itemIndex: NSIndexPath?
     var termToDisplay = ""
     var meaningToDisplay = ""
     var noteToDisplay: String?
@@ -23,20 +24,17 @@ class ItemCustomTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        itemDetailCell.
-        
-        // Load glossary items from database
-//        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-//            let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
-//            do {
-//                glossary = try managedObjectContext.executeFetchRequest(fetchRequest) as! [GlossaryItem]
-//            } catch {
-//                print("Failed to retrieve record")
-//                print(error)
-//            }
         termLabel.text = termToDisplay
         meaningLabel.text = meaningToDisplay
-        noteTakingField.text = noteToDisplay
+        noteTakingTextView.text = noteToDisplay
+        
+        noteTakingTextView.delegate = self
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showItemCustomVC" {
+            noteToDisplay = noteTakingTextView.text
+        }
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -53,10 +51,11 @@ class ItemCustomTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-
 }
 
 extension ItemCustomTableViewController: UITextViewDelegate {
-    
+    func textViewDidChange(textView: UITextView) {
+        noteToDisplay = textView.text
+    }
 }
 
