@@ -12,6 +12,7 @@ class MarkedItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var markedTermLabel: UILabel!
     @IBOutlet weak var markedMeaningLabel: UILabel!
+    var markedItemNote: String?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,6 +37,8 @@ class MarkedItemTableViewCell: UITableViewCell {
         } else {
             markedMeaningLabel.text = item.meaning
         }
+        
+        markedItemNote = item.note
     }
 
 }

@@ -49,6 +49,16 @@ class MarkedItemTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showItemCustomVC" {
+            let cell = sender as! MarkedItemTableViewCell
+            let controller = segue.destinationViewController as! ItemCustomTableViewController
+            controller.termToDisplay = cell.markedTermLabel.text!
+            controller.meaningToDisplay = cell.markedMeaningLabel.text!
+            controller.noteToDisplay = cell.markedItemNote
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView,

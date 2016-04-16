@@ -16,6 +16,10 @@ class ItemCustomTableViewController: UITableViewController {
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var noteTakingField: UITextView!
     
+    var termToDisplay = ""
+    var meaningToDisplay = ""
+    var noteToDisplay: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,8 +34,9 @@ class ItemCustomTableViewController: UITableViewController {
 //                print("Failed to retrieve record")
 //                print(error)
 //            }
-        
-        noteTakingField.text = "You can take notes here..."
+        termLabel.text = termToDisplay
+        meaningLabel.text = meaningToDisplay
+        noteTakingField.text = noteToDisplay
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
