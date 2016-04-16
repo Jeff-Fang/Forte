@@ -29,6 +29,21 @@ class ItemCustomTableViewController: UITableViewController {
         noteTakingTextView.text = noteToDisplay
         
         noteTakingTextView.delegate = self
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ItemCustomTableViewController.hideKeyboard(_:)))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.locationInView(tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(point)
+        
+        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+            return
+        }
+        
+        noteTakingTextView.resignFirstResponder()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -42,14 +57,19 @@ class ItemCustomTableViewController: UITableViewController {
             tableView.estimatedRowHeight = 200
             return UITableViewAutomaticDimension
         } else if indexPath.section == 1 {
-            return 200
+            return 300
         } else {
             return 44
         }
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 1 {
+            noteTakingTextView.becomeFirstResponder()
+        } else {
+            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            noteTakingTextView.resignFirstResponder()
+        }
     }
 }
 
