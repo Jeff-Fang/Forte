@@ -16,9 +16,9 @@
 		E51AF1C21CB526A2000CE430 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51AF1C11CB526A2000CE430 /* Functions.swift */; };
 		E53555E11CBC9E5900BBD205 /* ItemCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */; };
 		E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E540B7A31CA9657000AC556F /* GlossaryItem.swift */; };
-		E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */; };
 		E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */; };
 		E557FFD31CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */; };
+		E55C475D1CC345FA000A20C3 /* MusicTerms.csv in Resources */ = {isa = PBXBuildFile; fileRef = E55C475C1CC345FA000A20C3 /* MusicTerms.csv */; };
 		E55D4E7D1CBA52E10044D7EA /* MarkedItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */; };
 		E55D4E7F1CBA6E660044D7EA /* MarkedItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */; };
 		E561C23E1CC2F4A800615198 /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E561C23D1CC2F4A800615198 /* AboutTableViewController.swift */; };
@@ -40,9 +40,9 @@
 		E51AF1C11CB526A2000CE430 /* Functions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
-		E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = A_MusicTerms.csv; sourceTree = "<group>"; };
 		E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemBriefTableViewCell.swift; sourceTree = "<group>"; };
 		E557FFD21CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlossaryItemBriefTableViewCell.xib; sourceTree = "<group>"; };
+		E55C475C1CC345FA000A20C3 /* MusicTerms.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MusicTerms.csv; sourceTree = "<group>"; };
 		E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkedItemTableViewController.swift; sourceTree = "<group>"; };
 		E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkedItemTableViewCell.swift; sourceTree = "<group>"; };
 		E561C23D1CC2F4A800615198 /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 				E540B7A31CA9657000AC556F /* GlossaryItem.swift */,
 				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
-				E540B7A81CA97BBC00AC556F /* A_MusicTerms.csv */,
+				E55C475C1CC345FA000A20C3 /* MusicTerms.csv */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -184,7 +184,7 @@
 				E557FFD31CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib in Resources */,
 				E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */,
 				E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */,
-				E540B7A91CA97BBC00AC556F /* A_MusicTerms.csv in Resources */,
+				E55C475D1CC345FA000A20C3 /* MusicTerms.csv in Resources */,
 				E576F89F1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib in Resources */,
 				E576F89B1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib in Resources */,
 				E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */,
