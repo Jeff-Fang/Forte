@@ -118,11 +118,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - CSV Parsing support
     
-    func parseCSV(contentsOfURL: NSURL, encoding: NSStringEncoding) -> [(term:String, meaning:String)]? {
+    let origins: [String: String] = ["(Fre)":"French",
+                                     "(Ger)":"German",
+                                     "(Por)":"Portuguese",
+                                     "(Eng)":"English",
+                                     "(Ita)":"Italian",
+                                     "(Lat)":"Latin",
+                                     "(Pol)":"Polish"]
+    
+    func parseCSV(contentsOfURL: NSURL, encoding: NSStringEncoding) -> [(term:String, meaning:String, origin:String)]? {
         
         // Load the CSV file and parse it
         let delimiter = ","
-        var items:[(term:String, meaning:String)]?
+        var items:[(term:String, meaning:String, origin:String)]?
         
         do {
             let content = try String(contentsOfURL: contentsOfURL, encoding: encoding)
@@ -131,6 +139,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             for line in lines {
                 var values:[String] = []
+                var itemOriginDescription = ""
+//                var remark:String?
+                
                 if line != "" {
                     // For a line with double quotes
                     // we use NSScanner to perform the parsing
@@ -148,6 +159,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 textScanner.scanUpToString(delimiter, intoString: &value)
                             }
                             
+                            if value != "" {
+                                for (origin, fullOrigin) in origins {
+                                    if value!.containsString(origin) {
+                                        itemOriginDescription = fullOrigin
+                                        value = value!.stringByReplacingOccurrencesOfString(origin, withString: "")
+                                    }
+                                }
+                                
+                            }
+
                             // Store the value into the values array
                             values.append(value as! String)
                             
@@ -167,7 +188,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                     // Put the values into the tuple and add it to the items array
-                    let item = (term: values[0], meaning: values[1])
+                    let item = (term: values[0], meaning: values[1], origin: itemOriginDescription)
+                    print("The origin of the term \(item.term) is \(item.origin)")
                     items?.append(item)
                 }
             }
