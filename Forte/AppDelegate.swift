@@ -189,7 +189,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     // Put the values into the tuple and add it to the items array
                     let item = (term: values[0], meaning: values[1], origin: itemOriginDescription)
-                    print("The origin of the term \(item.term) is \(item.origin)")
                     items?.append(item)
                 }
             }
@@ -221,6 +220,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 glossaryItem.meaning = item.meaning
                 glossaryItem.isMarked = false
                 glossaryItem.note = ""
+                glossaryItem.origin = item.origin
                 
                 do {
                     try managedObjectContext.save()

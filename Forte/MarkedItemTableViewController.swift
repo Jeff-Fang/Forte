@@ -57,6 +57,7 @@ class MarkedItemTableViewController: UITableViewController {
             controller.meaningToDisplay = cell.markedMeaningLabel.text!
             controller.noteToDisplay = cell.markedItemNote
             controller.itemIndex = cell.cellIndexPath
+            controller.originToDisplay = cell.origin
         }
     }
     

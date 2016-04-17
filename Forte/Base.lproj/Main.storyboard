@@ -226,21 +226,30 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meaning goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFJ-MT-W4F">
-                                                    <rect key="frame" x="28" y="49" width="549" height="127"/>
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" text="Meaning goes here" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFJ-MT-W4F">
+                                                    <rect key="frame" x="28" y="70" width="549" height="106"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgC-fF-pTY">
+                                                    <rect key="frame" x="28" y="45" width="549" height="16"/>
+                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fFJ-MT-W4F" secondAttribute="bottom" constant="15" id="2sG-OP-HlF"/>
                                                 <constraint firstItem="PSa-5m-neR" firstAttribute="top" secondItem="8ha-zF-lvu" secondAttribute="topMargin" constant="10" id="JNb-cY-G8q"/>
+                                                <constraint firstItem="PgC-fF-pTY" firstAttribute="leading" secondItem="8ha-zF-lvu" secondAttribute="leadingMargin" constant="20" id="Kc2-OG-kSw"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="PSa-5m-neR" secondAttribute="trailing" constant="15" id="LZ1-ZA-4g9"/>
-                                                <constraint firstItem="fFJ-MT-W4F" firstAttribute="top" secondItem="PSa-5m-neR" secondAttribute="bottom" priority="999" constant="10" id="TmV-Ag-Cs9"/>
+                                                <constraint firstItem="PgC-fF-pTY" firstAttribute="top" secondItem="PSa-5m-neR" secondAttribute="bottom" constant="6" id="T2w-k3-ItE"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="PgC-fF-pTY" secondAttribute="trailing" constant="15" id="W1c-HX-p6k"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="fFJ-MT-W4F" secondAttribute="trailing" constant="15" id="d9u-aM-Ji2"/>
                                                 <constraint firstItem="fFJ-MT-W4F" firstAttribute="leading" secondItem="8ha-zF-lvu" secondAttribute="leadingMargin" constant="20" id="dW2-xJ-hAa"/>
                                                 <constraint firstItem="PSa-5m-neR" firstAttribute="leading" secondItem="8ha-zF-lvu" secondAttribute="leadingMargin" constant="15" id="kdD-xd-G24"/>
+                                                <constraint firstItem="fFJ-MT-W4F" firstAttribute="top" secondItem="PgC-fF-pTY" secondAttribute="bottom" constant="9" id="zg7-Xi-1n6"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -296,6 +305,7 @@
                         <outlet property="itemDetailCell" destination="Hqu-qd-pRM" id="dWO-TV-ori"/>
                         <outlet property="meaningLabel" destination="fFJ-MT-W4F" id="tzT-8R-6ec"/>
                         <outlet property="noteTakingTextView" destination="n7B-4w-PRD" id="Qi6-md-iXC"/>
+                        <outlet property="originLabel" destination="PgC-fF-pTY" id="k6o-Ki-QeO"/>
                         <outlet property="termLabel" destination="PSa-5m-neR" id="6yY-pT-4wn"/>
                     </connections>
                 </tableViewController>

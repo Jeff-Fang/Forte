@@ -5,10 +5,11 @@
         <attribute name="markedDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="meaning" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="note" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="term" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <fetchRequest name="MarkedItem" entity="GlossaryItem" predicateString="isMarked != 0"/>
     <elements>
-        <element name="GlossaryItem" positionX="-54" positionY="-9" width="128" height="120"/>
+        <element name="GlossaryItem" positionX="-54" positionY="-9" width="128" height="135"/>
     </elements>
 </model>

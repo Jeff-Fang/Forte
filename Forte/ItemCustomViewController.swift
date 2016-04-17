@@ -15,11 +15,13 @@ class ItemCustomTableViewController: UITableViewController {
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var noteTakingTextView: UITextView!
+    @IBOutlet weak var originLabel: UILabel!
     
     var itemIndex: NSIndexPath?
     var termToDisplay = ""
     var meaningToDisplay = ""
     var noteToDisplay: String?
+    var originToDisplay: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,7 @@ class ItemCustomTableViewController: UITableViewController {
         termLabel.text = termToDisplay
         meaningLabel.text = meaningToDisplay
         noteTakingTextView.text = noteToDisplay
+        originLabel.text = originToDisplay
         
         noteTakingTextView.delegate = self
         

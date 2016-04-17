@@ -170,6 +170,7 @@ extension SearchViewController: UITableViewDataSource {
         func configureInfoForDetailedCell(cell:GlossaryItemDetailedTableViewCell) {
             cell.termLabel.text = dataSource[indexPath.row].term
             cell.meaningLabel.text = dataSource[indexPath.row].meaning
+            cell.originLabel.text = dataSource[indexPath.row].origin
             
             cell.indexPath = indexPath
             cell.delegate = self

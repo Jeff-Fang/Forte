@@ -15,4 +15,5 @@ class GlossaryItem:NSManagedObject {
     @NSManaged var isMarked:NSNumber!
     @NSManaged var note:String?
     @NSManaged var markedDate: NSDate?
+    @NSManaged var origin: String?
 }
