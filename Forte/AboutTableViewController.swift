@@ -12,7 +12,7 @@ import MessageUI
 
 class AboutTableViewController: UITableViewController {
     
-    var sectionTitles = ["","Leave Feedback","Follow Me"]
+    var sectionTitles = ["About","Leave Feedback","Follow Me"]
     var sectionContent = [["Music Glossary on Wikipedia"],["Rate Forte on App Store", "Tell me your feedback", "Report a problem"],["Twitter", "Weibo"]]
     var links = ["https://twitter.com/all2jeff","https://weibo.com/all2jeff"]
 

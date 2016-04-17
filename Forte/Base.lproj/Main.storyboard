@@ -64,7 +64,7 @@
                             <constraint firstItem="Gl4-Uk-LUi" firstAttribute="leading" secondItem="Saq-0V-huq" secondAttribute="leading" id="jzW-RI-Tr5"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Glossary" id="O5X-ym-JWW"/>
+                    <tabBarItem key="tabBarItem" title="Glossary" image="Glossary" id="O5X-ym-JWW"/>
                     <connections>
                         <outlet property="searchBar" destination="Gl4-Uk-LUi" id="B9c-Wt-MYr"/>
                         <outlet property="tableView" destination="bxM-Tv-x2Y" id="cM8-68-smm"/>
@@ -78,7 +78,7 @@
         <scene sceneID="DOI-7E-ewa">
             <objects>
                 <navigationController id="qN0-la-iBc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorite" id="2du-Wc-u6E"/>
+                    <tabBarItem key="tabBarItem" title="Favorite" image="Heart_grey" id="2du-Wc-u6E"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YYp-pe-i9F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -99,9 +99,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="forteBadge" id="kj3-3J-xA4">
+                            <rect key="frame" x="0.0" y="64" width="600" height="170"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="JMX-fc-xeN" style="IBUITableViewCellStyleDefault" id="hnN-Cr-2Wr">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="262" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hnN-Cr-2Wr" id="3EI-kW-sJG">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -133,7 +137,7 @@
         <scene sceneID="Up8-O1-szl">
             <objects>
                 <navigationController id="8b9-8E-kXy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="About" id="Sl4-a7-pZe"/>
+                    <tabBarItem key="tabBarItem" title="About" image="about" id="Sl4-a7-pZe"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="btA-Tw-bA6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -159,7 +163,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8Sj-Ta-Lpo" id="M3Y-bn-uTS">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wo-yk-hz2">
@@ -217,7 +221,7 @@
                                         <rect key="frame" x="0.0" y="99" width="600" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hqu-qd-pRM" id="8ha-zF-lvu">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Term" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSa-5m-neR">
@@ -261,7 +265,7 @@
                                         <rect key="frame" x="0.0" y="349" width="600" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="maG-Nd-DB8" id="aBv-CR-iyU">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="299.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n7B-4w-PRD">
@@ -315,4 +319,10 @@
             <point key="canvasLocation" x="1883" y="723"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Glossary" width="21" height="25"/>
+        <image name="Heart_grey" width="25" height="25"/>
+        <image name="about" width="25" height="25"/>
+        <image name="forteBadge" width="485" height="200"/>
+    </resources>
 </document>
