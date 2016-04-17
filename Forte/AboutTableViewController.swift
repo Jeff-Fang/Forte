@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import MessageUI
 
 class AboutTableViewController: UITableViewController {
     
@@ -72,6 +73,8 @@ class AboutTableViewController: UITableViewController {
                 if let url = NSURL(string:"http://www.apple.com/itunes/charts/paid-apps/") {
                     UIApplication.sharedApplication().openURL(url)
                 }
+            } else {
+                showEmailForRow(indexPath.row)
             }
             
         case 2:
@@ -86,5 +89,49 @@ class AboutTableViewController: UITableViewController {
         
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
+    
+    func showEmailForRow(row:Int) {
+        print("*** sending mails .....")
+        guard MFMailComposeViewController.canSendMail() else {
+            return
+        }
+        let messageBody = ""
+        let toRecipients = ["all2jeff@gmail.com"]
+        var emailTitle = ""
+        
+        if row == 1 {
+            emailTitle = "Feedback of Forte"
+        } else if row == 2 {
+            emailTitle = "Problem of Forte"
+        }
+        
+        let mailComposer = MFMailComposeViewController()
+        mailComposer.mailComposeDelegate = self
+        mailComposer.setSubject(emailTitle)
+        mailComposer.setMessageBody(messageBody, isHTML: false)
+        mailComposer.setToRecipients(toRecipients)
+        
+        presentViewController(mailComposer, animated: true, completion: nil)
+    }
 
+}
+
+extension AboutTableViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+        
+        switch result.rawValue {
+        case MFMailComposeResultCancelled.rawValue:
+            print("Mail cancelled")
+        case MFMailComposeResultSaved.rawValue:
+            print("Mail saved")
+        case MFMailComposeResultSent.rawValue:
+            print("Mail sent")
+        case MFMailComposeResultFailed.rawValue:
+            print("Failed to send: \(error)")
+        default: break
+            
+        }
+        
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

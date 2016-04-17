@@ -124,46 +124,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="About" id="LVB-Bv-nan"/>
-                    <connections>
-                        <segue destination="QmX-bI-Ru1" kind="show" identifier="showWebView" id="OEe-mk-2v5"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OOv-lb-mYR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1168" y="1701"/>
-        </scene>
-        <!--Web View Controller-->
-        <scene sceneID="1FA-Nm-24Z">
-            <objects>
-                <viewController id="QmX-bI-Ru1" customClass="WebViewController" customModule="Forte" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="VQ1-KD-ZH6"/>
-                        <viewControllerLayoutGuide type="bottom" id="yP7-X5-qwI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Eyk-lG-HjJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uql-do-3Nd">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="yP7-X5-qwI" firstAttribute="top" secondItem="Uql-do-3Nd" secondAttribute="bottom" constant="-49" id="4KJ-tL-8Rd"/>
-                            <constraint firstItem="Uql-do-3Nd" firstAttribute="top" secondItem="VQ1-KD-ZH6" secondAttribute="bottom" constant="-64" id="JJ3-zh-trC"/>
-                            <constraint firstItem="Uql-do-3Nd" firstAttribute="leading" secondItem="Eyk-lG-HjJ" secondAttribute="leading" id="Yh8-j2-k8w"/>
-                            <constraint firstAttribute="trailing" secondItem="Uql-do-3Nd" secondAttribute="trailing" id="eRz-ff-bDo"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="Uql-do-3Nd" id="Z1e-Fp-wdG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lvp-LR-eaZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1859" y="1701"/>
         </scene>
         <!--About-->
         <scene sceneID="Up8-O1-szl">

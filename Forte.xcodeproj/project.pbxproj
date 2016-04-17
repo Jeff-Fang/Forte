@@ -26,7 +26,6 @@
 		E576F89B1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */; };
 		E576F89E1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */; };
 		E576F89F1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */; };
-		E5A5715D1CC2FF7200365558 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A5715C1CC2FF7200365558 /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +50,6 @@
 		E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NothingFoundTableViewCell.xib; sourceTree = "<group>"; };
 		E576F89C1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemDetailedTableViewCell.swift; sourceTree = "<group>"; };
 		E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlossaryItemDetailedTableViewCell.xib; sourceTree = "<group>"; };
-		E5A5715C1CC2FF7200365558 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +88,6 @@
 				E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */,
 				E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
-				E5A5715C1CC2FF7200365558 /* WebViewController.swift */,
 				E561C23D1CC2F4A800615198 /* AboutTableViewController.swift */,
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E524A08F1CB1100800DECC25 /* Support */,
@@ -212,7 +209,6 @@
 				E507AC7B1CA7CB7300EF850C /* AppDelegate.swift in Sources */,
 				E53555E11CBC9E5900BBD205 /* ItemCustomViewController.swift in Sources */,
 				E55D4E7D1CBA52E10044D7EA /* MarkedItemTableViewController.swift in Sources */,
-				E5A5715D1CC2FF7200365558 /* WebViewController.swift in Sources */,
 				E561C23E1CC2F4A800615198 /* AboutTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
