@@ -31,8 +31,19 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         // Configure search bar
-        searchBar.barTintColor = UIColor(colorLiteralRed: 100/255 , green: 180/255 , blue: 230/255 , alpha: 1)
-        searchBar.tintColor = UIColor.whiteColor()
+        searchBar.barTintColor = UIColor.whiteColor()
+//        searchBar.tintColor = UIColor.whiteColor()
+        
+        searchBar.tintColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
+
+        for view in searchBar.subviews {
+            for subview in view.subviews {
+                if subview.isKindOfClass(UITextField) {
+                    let textField: UITextField = subview as! UITextField
+                    textField.backgroundColor = UIColor(colorLiteralRed: 230/255 , green: 230/255 , blue: 230/255 , alpha: 1)
+                }
+            }
+        }
         
         // Configure table view
         tableView.contentInset.top = 64

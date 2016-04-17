@@ -15,7 +15,7 @@ enum starState {
         case .normal :
             return UIImage(named: "Heart_grey")!
         case .highlighted :
-            return UIImage(named: "Heart_blue")!
+            return UIImage(named: "Heart_red")!
         }
     }
     

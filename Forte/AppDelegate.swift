@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        customizeAppearance()
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         let isPreloaded = defaults.boolForKey("isPreloaded")
         if !isPreloaded {
@@ -27,6 +29,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(applicationDocumentsDirectory.path)
 
         return true
+    }
+    
+    func customizeAppearance() {
+        let redColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
+
+        UINavigationBar.appearance().titleTextAttributes = [ NSForegroundColorAttributeName: redColor ]
+        UINavigationBar.appearance().tintColor = redColor
+//        UINavigationBar.appearance().barTintColor = UIColor.blackColor()
+        
+        UITabBar.appearance().tintColor = redColor
+//        UITabBar.appearance().barTintColor = UIColor.blackColor()
+        
     }
 
     func applicationWillResignActive(application: UIApplication) {
