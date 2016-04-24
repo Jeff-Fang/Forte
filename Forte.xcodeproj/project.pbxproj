@@ -90,8 +90,8 @@
 				E561C23D1CC2F4A800615198 /* AboutTableViewController.swift */,
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
-				E524A08F1CB1100800DECC25 /* Support */,
 				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
+				E524A08F1CB1100800DECC25 /* Support */,
 			);
 			path = Forte;
 			sourceTree = "<group>";
@@ -154,7 +154,7 @@
 				TargetAttributes = {
 					E507AC761CA7CB7300EF850C = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = G2VU26L9YP;
+						DevelopmentTeam = Q7Y8V79W6L;
 					};
 				};
 			};
@@ -325,7 +325,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Forte/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.Forte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.forteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -337,7 +337,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Forte/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.Forte;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.forteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

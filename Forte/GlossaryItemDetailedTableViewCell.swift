@@ -19,7 +19,7 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
     @IBOutlet weak var starIconOutlet: UIButton!
     @IBOutlet weak var originLabel: UILabel!
     
-    var delegate:InCellFunctionalityDelegate?
+    var delegate: InCellFunctionalityDelegate?
     var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: -1)
     
     @IBAction func starIcon(sender: UIButton) {
