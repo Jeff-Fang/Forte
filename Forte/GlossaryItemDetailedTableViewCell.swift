@@ -35,6 +35,13 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
         }
     }
     
+//    func configureForItem(item: GlossaryItem) {
+//        if let temp = item.isMarked {
+//            let starIsHighlighted = temp.boolValue
+//            starIsHighlighted ? setStarState(.highlighted) : setStarState(.normal)
+//        }
+//    }
+//    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

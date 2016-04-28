@@ -11,15 +11,26 @@ import CoreData
 
 class MarkedItemTableViewController: UITableViewController {
     
+    // MARK: - Class Properties
+    
     var managedObjectContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController!
-
+    
+    // MARK: - Class Settings
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.rowHeight = 80
+        initializeFetchedResultsController()
+        performFetch()
+    }
+    
     func initializeFetchedResultsController() {
         var fetchRequest = NSFetchRequest()
         if let moc = managedObjectContext {
             let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
             fetchRequest = managedObjectModel.fetchRequestTemplateForName("MarkedItem")!.copy() as! NSFetchRequest
-
+            
             let sortDescriptor1 = NSSortDescriptor(key: "markedDate", ascending: false)
             let sortDescriptor2 = NSSortDescriptor(key: "term", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
@@ -28,13 +39,6 @@ class MarkedItemTableViewController: UITableViewController {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "rootCache")
             fetchedResultsController.delegate = self
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.rowHeight = 80
-        initializeFetchedResultsController()
-        performFetch()
     }
     
     func performFetch() {
@@ -50,6 +54,8 @@ class MarkedItemTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    // MARK: - Dealing with Segues
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItemCustomVC" {
             let cell = sender as! MarkedItemTableViewCell
@@ -114,13 +120,14 @@ class MarkedItemTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view Delegate
+    // MARK: - TableView Delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
+// MARK: - NSFetchedResultsControllerDelegate
 extension MarkedItemTableViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()

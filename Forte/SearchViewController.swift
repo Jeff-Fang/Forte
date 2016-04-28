@@ -12,6 +12,8 @@ import CoreData
 
 class SearchViewController: UIViewController {
     
+    // MARK: - Class Properties
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,21 +35,29 @@ class SearchViewController: UIViewController {
     
     // Data preparation
     var managedObjectContext: NSManagedObjectContext!
+    var fetchedResultsController: NSFetchedResultsController!
 
     var glossary:[GlossaryItem] = []
     var searchResults:[GlossaryItem] = []
     var hasSearched = false
     
-
+    // MARK: - Class Settings
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        customizeAppearance()
+        prepareTableView()
+        loadNibFiles()
+        performFetch()
+    }
+    
+    func customizeAppearance() {
         // Configure search bar
         searchBar.barTintColor = UIColor.whiteColor()
-//        searchBar.tintColor = UIColor.whiteColor()
+        //        searchBar.tintColor = UIColor.whiteColor()
         
         searchBar.tintColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
-
+        
         for view in searchBar.subviews {
             for subview in view.subviews {
                 if subview.isKindOfClass(UITextField) {
@@ -56,22 +66,35 @@ class SearchViewController: UIViewController {
                 }
             }
         }
-        
-        // Configure table view
+    }
+    
+    func prepareTableView() {
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
-        
-        // Load nib files
+    }
+    
+    func loadNibFiles() {
         var cellNib = UINib(nibName: TableViewCellIdentifiers.briefCellIdentifier, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.briefCellIdentifier)
         cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCellIdentifier, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCellIdentifier)
         cellNib = UINib(nibName: TableViewCellIdentifiers.detailedCellIdentifier, bundle: nil)
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.detailedCellIdentifier)
-        
-        // Load glossary items from database
+    }
+    
+    func performFetch() {
         if let moc = managedObjectContext {
             let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
+//            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "rootCache0")
+//            fetchedResultsController.delegate = self
+            
+//            
+//            do {
+//                try fetchedResultsController.performFetch()
+//            } catch {
+//                fatalError("Failed to initialize FetchedResultsController: \(error)")
+//            }
+            
             do {
                 glossary = try moc.executeFetchRequest(fetchRequest) as! [GlossaryItem]
             } catch {
@@ -87,7 +110,6 @@ class SearchViewController: UIViewController {
 }
 
 // MARK: - UISearchBarDelegate
-
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
@@ -150,8 +172,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: - UITableViewDataSource
-
+// MARK: - UITableViewDataSourceDelegate
 extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hasSearched {
@@ -164,21 +185,6 @@ extension SearchViewController: UITableViewDataSource {
             return glossary.count
         }
     }
-    
-//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        let defaultRowHeight:CGFloat = 50
-//        
-//        if hasSearched && searchResults.count == 0 {
-//            // for NoResultFoundCell
-//            return 88
-//        } else if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-//            // for DetailedCell
-//            tableView.estimatedRowHeight = defaultRowHeight
-//            return UITableViewAutomaticDimension
-//        } else {
-//            return defaultRowHeight
-//        }
-//    }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let defaultRowHeight:CGFloat = 56.5
@@ -198,7 +204,6 @@ extension SearchViewController: UITableViewDataSource {
             return defaultRowHeight
         }
     }
-    
     
     func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -260,24 +265,8 @@ extension SearchViewController: UITableViewDataSource {
     }
 }
 
-
 // MARK: - UITableViewDelegate
-
 extension SearchViewController: UITableViewDelegate {
-//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        if selectedIndexPath != indexPath {
-//            selectedIndexPath = indexPath
-//            tableView.reloadData()
-//            tableView.beginUpdates()
-//            tableView.endUpdates()
-//        } else {
-//            selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
-//            tableView.reloadData()
-//            tableView.beginUpdates()
-//            tableView.endUpdates()
-//        }
-//    }
-
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         indexPathsToUpdate.removeAll(keepCapacity: false)
         
@@ -292,18 +281,12 @@ extension SearchViewController: UITableViewDelegate {
             indexPathsToUpdate.append(prevSelectedIndexPath!)
         }
         
-        //tableView.reloadData()
-        
+//        tableView.reloadData()
         tableView.reloadRowsAtIndexPaths(indexPathsToUpdate, withRowAnimation: UITableViewRowAnimation.Automatic)
-        
     }
-
-
-
 }
 
-
-
+// MARK: - CellDelegate
 extension SearchViewController: InCellFunctionalityDelegate {
     func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
         let indexPath = cell.indexPath
@@ -347,3 +330,43 @@ extension SearchViewController: InCellFunctionalityDelegate {
         }
     }
 }
+
+// MARK: - NSFetchedResultsControllerDelegate
+//extension SearchViewController: NSFetchedResultsControllerDelegate {
+//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+//        tableView.beginUpdates()
+//    }
+//    
+//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+//        switch type {
+//        case .Insert:
+//            print("*** NSFetchedResultsChangeInsert (object)")
+//            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//            
+//        case .Delete:
+//            print("*** NSFetchedResultsChangeDelete (object)")
+//            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//        
+//        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        
+//        case .Update:
+//            print("*** NSFetchedResultsChangeUpdate (object)")
+//            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? GlossaryItemDetailedTableViewCell {
+//                let item = controller.objectAtIndexPath(indexPath!) as! GlossaryItem
+//                cell.configureForItem(item)
+//            }
+//        case .Move:
+//            print("*** NSFetchedResultsChangeMove (object)")
+//            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//        }
+//    }
+//    
+//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+//        print("*** controllerDidChangeContent")
+//        tableView.endUpdates()
+//    }
+//    
+//}
+
