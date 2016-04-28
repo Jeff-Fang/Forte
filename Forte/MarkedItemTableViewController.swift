@@ -11,12 +11,13 @@ import CoreData
 
 class MarkedItemTableViewController: UITableViewController {
     
+    var managedObjectContext: NSManagedObjectContext!
     var fetchedResultsController: NSFetchedResultsController!
 
     func initializeFetchedResultsController() {
         var fetchRequest = NSFetchRequest()
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-            let managedObjectModel = managedObjectContext.persistentStoreCoordinator!.managedObjectModel
+        if let moc = managedObjectContext {
+            let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
             fetchRequest = managedObjectModel.fetchRequestTemplateForName("MarkedItem")!.copy() as! NSFetchRequest
 
             let sortDescriptor1 = NSSortDescriptor(key: "markedDate", ascending: false)
@@ -24,7 +25,7 @@ class MarkedItemTableViewController: UITableViewController {
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
             fetchRequest.fetchBatchSize = 20
             
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: "rootCache")
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "rootCache")
             fetchedResultsController.delegate = self
         }
     }

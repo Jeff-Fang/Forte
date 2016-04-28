@@ -11,6 +11,7 @@ import CoreData
 
 
 class SearchViewController: UIViewController {
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +22,9 @@ class SearchViewController: UIViewController {
         static let detailedCellIdentifier = "GlossaryItemDetailedTableViewCell"
     }
     
+    // Data preparation
+    var managedObjectContext: NSManagedObjectContext!
+
     var glossary:[GlossaryItem] = []
     var searchResults:[GlossaryItem] = []
     var hasSearched = false
@@ -58,10 +62,10 @@ class SearchViewController: UIViewController {
         tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.detailedCellIdentifier)
         
         // Load glossary items from database
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
+        if let moc = managedObjectContext {
             let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
             do {
-                glossary = try managedObjectContext.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+                glossary = try moc.executeFetchRequest(fetchRequest) as! [GlossaryItem]
             } catch {
                 print("Failed to retrieve record")
                 print(error)

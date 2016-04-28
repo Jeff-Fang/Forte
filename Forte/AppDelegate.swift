@@ -27,6 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         print(applicationDocumentsDirectory.path)
+        
+        // send managedObjectContext to View Controllers
+        let tabBarController = window!.rootViewController as! UITabBarController
+        if let tabBarViewControllers = tabBarController.viewControllers {
+            let searchViewController = tabBarViewControllers[0] as! SearchViewController
+            searchViewController.managedObjectContext = managedObjectContext
+            
+            let navigationController = tabBarViewControllers[1] as! UINavigationController
+            let markedItemTableViewController = navigationController.viewControllers[0] as! MarkedItemTableViewController
+            markedItemTableViewController.managedObjectContext = managedObjectContext
+        }
 
         return true
     }
