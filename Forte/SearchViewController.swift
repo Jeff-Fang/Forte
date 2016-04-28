@@ -15,6 +15,15 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
+//    var selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+    private var prevSelectedIndexPath: NSIndexPath? = nil
+    private var selectedIndexPath: NSIndexPath? {
+        willSet {
+            prevSelectedIndexPath = selectedIndexPath
+        }
+    }
+    private var indexPathsToUpdate = [NSIndexPath] ()
+    
     // Identifiers for nib files
     struct TableViewCellIdentifiers {
         static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
@@ -29,7 +38,6 @@ class SearchViewController: UIViewController {
     var searchResults:[GlossaryItem] = []
     var hasSearched = false
     
-    var selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,19 +165,43 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
     
+//    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        let defaultRowHeight:CGFloat = 50
+//        
+//        if hasSearched && searchResults.count == 0 {
+//            // for NoResultFoundCell
+//            return 88
+//        } else if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
+//            // for DetailedCell
+//            tableView.estimatedRowHeight = defaultRowHeight
+//            return UITableViewAutomaticDimension
+//        } else {
+//            return defaultRowHeight
+//        }
+//    }
+
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let defaultRowHeight:CGFloat = 50
+        let defaultRowHeight:CGFloat = 56.5
         
         if hasSearched && searchResults.count == 0 {
             // for NoResultFoundCell
             return 88
-        } else if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            // for DetailedCell
-            tableView.estimatedRowHeight = defaultRowHeight
-            return UITableViewAutomaticDimension
+        } else if let path = selectedIndexPath {
+            if indexPath.compare(path) == NSComparisonResult.OrderedSame {
+                // for DetailedCell
+                tableView.estimatedRowHeight = defaultRowHeight
+                return UITableViewAutomaticDimension
+            } else {
+                return defaultRowHeight
+            }
         } else {
             return defaultRowHeight
         }
+    }
+    
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -202,18 +234,29 @@ extension SearchViewController: UITableViewDataSource {
             return nothingFoundCell
         }
         
-        if indexPath.compare(selectedIndexPath) == NSComparisonResult.OrderedSame {
-            cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-            configureInfoForDetailedCell(cell)
-            return cell
-            
+        if let path = selectedIndexPath {
+            if indexPath.compare(path) == NSComparisonResult.OrderedSame {
+                cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
+                let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+                configureInfoForDetailedCell(cell)
+                return cell
+            } else {
+                // SITUATION I
+                cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
+                let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
+                cell.termLabel.text = dataSource[indexPath.row].term
+                return cell
+            }
         } else {
+            // SITUATION II
+            // The SITUATION I & II are same. Still couldn't find a good way to avoid this repeat.
             cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
             cell.termLabel.text = dataSource[indexPath.row].term
             return cell
         }
+       
+
     }
 }
 
@@ -221,20 +264,45 @@ extension SearchViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 
 extension SearchViewController: UITableViewDelegate {
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        if selectedIndexPath != indexPath {
+//            selectedIndexPath = indexPath
+//            tableView.reloadData()
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//        } else {
+//            selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+//            tableView.reloadData()
+//            tableView.beginUpdates()
+//            tableView.endUpdates()
+//        }
+//    }
+
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if selectedIndexPath != indexPath {
-            selectedIndexPath = indexPath
-            tableView.reloadData()
-            tableView.beginUpdates()
-            tableView.endUpdates()
+        indexPathsToUpdate.removeAll(keepCapacity: false)
+        
+        if selectedIndexPath == indexPath {
+            selectedIndexPath = nil
         } else {
-            selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
-            tableView.reloadData()
-            tableView.beginUpdates()
-            tableView.endUpdates()
+            selectedIndexPath = indexPath
+            indexPathsToUpdate.append(indexPath)
         }
+        
+        if prevSelectedIndexPath != nil {
+            indexPathsToUpdate.append(prevSelectedIndexPath!)
+        }
+        
+        //tableView.reloadData()
+        
+        tableView.reloadRowsAtIndexPaths(indexPathsToUpdate, withRowAnimation: UITableViewRowAnimation.Automatic)
+        
     }
+
+
+
 }
+
+
 
 extension SearchViewController: InCellFunctionalityDelegate {
     func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
