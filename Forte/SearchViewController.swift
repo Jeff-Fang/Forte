@@ -167,7 +167,10 @@ extension SearchViewController: UISearchBarDelegate {
             hasSearched = true
         }
         
-        performFetchSearchResult()
+        if let text = searchBar.text {
+            performFetchSearchResultByText(text)
+            tableView.reloadData()
+        }
         
 //        searchResults = [GlossaryItem]()
         
@@ -195,14 +198,17 @@ extension SearchViewController: UISearchBarDelegate {
         return .TopAttached
     }
     
-    func performFetchSearchResult() {
+    func performFetchSearchResultByText(text: String) {
+        let cacheName = "searchGlossaryItemCache"
+        NSFetchedResultsController.deleteCacheWithName(cacheName)
+        
         let searchFetchRequest = NSFetchRequest(entityName: entityName)
-        let searchPredicate = NSPredicate(format: "term LIKE %@", "moderato")
+        let searchPredicate = NSPredicate(format: "term CONTAINS %@", text)
         let sortDescriptor = NSSortDescriptor(key: "term", ascending: true)
         searchFetchRequest.sortDescriptors = [sortDescriptor]
         searchFetchRequest.predicate = searchPredicate
         
-        searchFetchedResultsController = NSFetchedResultsController(fetchRequest: searchFetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: "searchGlossaryItemCache")
+        searchFetchedResultsController = NSFetchedResultsController(fetchRequest: searchFetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: cacheName)
         searchFetchedResultsController.delegate = self
         
         do {
@@ -271,8 +277,6 @@ extension SearchViewController: UITableViewDataSource {
         
         if hasSearched {
             itemContent = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
-            print("*** The indexPath is: \(indexPath)")
-            print("*** The itemContent is: \(itemContent)")
         } else {
             itemContent = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
         }
