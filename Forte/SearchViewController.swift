@@ -17,7 +17,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-//    var selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
     private var prevSelectedIndexPath: NSIndexPath? = nil
     private var selectedIndexPath: NSIndexPath? {
         willSet {
@@ -27,7 +26,7 @@ class SearchViewController: UIViewController {
     private var indexPathsToUpdate = [NSIndexPath] ()
     
     // Identifiers for nib files
-    struct TableViewCellIdentifiers {
+    private struct TableViewCellIdentifiers {
         static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
         static let nothingFoundCellIdentifier = "NothingFoundTableViewCell"
         static let detailedCellIdentifier = "GlossaryItemDetailedTableViewCell"
@@ -35,11 +34,15 @@ class SearchViewController: UIViewController {
     
     // Data preparation
     var managedObjectContext: NSManagedObjectContext!
-    var fetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController!
+    private var searchFetchedResultsController: NSFetchedResultsController!
 
-    var glossary:[GlossaryItem] = []
-    var searchResults:[GlossaryItem] = []
-    var hasSearched = false
+    private var entityName = "GlossaryItem"
+//    private var glossary:[GlossaryItem] = []
+//    private var searchResults:[GlossaryItem] = []
+    private var hasSearched = false
+    private var glossaryCount:Int = 0
+    private var searchCount:Int = 0
     
     // MARK: - Class Settings
     
@@ -84,23 +87,41 @@ class SearchViewController: UIViewController {
     
     func performFetch() {
         if let moc = managedObjectContext {
-            let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
-//            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "rootCache0")
-//            fetchedResultsController.delegate = self
             
-//            
-//            do {
-//                try fetchedResultsController.performFetch()
-//            } catch {
-//                fatalError("Failed to initialize FetchedResultsController: \(error)")
-//            }
+            let fetchRequest = NSFetchRequest(entityName: entityName)
+            let sortDescriptor = NSSortDescriptor(key: "term", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+            fetchRequest.fetchBatchSize = 20
+            
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "glossaryItemCache")
+            fetchedResultsController.delegate = self
             
             do {
-                glossary = try moc.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+                try fetchedResultsController.performFetch()
             } catch {
-                print("Failed to retrieve record")
-                print(error)
+                fatalError("Failed to initialize FetchedResultsController: \(error)")
             }
+            
+            let countFetchRequest = NSFetchRequest(entityName: entityName)
+            countFetchRequest.resultType = .CountResultType
+            
+            do {
+                let results =
+                    try managedObjectContext.executeFetchRequest(countFetchRequest) as! [NSNumber]
+                let count = results.first!.integerValue
+                glossaryCount = count
+                print("The glossaryCount = \(glossaryCount)")
+            } catch let error as NSError {
+                print("Could not fetch \(error), \(error.userInfo)")
+            }
+            
+            
+//            do {
+//                glossary = try moc.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+//            } catch {
+//                print("Failed to retrieve record")
+//                print(error)
+//            }
         }
     }
     
@@ -146,12 +167,15 @@ extension SearchViewController: UISearchBarDelegate {
             hasSearched = true
         }
         
-        searchResults = [GlossaryItem]()
+        performFetchSearchResult()
         
-        if let searchText = searchBar.text {
-            filterContentForSearchText(searchText)
-            tableView.reloadData()
-        }
+//        searchResults = [GlossaryItem]()
+        
+//        if let searchText = searchBar.text {
+//            filterContentForSearchText(searchText)
+//            tableView.reloadData()
+//        }
+        
         
     }
     
@@ -160,15 +184,47 @@ extension SearchViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
     
-    func filterContentForSearchText(searchText: String) {
-        searchResults = glossary.filter({(glossaryItem:GlossaryItem) -> Bool in
-            let nameMatch = glossaryItem.term.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
-            return nameMatch != nil
-        })
-    }
+//    func filterContentForSearchText(searchText: String) {
+//        searchResults = glossary.filter({(glossaryItem:GlossaryItem) -> Bool in
+//            let nameMatch = glossaryItem.term.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
+//            return nameMatch != nil
+//        })
+//    }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return .TopAttached
+    }
+    
+    func performFetchSearchResult() {
+        let searchFetchRequest = NSFetchRequest(entityName: entityName)
+        let searchPredicate = NSPredicate(format: "term LIKE %@", "moderato")
+        let sortDescriptor = NSSortDescriptor(key: "term", ascending: true)
+        searchFetchRequest.sortDescriptors = [sortDescriptor]
+        searchFetchRequest.predicate = searchPredicate
+        
+        searchFetchedResultsController = NSFetchedResultsController(fetchRequest: searchFetchRequest, managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: "searchGlossaryItemCache")
+        searchFetchedResultsController.delegate = self
+        
+        do {
+            try searchFetchedResultsController.performFetch()
+        } catch {
+            fatalError("Failed to initialize FetchedResultsController: \(error)")
+        }
+        
+        
+        let countFetchRequest = NSFetchRequest(entityName: entityName)
+        countFetchRequest.resultType = .CountResultType
+        countFetchRequest.predicate = searchPredicate
+        
+        do {
+            let results =
+            try managedObjectContext.executeFetchRequest(countFetchRequest) as! [NSNumber]
+            let count = results.first!.integerValue
+            searchCount = count
+            print("*** searchCount = \(searchCount)")
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
     }
 }
 
@@ -176,20 +232,20 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hasSearched {
-            if searchResults.count == 0 {
+            if searchCount == 0 {
                 return 1
             } else {
-                return searchResults.count
+                return searchCount
             }
         } else {
-            return glossary.count
+            return glossaryCount
         }
     }
 
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let defaultRowHeight:CGFloat = 56.5
         
-        if hasSearched && searchResults.count == 0 {
+        if hasSearched && searchCount == 0 {
             // for NoResultFoundCell
             return 88
         } else if let path = selectedIndexPath {
@@ -210,46 +266,31 @@ extension SearchViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var dataSource = [GlossaryItem]()
         var cellIdentifier: String
+        var itemContent: GlossaryItem
         
         if hasSearched {
-            dataSource = searchResults
+            itemContent = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+            print("*** The indexPath is: \(indexPath)")
+            print("*** The itemContent is: \(itemContent)")
         } else {
-            dataSource = glossary
-        }
-        
-        func configureInfoForDetailedCell(cell:GlossaryItemDetailedTableViewCell) {
-            cell.termLabel.text = dataSource[indexPath.row].term
-            cell.meaningLabel.text = dataSource[indexPath.row].meaning
-            cell.originLabel.text = dataSource[indexPath.row].origin
-            
-            cell.indexPath = indexPath
-            cell.delegate = self
-            
-            if let temp = dataSource[indexPath.row].isMarked {
-                let starIsHighlighted = temp.boolValue
-                starIsHighlighted ? cell.setStarState(.highlighted) : cell.setStarState(.normal)
-            }
-        }
-        
-        guard dataSource.count != 0 else {
-            cellIdentifier = TableViewCellIdentifiers.nothingFoundCellIdentifier
-            let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
-            return nothingFoundCell
+            itemContent = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
         }
         
         if let path = selectedIndexPath {
             if indexPath.compare(path) == NSComparisonResult.OrderedSame {
                 cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-                configureInfoForDetailedCell(cell)
+                
+                cell.delegate = self
+                cell.indexPath = indexPath
+                cell.configureForItem(itemContent)
                 return cell
             } else {
                 // SITUATION I
                 cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
-                cell.termLabel.text = dataSource[indexPath.row].term
+                cell.termLabel.text = itemContent.term
                 return cell
             }
         } else {
@@ -257,7 +298,7 @@ extension SearchViewController: UITableViewDataSource {
             // The SITUATION I & II are same. Still couldn't find a good way to avoid this repeat.
             cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
-            cell.termLabel.text = dataSource[indexPath.row].term
+            cell.termLabel.text = itemContent.term
             return cell
         }
     }
@@ -288,27 +329,21 @@ extension SearchViewController: UITableViewDelegate {
 extension SearchViewController: InCellFunctionalityDelegate {
     func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
         let indexPath = cell.indexPath
-        var glossaryItem: GlossaryItem = glossary[indexPath.row]
+        var pressedItem: GlossaryItem!
         
         if hasSearched {
-            let searchedItem = searchResults[indexPath.row]
-            for item in glossary {
-                if item == searchedItem {
-                    glossaryItem = item
-                }
-            }
-            
+            pressedItem = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
         } else {
-            glossaryItem = glossary[indexPath.row]
+            pressedItem = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
         }
         
         var markSign: Bool {
             get {
-                return glossaryItem.isMarked.boolValue
+                return pressedItem.isMarked.boolValue
             }
             set(value) {
-                glossaryItem.isMarked = value
-                glossaryItem.markedDate = NSDate()
+                pressedItem.isMarked = value
+                pressedItem.markedDate = NSDate()
             }
         }
         
@@ -319,52 +354,54 @@ extension SearchViewController: InCellFunctionalityDelegate {
     }
     
     func saveData() {
-        if let managedObjectContext = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext {
-            do {
-                try managedObjectContext.save()
-            } catch {
-                print(error)
-            }
+        do {
+            try managedObjectContext.save()
+        } catch {
+            print(error)
         }
     }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
-//extension SearchViewController: NSFetchedResultsControllerDelegate {
-//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-//        tableView.beginUpdates()
-//    }
-//    
-//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-//        switch type {
-//        case .Insert:
-//            print("*** NSFetchedResultsChangeInsert (object)")
-//            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-//            
-//        case .Delete:
-//            print("*** NSFetchedResultsChangeDelete (object)")
-//            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-//        
-//        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//        
-//        case .Update:
-//            print("*** NSFetchedResultsChangeUpdate (object)")
-//            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? GlossaryItemDetailedTableViewCell {
-//                let item = controller.objectAtIndexPath(indexPath!) as! GlossaryItem
-//                cell.configureForItem(item)
-//            }
-//        case .Move:
-//            print("*** NSFetchedResultsChangeMove (object)")
-//            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-//            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-//        }
-//    }
-//    
-//    func controllerDidChangeContent(controller: NSFetchedResultsController) {
-//        print("*** controllerDidChangeContent")
-//        tableView.endUpdates()
-//    }
-//    
-//}
+extension SearchViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        switch type {
+        case .Insert:
+            print("*** NSFetchedResultsChangeInsert (object)")
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            
+        case .Delete:
+            print("*** NSFetchedResultsChangeDelete (object)")
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        
+        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
+        case .Update:
+            print("*** NSFetchedResultsChangeUpdate (object)")
+            guard selectedIndexPath != indexPath else {
+                if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? GlossaryItemDetailedTableViewCell {
+                    let item = controller.objectAtIndexPath(indexPath!) as! GlossaryItem
+                    cell.configureForItem(item)
+                }
+                break
+            }
+
+        case .Move:
+            print("*** NSFetchedResultsChangeMove (object)")
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        }
+    }
+    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        print("*** controllerDidChangeContent")
+        tableView.endUpdates()
+    }
+    
+}
 

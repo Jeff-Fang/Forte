@@ -35,13 +35,33 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
         }
     }
     
-//    func configureForItem(item: GlossaryItem) {
-//        if let temp = item.isMarked {
-//            let starIsHighlighted = temp.boolValue
-//            starIsHighlighted ? setStarState(.highlighted) : setStarState(.normal)
-//        }
-//    }
-//    
+    func configureForItem(item: GlossaryItem) {
+        if item.term.isEmpty {
+            termLabel.text = "(No Term)"
+        } else {
+            termLabel.text = item.term
+        }
+        
+        if let origin = item.origin {
+            if origin.isEmpty {
+                originLabel.text = ""
+            } else {
+                originLabel.text = item.origin
+            }
+        }
+        
+        if item.meaning.isEmpty {
+            meaningLabel.text = "(No Meaning)"
+        } else {
+            meaningLabel.text = item.meaning
+        }
+        
+        if let temp = item.isMarked {
+            let starIsHighlighted = temp.boolValue
+            starIsHighlighted ? setStarState(.highlighted) : setStarState(.normal)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

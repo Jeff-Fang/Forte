@@ -36,7 +36,7 @@ class MarkedItemTableViewController: UITableViewController {
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
             fetchRequest.fetchBatchSize = 20
             
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "rootCache")
+            fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "markedItemCache")
             fetchedResultsController.delegate = self
         }
     }
@@ -81,6 +81,9 @@ class MarkedItemTableViewController: UITableViewController {
         item.note = note
         
         do {
+            //!!!!!!!!!!!!!!!!!!!!!!!
+            
+            
             try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
         } catch {
             print(error)
