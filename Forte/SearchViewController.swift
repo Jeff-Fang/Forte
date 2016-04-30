@@ -114,7 +114,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
-        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+        selectedIndexPath = nil
         tableView.reloadData()
         return true
     }
@@ -138,7 +138,7 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+        selectedIndexPath = nil
         
         if searchBar.text == "" {
             hasSearched = false
@@ -260,8 +260,6 @@ extension SearchViewController: UITableViewDataSource {
             cell.termLabel.text = dataSource[indexPath.row].term
             return cell
         }
-       
-
     }
 }
 
