@@ -26,10 +26,10 @@ class SearchViewController: UIViewController {
     private var indexPathsToUpdate = [NSIndexPath] ()
     
     // Identifiers for nib files
-    private struct TableViewCellIdentifiers {
-        static let briefCellIdentifier = "GlossaryItemBriefTableViewCell"
-        static let nothingFoundCellIdentifier = "NothingFoundTableViewCell"
-        static let detailedCellIdentifier = "GlossaryItemDetailedTableViewCell"
+    private struct cellID {
+        static let brief = "GlossaryItemBriefTableViewCell"
+        static let nothingFound = "NothingFoundTableViewCell"
+        static let detailed = "GlossaryItemDetailedTableViewCell"
     }
     
     // Data preparation
@@ -38,11 +38,9 @@ class SearchViewController: UIViewController {
     private var searchFetchedResultsController: NSFetchedResultsController!
 
     private var entityName = "GlossaryItem"
-//    private var glossary:[GlossaryItem] = []
-//    private var searchResults:[GlossaryItem] = []
     private var hasSearched = false
-    private var glossaryCount:Int = 0
-    private var searchCount:Int = 0
+    private var glossaryCount: Int = 0
+    private var searchCount: Int = 0
     
     // MARK: - Class Settings
     
@@ -55,10 +53,8 @@ class SearchViewController: UIViewController {
     }
     
     func customizeAppearance() {
-        // Configure search bar
         searchBar.barTintColor = UIColor.whiteColor()
         //        searchBar.tintColor = UIColor.whiteColor()
-        
         searchBar.tintColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
         
         for view in searchBar.subviews {
@@ -77,19 +73,19 @@ class SearchViewController: UIViewController {
     }
     
     func loadNibFiles() {
-        var cellNib = UINib(nibName: TableViewCellIdentifiers.briefCellIdentifier, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.briefCellIdentifier)
-        cellNib = UINib(nibName: TableViewCellIdentifiers.nothingFoundCellIdentifier, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.nothingFoundCellIdentifier)
-        cellNib = UINib(nibName: TableViewCellIdentifiers.detailedCellIdentifier, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: TableViewCellIdentifiers.detailedCellIdentifier)
+        var cellNib = UINib(nibName: cellID.brief, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.brief)
+        cellNib = UINib(nibName: cellID.nothingFound, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.nothingFound)
+        cellNib = UINib(nibName: cellID.detailed, bundle: nil)
+        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.detailed)
     }
     
     func performFetch() {
         if let moc = managedObjectContext {
             
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let sortDescriptor = NSSortDescriptor(key: "term", ascending: true)
+            let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
             fetchRequest.sortDescriptors = [sortDescriptor]
             fetchRequest.fetchBatchSize = 20
             
@@ -114,14 +110,6 @@ class SearchViewController: UIViewController {
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
-            
-            
-//            do {
-//                glossary = try moc.executeFetchRequest(fetchRequest) as! [GlossaryItem]
-//            } catch {
-//                print("Failed to retrieve record")
-//                print(error)
-//            }
         }
     }
     
@@ -182,8 +170,8 @@ extension SearchViewController: UISearchBarDelegate {
         NSFetchedResultsController.deleteCacheWithName(cacheName)
         
         let searchFetchRequest = NSFetchRequest(entityName: entityName)
-        let searchPredicate = NSPredicate(format: "term CONTAINS %@", text)
-        let sortDescriptor = NSSortDescriptor(key: "term", ascending: true)
+        let searchPredicate = NSPredicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
+        let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
         searchFetchRequest.sortDescriptors = [sortDescriptor]
         searchFetchRequest.predicate = searchPredicate
         
@@ -195,7 +183,6 @@ extension SearchViewController: UISearchBarDelegate {
         } catch {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
-        
         
         let countFetchRequest = NSFetchRequest(entityName: entityName)
         countFetchRequest.resultType = .CountResultType
@@ -255,7 +242,7 @@ extension SearchViewController: UITableViewDataSource {
         var itemContent: GlossaryItem
         
         guard !hasSearched || searchCount != 0 else {
-            cellIdentifier = TableViewCellIdentifiers.nothingFoundCellIdentifier
+            cellIdentifier = cellID.nothingFound
             let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
             return nothingFoundCell
         }
@@ -268,7 +255,7 @@ extension SearchViewController: UITableViewDataSource {
         
         if let path = selectedIndexPath {
             if indexPath.compare(path) == NSComparisonResult.OrderedSame {
-                cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
+                cellIdentifier = cellID.detailed
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
                 cell.delegate = self
                 cell.indexPath = indexPath
@@ -276,7 +263,7 @@ extension SearchViewController: UITableViewDataSource {
                 return cell
             } else {
                 // SITUATION I
-                cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
+                cellIdentifier = cellID.brief
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
                 cell.termLabel.text = itemContent.term
                 return cell
@@ -284,7 +271,7 @@ extension SearchViewController: UITableViewDataSource {
         } else {
             // SITUATION II
             // The SITUATION I & II are same. Still couldn't find a good way to avoid this repeat.
-            cellIdentifier = TableViewCellIdentifiers.briefCellIdentifier
+            cellIdentifier = cellID.brief
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
             cell.termLabel.text = itemContent.term
             return cell
@@ -351,6 +338,7 @@ extension SearchViewController: InCellFunctionalityDelegate {
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
+// So far the only element needs to change automatically is the like button.
 extension SearchViewController: NSFetchedResultsControllerDelegate {
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         tableView.beginUpdates()
@@ -366,10 +354,7 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
             print("*** NSFetchedResultsChangeDelete (object)")
             tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         
-        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //-------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        
-        case .Update:
+        case .Update: // Update the heart
             print("*** NSFetchedResultsChangeUpdate (object)")
             guard selectedIndexPath != indexPath else {
                 if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? GlossaryItemDetailedTableViewCell {

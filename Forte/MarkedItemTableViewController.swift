@@ -81,10 +81,7 @@ class MarkedItemTableViewController: UITableViewController {
         item.note = note
         
         do {
-            //!!!!!!!!!!!!!!!!!!!!!!!
-            
-            
-            try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
+            try managedObjectContext.save()
         } catch {
             print(error)
         }
@@ -92,8 +89,7 @@ class MarkedItemTableViewController: UITableViewController {
     
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView,
-                   numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fetchedResultsController.fetchedObjects?.count)!
     }
     
