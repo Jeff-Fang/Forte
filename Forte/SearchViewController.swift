@@ -17,14 +17,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    private var prevSelectedIndexPath: NSIndexPath? = nil
-    private var selectedIndexPath: NSIndexPath? {
-        willSet {
-            prevSelectedIndexPath = selectedIndexPath
-        }
-    }
-    private var indexPathsToUpdate = [NSIndexPath] ()
-    
     // Identifiers for nib files
     private struct cellID {
         static let brief = "GlossaryItemBriefTableViewCell"
@@ -42,6 +34,14 @@ class SearchViewController: UIViewController {
     private var glossaryCount: Int = 0
     private var searchCount: Int = 0
     
+    private var indexPathsToUpdate = [NSIndexPath] ()
+    private var prevSelectedIndexPath: NSIndexPath? = nil
+    private var selectedIndexPath: NSIndexPath? {
+        willSet {
+            prevSelectedIndexPath = selectedIndexPath
+        }
+    }
+    
     // MARK: - Class Settings
     
     override func viewDidLoad() {
@@ -50,6 +50,7 @@ class SearchViewController: UIViewController {
         prepareTableView()
         loadNibFiles()
         performFetch()
+        setGestureRecognizer()
     }
     
     func customizeAppearance() {
@@ -70,6 +71,7 @@ class SearchViewController: UIViewController {
     func prepareTableView() {
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
+        tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     func loadNibFiles() {
@@ -83,7 +85,7 @@ class SearchViewController: UIViewController {
     
     func performFetch() {
         if let moc = managedObjectContext {
-            
+            // Fetch glossary items
             let fetchRequest = NSFetchRequest(entityName: entityName)
             let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
             fetchRequest.sortDescriptors = [sortDescriptor]
@@ -98,6 +100,7 @@ class SearchViewController: UIViewController {
                 fatalError("Failed to initialize FetchedResultsController: \(error)")
             }
             
+            // Fetch the number of items of glossary
             let countFetchRequest = NSFetchRequest(entityName: entityName)
             countFetchRequest.resultType = .CountResultType
             
@@ -106,11 +109,20 @@ class SearchViewController: UIViewController {
                     try managedObjectContext.executeFetchRequest(countFetchRequest) as! [NSNumber]
                 let count = results.first!.integerValue
                 glossaryCount = count
-                print("The glossaryCount = \(glossaryCount)")
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
             }
         }
+    }
+    
+    func setGestureRecognizer() {
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.hideKeyboard(_:)))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
+        searchBar.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {

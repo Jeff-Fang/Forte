@@ -12,6 +12,18 @@ protocol InCellFunctionalityDelegate {
     func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell)
 }
 
+enum starState {
+    case normal, highlighted
+    func image() -> UIImage {
+        switch self {
+        case .normal :
+            return UIImage(named: "Heart_grey")!
+        case .highlighted :
+            return UIImage(named: "Heart_red")!
+        }
+    }
+}
+
 class GlossaryItemDetailedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var termLabel: UILabel!

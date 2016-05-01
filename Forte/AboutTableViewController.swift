@@ -11,16 +11,20 @@ import SafariServices
 import MessageUI
 
 class AboutTableViewController: UITableViewController {
-    
+
+    // MARK: - Class Properties
+
     var sectionTitles = ["About","Leave Feedback","Follow Me"]
-    var sectionContent = [["Music Glossary on Wikipedia"],["Rate Forte on App Store", "Tell me your feedback", "Report a problem"],["Twitter", "Weibo"]]
+    var sectionContent = [["Music Glossary on Wikipedia"],
+                          ["Rate Forte on App Store", "Tell me your feedback", "Report a problem"],
+                          ["Twitter", "Weibo"]]
     var links = ["https://twitter.com/all2jeff","https://weibo.com/all2jeff"]
+
+    // MARK: - Class Settings
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.tableFooterView = UIView(frame: CGRectZero)
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,15 +32,13 @@ class AboutTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // MARK: - UITableViewDataSourceDelegate
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         switch section {
         case 0:
             return 1
@@ -60,6 +62,8 @@ class AboutTableViewController: UITableViewController {
         return cell
     }
     
+    // MARK: - UITableViewDelegate
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.section{
         case 0:
@@ -115,6 +119,8 @@ class AboutTableViewController: UITableViewController {
     }
 
 }
+
+// MARK: - MFMailComposeViewControllerDelegate
 
 extension AboutTableViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {

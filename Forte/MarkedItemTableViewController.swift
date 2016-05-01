@@ -20,12 +20,16 @@ class MarkedItemTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 80
-        initializeFetchedResultsController()
+        prepareTableView()
         performFetch()
     }
     
-    func initializeFetchedResultsController() {
+    func prepareTableView() {
+        tableView.rowHeight = 80
+//        tableView.tableFooterView = UIView(frame: CGRectZero) // ! This will strangely cause fatal error.
+    }
+    
+    func performFetch() {
         var fetchRequest = NSFetchRequest()
         if let moc = managedObjectContext {
             let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
@@ -39,9 +43,7 @@ class MarkedItemTableViewController: UITableViewController {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: "markedItemCache")
             fetchedResultsController.delegate = self
         }
-    }
-    
-    func performFetch() {
+        
         do {
             try fetchedResultsController.performFetch()
         } catch {
@@ -87,7 +89,7 @@ class MarkedItemTableViewController: UITableViewController {
         }
     }
     
-    // MARK: - Table view data source
+    // MARK: - UITableViewDataSourceDelegate
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fetchedResultsController.fetchedObjects?.count)!
@@ -112,14 +114,14 @@ class MarkedItemTableViewController: UITableViewController {
             item.markedDate = nil
             
             do {
-                try (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext.save()
+                try managedObjectContext.save()
             } catch {
                 print(error)
             }
         }
     }
     
-    // MARK: - TableView Delegate
+    // MARK: - UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)

@@ -11,12 +11,16 @@ import CoreData
 
 class ItemCustomTableViewController: UITableViewController {
     
+    // MARK: - Class Properties
+
     @IBOutlet weak var itemDetailCell: UITableViewCell!
     @IBOutlet weak var termLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     @IBOutlet weak var noteTakingTextView: UITextView!
     @IBOutlet weak var originLabel: UILabel!
     
+    // MARK: - Class Settings
+
     var itemIndex: NSIndexPath?
     var termToDisplay = ""
     var meaningToDisplay = ""
@@ -25,14 +29,20 @@ class ItemCustomTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        prepareCells()
+        setGestureRecognizer()
+    }
+    
+    func prepareCells() {
         termLabel.text = termToDisplay
         meaningLabel.text = meaningToDisplay
         noteTakingTextView.text = noteToDisplay
         originLabel.text = originToDisplay
         
         noteTakingTextView.delegate = self
-        
+    }
+    
+    func setGestureRecognizer() {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ItemCustomTableViewController.hideKeyboard(_:)))
         gestureRecognizer.cancelsTouchesInView = false
         tableView.addGestureRecognizer(gestureRecognizer)
@@ -49,12 +59,16 @@ class ItemCustomTableViewController: UITableViewController {
         noteTakingTextView.resignFirstResponder()
     }
     
+    // MARK: - Dealing with Segues
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItemCustomVC" {
             noteToDisplay = noteTakingTextView.text
         }
     }
     
+    // MARK: - UITableViewDataSourceDelegate
+
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0 {
             tableView.estimatedRowHeight = 200
@@ -66,6 +80,8 @@ class ItemCustomTableViewController: UITableViewController {
         }
     }
     
+    // MARK: - UITableViewDelegate
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 1 {
             noteTakingTextView.becomeFirstResponder()
@@ -75,6 +91,8 @@ class ItemCustomTableViewController: UITableViewController {
         }
     }
 }
+
+// MARK: - UITextViewDelegate
 
 extension ItemCustomTableViewController: UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
