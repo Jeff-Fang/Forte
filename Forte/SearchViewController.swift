@@ -140,11 +140,6 @@ extension SearchViewController: UISearchBarDelegate {
         return true
     }
     
-//    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-//        selectedIndexPath = NSIndexPath(forRow: 0, inSection: -1)
-//        tableView.reloadData()
-//    }
-    
     func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = false
         return true
@@ -171,28 +166,12 @@ extension SearchViewController: UISearchBarDelegate {
             performFetchSearchResultByText(text)
             tableView.reloadData()
         }
-        
-//        searchResults = [GlossaryItem]()
-        
-//        if let searchText = searchBar.text {
-//            filterContentForSearchText(searchText)
-//            tableView.reloadData()
-//        }
-        
-        
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         tableView.reloadData()
     }
-    
-//    func filterContentForSearchText(searchText: String) {
-//        searchResults = glossary.filter({(glossaryItem:GlossaryItem) -> Bool in
-//            let nameMatch = glossaryItem.term.rangeOfString(searchText, options:NSStringCompareOptions.CaseInsensitiveSearch)
-//            return nameMatch != nil
-//        })
-//    }
     
     func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
         return .TopAttached
@@ -275,6 +254,12 @@ extension SearchViewController: UITableViewDataSource {
         var cellIdentifier: String
         var itemContent: GlossaryItem
         
+        guard !hasSearched || searchCount != 0 else {
+            cellIdentifier = TableViewCellIdentifiers.nothingFoundCellIdentifier
+            let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
+            return nothingFoundCell
+        }
+        
         if hasSearched {
             itemContent = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
         } else {
@@ -285,7 +270,6 @@ extension SearchViewController: UITableViewDataSource {
             if indexPath.compare(path) == NSComparisonResult.OrderedSame {
                 cellIdentifier = TableViewCellIdentifiers.detailedCellIdentifier
                 let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
-                
                 cell.delegate = self
                 cell.indexPath = indexPath
                 cell.configureForItem(itemContent)
