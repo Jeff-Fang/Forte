@@ -1,14 +1,16 @@
 //
-//  AboutTableViewController.swift
+//  SettingsTableViewController.swift
 //  Forte
 //
-//  Created by Jeff Fang on 4/17/16.
+//  Created by Jeff Fang on 5/2/16.
 //  Copyright © 2016 swordx. All rights reserved.
 //
 
 import UIKit
 import SafariServices
 import MessageUI
+
+// MARK: - Configure Menu Items
 
 struct MenuItem {
     var text: String
@@ -21,22 +23,20 @@ struct Section {
     var sectionNumber: Int
 }
 
-// MARK: - Configure Menu Items
-
 let wikiPage = MenuItem(text:"Music Glossary on Wikipedia", row: 0)
 let aboutForte: [MenuItem] = [wikiPage]
-let aboutSection = Section(items: aboutForte, name: "About", sectionNumber:0)
+let aboutSection = Section(items: aboutForte, name: "About", sectionNumber:1)
 
 let rate = MenuItem(text: "Rate Forte on App Store", row: 0)
 let sendFeedback = MenuItem(text: "Tell me your feedback", row: 1)
 let reportProblem = MenuItem(text: "Report a problem", row: 2)
 let feedback: [MenuItem] = [rate, sendFeedback, reportProblem]
-let feedbackSection = Section(items: feedback, name: "Leave Feedback", sectionNumber: 1)
+let feedbackSection = Section(items: feedback, name: "Leave Feedback", sectionNumber: 2)
 
 let myTwitter = MenuItem(text: "Twitter", row: 0)
 let myWeibo = MenuItem(text: "Weibo", row: 1)
 let followMe: [MenuItem] = [myTwitter, myWeibo]
-let followMeSection = Section(items: followMe, name:"Follow Me", sectionNumber: 2)
+let followMeSection = Section(items: followMe, name:"Follow Me", sectionNumber: 3)
 
 let aboutPageMenu: [Section] = [aboutSection, feedbackSection, followMeSection]
 
@@ -49,65 +49,29 @@ func aboutPageMenuItemForIndexPath(index: NSIndexPath) -> MenuItem? {
     return nil
 }
 
-//MARK: - ViewController
-
-class AboutTableViewController: UITableViewController {
-
-    // MARK: - Class Properties
-
+class SettingsTableViewController: UITableViewController {
+    
     let links = [myTwitter.text: "https://twitter.com/all2jeff",
                  myWeibo.text: "https://weibo.com/all2jeff",
                  wikiPage.text: "https://en.wikipedia.org/wiki/Glossary_of_musical_terminology",
                  rate.text: "http://www.apple.com/itunes/charts/paid-apps/"]
 
-
-    // MARK: - Class Settings
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - UITableViewDataSourceDelegate
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return aboutPageMenu.count
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var number = 0
-        for sct in aboutPageMenu {
-            if sct.sectionNumber == section {
-                number = sct.items.count
-            }
-        }
-        return number
-    }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        var sctTitle: String?
-        for sct in aboutPageMenu {
-            if sct.sectionNumber == section {
-                sctTitle = sct.name
-            }
-        }
-        return sctTitle
-    }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        if let itemInfo = aboutPageMenuItemForIndexPath(indexPath) {
-            cell.textLabel?.text = itemInfo.text
-        }
-        return cell
-    }
-    
-    // MARK: - UITableViewDelegate
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cellItem = aboutPageMenuItemForIndexPath(indexPath) {
@@ -119,13 +83,13 @@ class AboutTableViewController: UITableViewController {
                 }
                 
             case rate.text:
-                    if let url = NSURL(string:links[rate.text]!) {
-                        UIApplication.sharedApplication().openURL(url)
+                if let url = NSURL(string:links[rate.text]!) {
+                    UIApplication.sharedApplication().openURL(url)
                 }
-            
+                
             case sendFeedback.text:
                 showEmailForKey(sendFeedback.text)
-            
+                
             case reportProblem.text:
                 showEmailForKey(sendFeedback.text)
                 
@@ -170,12 +134,9 @@ class AboutTableViewController: UITableViewController {
         
         presentViewController(mailComposer, animated: true, completion: nil)
     }
-
 }
 
-// MARK: - MFMailComposeViewControllerDelegate
-
-extension AboutTableViewController: MFMailComposeViewControllerDelegate {
+extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
         
         switch result.rawValue {
