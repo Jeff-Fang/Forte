@@ -41,13 +41,9 @@ let followMeSection = Section(items: followMe, name:"Follow Me", sectionNumber: 
 let aboutPageMenu: [Section] = [aboutSection, feedbackSection, followMeSection]
 
 func aboutPageMenuItemForIndexPath(index: NSIndexPath) -> MenuItem? {
-    for sec in aboutPageMenu {
-        if sec.sectionNumber == index.section {
-            for item in sec.items {
-                if item.row == index.row {
-                    return item
-                }
-            }
+    for sec in aboutPageMenu where sec.sectionNumber == index.section {
+        for item in sec.items where item.row == index.row {
+            return item
         }
     }
     return nil
