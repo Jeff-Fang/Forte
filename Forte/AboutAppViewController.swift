@@ -13,6 +13,7 @@ class AboutAppViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        aboutWebView.delegate = self
 
         // Do any additional setup after loading the view.
         if let htmlFile = NSBundle.mainBundle().pathForResource("Forte 1.0", ofType: "html") {
@@ -27,18 +28,15 @@ class AboutAppViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension AboutAppViewController: UIWebViewDelegate {
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if navigationType == UIWebViewNavigationType.LinkClicked {
+            if let url = request.URL {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        }
+        return true
     }
-    */
-
 }
