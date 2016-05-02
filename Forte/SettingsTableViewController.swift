@@ -23,7 +23,7 @@ struct Section {
     var sectionNumber: Int
 }
 
-let wikiPage = MenuItem(text:"Music Glossary on Wikipedia", row: 0)
+let wikiPage = MenuItem(text:"Music Glossary on Wikipedia", row: 1)
 let aboutForte: [MenuItem] = [wikiPage]
 let aboutSection = Section(items: aboutForte, name: "About", sectionNumber:1)
 
