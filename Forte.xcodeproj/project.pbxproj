@@ -12,7 +12,6 @@
 		E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC7E1CA7CB7300EF850C /* Main.storyboard */; };
 		E507AC831CA7CB7300EF850C /* Forte.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */; };
 		E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E507AC841CA7CB7300EF850C /* Assets.xcassets */; };
-		E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */; };
 		E53555E11CBC9E5900BBD205 /* ItemCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */; };
 		E540B7A41CA9657000AC556F /* GlossaryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E540B7A31CA9657000AC556F /* GlossaryItem.swift */; };
 		E557FFD01CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */; };
@@ -27,6 +26,7 @@
 		E58D65781CD78276005E68DB /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D65771CD78276005E68DB /* SettingsTableViewController.swift */; };
 		E58D657A1CD78AEA005E68DB /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58D65791CD78AEA005E68DB /* AboutAppViewController.swift */; };
 		E58D65801CD7A24F005E68DB /* Forte 1.0.html in Resources */ = {isa = PBXBuildFile; fileRef = E58D657E1CD7A24F005E68DB /* Forte 1.0.html */; };
+		E58D65841CD7B997005E68DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */; };
 		E5D7CC841CD611E800CC085A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC831CD611E800CC085A /* CoreDataStack.swift */; };
 		E5D7CC861CD614C200CC085A /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC851CD614C200CC085A /* CSVParser.swift */; };
 		E5D7CC881CD61E3800CC085A /* Preloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC871CD61E3800CC085A /* Preloader.swift */; };
@@ -39,7 +39,6 @@
 		E507AC7F1CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Forte.xcdatamodel; sourceTree = "<group>"; };
 		E507AC841CA7CB7300EF850C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E507AC871CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
@@ -55,6 +54,7 @@
 		E58D65771CD78276005E68DB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E58D65791CD78AEA005E68DB /* AboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		E58D657E1CD7A24F005E68DB /* Forte 1.0.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Forte 1.0.html"; sourceTree = SOURCE_ROOT; };
+		E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E5D7CC831CD611E800CC085A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E5D7CC851CD614C200CC085A /* CSVParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		E5D7CC871CD61E3800CC085A /* Preloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preloader.swift; sourceTree = "<group>"; };
@@ -95,9 +95,9 @@
 				E55D4E7C1CBA52E10044D7EA /* MarkedItemTableViewController.swift */,
 				E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */,
 				E58D65771CD78276005E68DB /* SettingsTableViewController.swift */,
-				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
 				E58D65791CD78AEA005E68DB /* AboutAppViewController.swift */,
-				E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */,
+				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
+				E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */,
 				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
 				E5D7CC891CD6203E00CC085A /* DataPersistenceSupport */,
 				E524A08F1CB1100800DECC25 /* Support */,
@@ -202,8 +202,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E557FFD31CAC1D9200F8C53A /* GlossaryItemBriefTableViewCell.xib in Resources */,
+				E58D65841CD7B997005E68DB /* LaunchScreen.storyboard in Resources */,
 				E58D65801CD7A24F005E68DB /* Forte 1.0.html in Resources */,
-				E507AC881CA7CB7300EF850C /* LaunchScreen.storyboard in Resources */,
 				E507AC851CA7CB7300EF850C /* Assets.xcassets in Resources */,
 				E55C475D1CC345FA000A20C3 /* MusicTerms.csv in Resources */,
 				E576F89F1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib in Resources */,
@@ -246,14 +246,6 @@
 				E507AC7F1CA7CB7300EF850C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E507AC861CA7CB7300EF850C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E507AC871CA7CB7300EF850C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -348,6 +340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Forte/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.forteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -360,6 +353,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Forte/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.rookie.forteApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
