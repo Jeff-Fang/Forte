@@ -51,6 +51,7 @@ class SearchViewController: UIViewController {
         loadNibFiles()
         performFetch()
         setGestureRecognizer()
+        searchBar.becomeFirstResponder()
     }
     
     func customizeAppearance() {

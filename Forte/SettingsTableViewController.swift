@@ -54,7 +54,7 @@ class SettingsTableViewController: UITableViewController {
     let links = [myTwitter.text: "https://twitter.com/all2jeff",
                  myWeibo.text: "https://weibo.com/all2jeff",
                  wikiPage.text: "https://en.wikipedia.org/wiki/Glossary_of_musical_terminology",
-                 rate.text: "http://www.apple.com/itunes/charts/paid-apps/"]
+                 rate.text: "itms-apps://itunes.apple.com/app/id1106798267"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
