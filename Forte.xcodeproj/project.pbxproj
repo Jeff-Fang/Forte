@@ -39,7 +39,7 @@
 		E507AC7F1CA7CB7300EF850C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E507AC821CA7CB7300EF850C /* Forte.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Forte.xcdatamodel; sourceTree = "<group>"; };
 		E507AC841CA7CB7300EF850C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E507AC891CA7CB7300EF850C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		E53555E01CBC9E5900BBD205 /* ItemCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCustomViewController.swift; sourceTree = "<group>"; };
 		E540B7A31CA9657000AC556F /* GlossaryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItem.swift; sourceTree = "<group>"; };
 		E557FFCE1CAC0A0100F8C53A /* GlossaryItemBriefTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlossaryItemBriefTableViewCell.swift; sourceTree = "<group>"; };
@@ -53,8 +53,8 @@
 		E576F89D1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GlossaryItemDetailedTableViewCell.xib; sourceTree = "<group>"; };
 		E58D65771CD78276005E68DB /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		E58D65791CD78AEA005E68DB /* AboutAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
-		E58D657E1CD7A24F005E68DB /* Forte 1.0.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Forte 1.0.html"; sourceTree = SOURCE_ROOT; };
-		E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E58D657E1CD7A24F005E68DB /* Forte 1.0.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "Forte 1.0.html"; path = "Forte/Support/Forte 1.0.html"; sourceTree = SOURCE_ROOT; };
+		E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E5D7CC831CD611E800CC085A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E5D7CC851CD614C200CC085A /* CSVParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		E5D7CC871CD61E3800CC085A /* Preloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preloader.swift; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 				E507AC7E1CA7CB7300EF850C /* Main.storyboard */,
 				E58D65831CD7B997005E68DB /* LaunchScreen.storyboard */,
 				E524A08E1CB10FBB00DECC25 /* TableViewCells */,
-				E5D7CC891CD6203E00CC085A /* DataPersistenceSupport */,
+				E5D7CC891CD6203E00CC085A /* DataPersistencySupport */,
 				E524A08F1CB1100800DECC25 /* Support */,
 			);
 			path = Forte;
@@ -116,7 +116,7 @@
 				E576F8991CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib */,
 				E55D4E7E1CBA6E660044D7EA /* MarkedItemTableViewCell.swift */,
 			);
-			name = TableViewCells;
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		E524A08F1CB1100800DECC25 /* Support */ = {
@@ -126,10 +126,10 @@
 				E507AC841CA7CB7300EF850C /* Assets.xcassets */,
 				E507AC891CA7CB7300EF850C /* Info.plist */,
 			);
-			name = Support;
+			path = Support;
 			sourceTree = "<group>";
 		};
-		E5D7CC891CD6203E00CC085A /* DataPersistenceSupport */ = {
+		E5D7CC891CD6203E00CC085A /* DataPersistencySupport */ = {
 			isa = PBXGroup;
 			children = (
 				E5D7CC871CD61E3800CC085A /* Preloader.swift */,
@@ -139,7 +139,7 @@
 				E507AC811CA7CB7300EF850C /* Forte.xcdatamodeld */,
 				E55C475C1CC345FA000A20C3 /* MusicTerms.csv */,
 			);
-			name = DataPersistenceSupport;
+			path = DataPersistencySupport;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
