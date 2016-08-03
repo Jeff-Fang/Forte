@@ -34,7 +34,8 @@ extension AboutAppViewController: UIWebViewDelegate {
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if navigationType == UIWebViewNavigationType.linkClicked {
             if let url = request.url {
-                UIApplication.shared().openURL(url)
+//                UIApplication.shared().openURL(url)
+                UIApplication.shared().open(url, options: ["url":url], completionHandler: nil)
             }
         }
         return true

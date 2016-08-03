@@ -78,13 +78,14 @@ class SettingsTableViewController: UITableViewController {
             switch cellItem.text{
             case wikiPage.text:
                 if let url = URL(string: links[wikiPage.text]!) {
-                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    let safariController = SFSafariViewController(url: url)
                     present(safariController, animated: true, completion: nil)
                 }
                 
             case rate.text:
                 if let url = URL(string:links[rate.text]!) {
-                    UIApplication.shared().openURL(url)
+//                    UIApplication.shared().openURL(url)
+                    UIApplication.shared().open(url, options: ["url":url], completionHandler: nil)
                 }
                 
             case sendFeedback.text:
@@ -95,12 +96,12 @@ class SettingsTableViewController: UITableViewController {
                 
             case myTwitter.text:
                 if let url = URL(string: links[myTwitter.text]!) {
-                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    let safariController = SFSafariViewController(url: url)
                     present(safariController, animated: true, completion: nil)
                 }
             case myWeibo.text:
                 if let url = URL(string: links[myWeibo.text]!) {
-                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    let safariController = SFSafariViewController(url: url)
                     present(safariController, animated: true, completion: nil)
                 }
                 
