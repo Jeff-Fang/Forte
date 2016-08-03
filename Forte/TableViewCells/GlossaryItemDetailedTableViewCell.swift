@@ -9,7 +9,7 @@
 import UIKit
 
 protocol InCellFunctionalityDelegate {
-    func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell)
+    func inCellButtonIsPressed(_ cell: GlossaryItemDetailedTableViewCell)
 }
 
 enum starState {
@@ -32,22 +32,22 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
     @IBOutlet weak var originLabel: UILabel!
     
     var delegate: InCellFunctionalityDelegate?
-    var indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: -1)
+    var indexPath: IndexPath = IndexPath(row: 0, section: -1)
     
-    @IBAction func starIcon(sender: UIButton) {
+    @IBAction func starIcon(_ sender: UIButton) {
         delegate?.inCellButtonIsPressed(self)
     }
     
-    func setStarState(state: starState) {
+    func setStarState(_ state: starState) {
         switch state{
         case .highlighted:
-            starIconOutlet.setImage(starState.highlighted.image(), forState: .Normal)
+            starIconOutlet.setImage(starState.highlighted.image(), for: UIControlState())
         case .normal:
-            starIconOutlet.setImage(starState.normal.image(), forState: .Normal)
+            starIconOutlet.setImage(starState.normal.image(), for: UIControlState())
         }
     }
     
-    func configureForItem(item: GlossaryItem) {
+    func configureForItem(_ item: GlossaryItem) {
         if item.term.isEmpty {
             termLabel.text = "(No Term)"
         } else {
@@ -79,7 +79,7 @@ class GlossaryItemDetailedTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

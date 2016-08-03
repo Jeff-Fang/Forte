@@ -26,17 +26,17 @@ class SearchViewController: UIViewController {
     
     // Data preparation
     var managedObjectContext: NSManagedObjectContext!
-    private var fetchedResultsController: NSFetchedResultsController!
-    private var searchFetchedResultsController: NSFetchedResultsController!
+    private var fetchedResultsController: NSFetchedResultsController<AnyObject>!
+    private var searchFetchedResultsController: NSFetchedResultsController<AnyObject>!
 
     private var entityName = "GlossaryItem"
     private var hasSearched = false
     private var glossaryCount: Int = 0
     private var searchCount: Int = 0
     
-    private var indexPathsToUpdate = [NSIndexPath] ()
-    private var prevSelectedIndexPath: NSIndexPath? = nil
-    private var selectedIndexPath: NSIndexPath? {
+    private var indexPathsToUpdate = [IndexPath] ()
+    private var prevSelectedIndexPath: IndexPath? = nil
+    private var selectedIndexPath: IndexPath? {
         willSet {
             prevSelectedIndexPath = selectedIndexPath
         }
@@ -55,13 +55,13 @@ class SearchViewController: UIViewController {
     }
     
     func customizeAppearance() {
-        searchBar.barTintColor = UIColor.whiteColor()
+        searchBar.barTintColor = UIColor.white()
         //        searchBar.tintColor = UIColor.whiteColor()
         searchBar.tintColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
         
         for view in searchBar.subviews {
             for subview in view.subviews {
-                if subview.isKindOfClass(UITextField) {
+                if subview.isKind(UITextField) {
                     let textField: UITextField = subview as! UITextField
                     textField.backgroundColor = UIColor(colorLiteralRed: 230/255 , green: 230/255 , blue: 230/255 , alpha: 1)
                 }
@@ -72,23 +72,23 @@ class SearchViewController: UIViewController {
     func prepareTableView() {
         tableView.contentInset.top = 64
         tableView.contentInset.bottom = 66
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     func loadNibFiles() {
         var cellNib = UINib(nibName: cellID.brief, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.brief)
+        tableView.register(cellNib, forCellReuseIdentifier: cellID.brief)
         cellNib = UINib(nibName: cellID.nothingFound, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.nothingFound)
+        tableView.register(cellNib, forCellReuseIdentifier: cellID.nothingFound)
         cellNib = UINib(nibName: cellID.detailed, bundle: nil)
-        tableView.registerNib(cellNib, forCellReuseIdentifier: cellID.detailed)
+        tableView.register(cellNib, forCellReuseIdentifier: cellID.detailed)
     }
     
     func performFetch() {
         if let moc = managedObjectContext {
             // Fetch glossary items
             let fetchRequest = NSFetchRequest(entityName: entityName)
-            let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
+            let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
             fetchRequest.sortDescriptors = [sortDescriptor]
             fetchRequest.fetchBatchSize = 20
             
@@ -103,12 +103,12 @@ class SearchViewController: UIViewController {
             
             // Fetch the number of items of glossary
             let countFetchRequest = NSFetchRequest(entityName: entityName)
-            countFetchRequest.resultType = .CountResultType
+            countFetchRequest.resultType = .countResultType
             
             do {
                 let results =
-                    try managedObjectContext.executeFetchRequest(countFetchRequest) as! [NSNumber]
-                let count = results.first!.integerValue
+                    try managedObjectContext.fetch(countFetchRequest) as! [NSNumber]
+                let count = results.first!.intValue
                 glossaryCount = count
             } catch let error as NSError {
                 print("Could not fetch \(error), \(error.userInfo)")
@@ -122,7 +122,7 @@ class SearchViewController: UIViewController {
         tableView.addGestureRecognizer(gestureRecognizer)
     }
     
-    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
+    func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
         searchBar.resignFirstResponder()
     }
     
@@ -134,19 +134,19 @@ class SearchViewController: UIViewController {
 // MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = true
         selectedIndexPath = nil
         tableView.reloadData()
         return true
     }
     
-    func searchBarShouldEndEditing(searchBar: UISearchBar) -> Bool {
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.showsCancelButton = false
         return true
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         hasSearched = false
@@ -154,7 +154,7 @@ extension SearchViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         selectedIndexPath = nil
         
         if searchBar.text == "" {
@@ -169,22 +169,22 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         tableView.reloadData()
     }
     
-    func positionForBar(bar: UIBarPositioning) -> UIBarPosition {
-        return .TopAttached
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .topAttached
     }
     
-    func performFetchSearchResultByText(text: String) {
+    func performFetchSearchResultByText(_ text: String) {
         let cacheName = "searchGlossaryItemCache"
-        NSFetchedResultsController.deleteCacheWithName(cacheName)
+        NSFetchedResultsController.deleteCache(withName: cacheName)
         
         let searchFetchRequest = NSFetchRequest(entityName: entityName)
-        let searchPredicate = NSPredicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
-        let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
+        let searchPredicate = Predicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
+        let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
         searchFetchRequest.sortDescriptors = [sortDescriptor]
         searchFetchRequest.predicate = searchPredicate
         
@@ -198,13 +198,13 @@ extension SearchViewController: UISearchBarDelegate {
         }
         
         let countFetchRequest = NSFetchRequest(entityName: entityName)
-        countFetchRequest.resultType = .CountResultType
+        countFetchRequest.resultType = .countResultType
         countFetchRequest.predicate = searchPredicate
         
         do {
             let results =
-            try managedObjectContext.executeFetchRequest(countFetchRequest) as! [NSNumber]
-            let count = results.first!.integerValue
+            try managedObjectContext.fetch(countFetchRequest) as! [NSNumber]
+            let count = results.first!.intValue
             searchCount = count
             print("*** searchCount = \(searchCount)")
         } catch let error as NSError {
@@ -215,7 +215,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 // MARK: - UITableViewDataSourceDelegate
 extension SearchViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if hasSearched {
             if searchCount == 0 {
                 return 1
@@ -227,14 +227,14 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let defaultRowHeight:CGFloat = 56.5
         
         if hasSearched && searchCount == 0 {
             // for NoResultFoundCell
             return 88
         } else if let path = selectedIndexPath {
-            if indexPath.compare(path) == NSComparisonResult.OrderedSame {
+            if (indexPath as NSIndexPath).compare(path) == ComparisonResult.orderedSame {
                 // for DetailedCell
                 tableView.estimatedRowHeight = defaultRowHeight
                 return UITableViewAutomaticDimension
@@ -246,30 +246,30 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentifier: String
         var itemContent: GlossaryItem
         
         guard !hasSearched || searchCount != 0 else {
             cellIdentifier = cellID.nothingFound
-            let nothingFoundCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! NothingFoundTableViewCell
+            let nothingFoundCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! NothingFoundTableViewCell
             return nothingFoundCell
         }
         
         if hasSearched {
-            itemContent = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+            itemContent = searchFetchedResultsController.object(at: indexPath) as! GlossaryItem
         } else {
-            itemContent = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+            itemContent = fetchedResultsController.object(at: indexPath) as! GlossaryItem
         }
         
         if let path = selectedIndexPath {
-            if indexPath.compare(path) == NSComparisonResult.OrderedSame {
+            if (indexPath as NSIndexPath).compare(path) == ComparisonResult.orderedSame {
                 cellIdentifier = cellID.detailed
-                let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemDetailedTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! GlossaryItemDetailedTableViewCell
                 cell.delegate = self
                 cell.indexPath = indexPath
                 cell.configureForItem(itemContent)
@@ -277,7 +277,7 @@ extension SearchViewController: UITableViewDataSource {
             } else {
                 // SITUATION I
                 cellIdentifier = cellID.brief
-                let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! GlossaryItemBriefTableViewCell
                 cell.termLabel.text = itemContent.term
                 return cell
             }
@@ -285,7 +285,7 @@ extension SearchViewController: UITableViewDataSource {
             // SITUATION II
             // The SITUATION I & II are same. Still couldn't find a good way to avoid this repeat.
             cellIdentifier = cellID.brief
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! GlossaryItemBriefTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! GlossaryItemBriefTableViewCell
             cell.termLabel.text = itemContent.term
             return cell
         }
@@ -294,8 +294,8 @@ extension SearchViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension SearchViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        indexPathsToUpdate.removeAll(keepCapacity: false)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexPathsToUpdate.removeAll(keepingCapacity: false)
         
         if selectedIndexPath == indexPath {
             selectedIndexPath = nil
@@ -309,20 +309,20 @@ extension SearchViewController: UITableViewDelegate {
         }
         
 //        tableView.reloadData()
-        tableView.reloadRowsAtIndexPaths(indexPathsToUpdate, withRowAnimation: UITableViewRowAnimation.Automatic)
+        tableView.reloadRows(at: indexPathsToUpdate, with: UITableViewRowAnimation.automatic)
     }
 }
 
 // MARK: - CellDelegate
 extension SearchViewController: InCellFunctionalityDelegate {
-    func inCellButtonIsPressed(cell: GlossaryItemDetailedTableViewCell) {
+    func inCellButtonIsPressed(_ cell: GlossaryItemDetailedTableViewCell) {
         let indexPath = cell.indexPath
         var pressedItem: GlossaryItem!
         
         if hasSearched {
-            pressedItem = searchFetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+            pressedItem = searchFetchedResultsController.object(at: indexPath) as! GlossaryItem
         } else {
-            pressedItem = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+            pressedItem = fetchedResultsController.object(at: indexPath) as! GlossaryItem
         }
         
         var markSign: Bool {
@@ -331,7 +331,7 @@ extension SearchViewController: InCellFunctionalityDelegate {
             }
             set(value) {
                 pressedItem.isMarked = value
-                pressedItem.markedDate = NSDate()
+                pressedItem.markedDate = Date()
             }
         }
         
@@ -353,38 +353,38 @@ extension SearchViewController: InCellFunctionalityDelegate {
 // MARK: - NSFetchedResultsControllerDelegate
 // So far the only element needs to change automatically is the like button.
 extension SearchViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
+        case .insert:
             print("*** NSFetchedResultsChangeInsert (object)")
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
             
-        case .Delete:
+        case .delete:
             print("*** NSFetchedResultsChangeDelete (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
         
-        case .Update: // Update the heart
+        case .update: // Update the heart
             print("*** NSFetchedResultsChangeUpdate (object)")
             guard selectedIndexPath != indexPath else {
-                if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? GlossaryItemDetailedTableViewCell {
-                    let item = controller.objectAtIndexPath(indexPath!) as! GlossaryItem
+                if let cell = tableView.cellForRow(at: indexPath!) as? GlossaryItemDetailedTableViewCell {
+                    let item = controller.object(at: indexPath!) as! GlossaryItem
                     cell.configureForItem(item)
                 }
                 break
             }
 
-        case .Move:
+        case .move:
             print("*** NSFetchedResultsChangeMove (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("*** controllerDidChangeContent")
         tableView.endUpdates()
     }

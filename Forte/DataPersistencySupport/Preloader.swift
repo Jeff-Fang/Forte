@@ -16,7 +16,7 @@ class Preloader {
     func preloadData () {
         
         // Load the data file. For any reasons it can't be loaded, we just return
-        guard let contentsOfURL = NSBundle.mainBundle().URLForResource(dataSourceName, withExtension: "csv") else {
+        guard let contentsOfURL = Bundle.main().urlForResource(dataSourceName, withExtension: "csv") else {
             print("get contents URL failed! ")
             return
         }
@@ -24,14 +24,14 @@ class Preloader {
         // Remove all the menu items before preloading
         removeData()
         
-        if let items = Parser.parseCSV(contentsOfURL, encoding: NSUTF8StringEncoding) {
+        if let items = Parser.parseCSV(contentsOfURL, encoding: String.Encoding.utf8) {
             loadItems(items)
         }
     }
     
-    func loadItems(items: [ParseItem]) {
+    func loadItems(_ items: [ParseItem]) {
         for item in items {
-            let glossaryItem = NSEntityDescription.insertNewObjectForEntityForName("GlossaryItem", inManagedObjectContext: coreDataStack.managedObjectContext) as! GlossaryItem
+            let glossaryItem = NSEntityDescription.insertNewObject(forEntityName: "GlossaryItem", into: coreDataStack.managedObjectContext) as! GlossaryItem
             glossaryItem.term = item.term
             glossaryItem.meaning = item.meaning
             glossaryItem.isMarked = false
@@ -51,9 +51,9 @@ class Preloader {
         let fetchRequest = NSFetchRequest(entityName: "GlossaryItem")
         
         do {
-            let menuItems = try coreDataStack.managedObjectContext.executeFetchRequest(fetchRequest) as! [GlossaryItem]
+            let menuItems = try coreDataStack.managedObjectContext.fetch(fetchRequest) as! [GlossaryItem]
             for menuItem in menuItems {
-                coreDataStack.managedObjectContext.deleteObject(menuItem)
+                coreDataStack.managedObjectContext.delete(menuItem)
             }
         } catch {
             print(error)

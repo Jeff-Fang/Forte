@@ -21,7 +21,7 @@ class ItemCustomTableViewController: UITableViewController {
     
     // MARK: - Class Settings
 
-    var itemIndex: NSIndexPath?
+    var itemIndex: IndexPath?
     var termToDisplay = ""
     var meaningToDisplay = ""
     var noteToDisplay: String?
@@ -48,11 +48,11 @@ class ItemCustomTableViewController: UITableViewController {
         tableView.addGestureRecognizer(gestureRecognizer)
     }
     
-    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
-        let point = gestureRecognizer.locationInView(tableView)
-        let indexPath = tableView.indexPathForRowAtPoint(point)
+    func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
         
-        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+        if indexPath != nil && (indexPath! as NSIndexPath).section == 0 && (indexPath! as NSIndexPath).row == 0 {
             return
         }
         
@@ -61,7 +61,7 @@ class ItemCustomTableViewController: UITableViewController {
     
     // MARK: - Dealing with Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItemCustomVC" {
             noteToDisplay = noteTakingTextView.text
         }
@@ -69,11 +69,11 @@ class ItemCustomTableViewController: UITableViewController {
     
     // MARK: - UITableViewDataSourceDelegate
 
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath.section == 0 {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath as NSIndexPath).section == 0 {
             tableView.estimatedRowHeight = 200
             return UITableViewAutomaticDimension
-        } else if indexPath.section == 1 {
+        } else if (indexPath as NSIndexPath).section == 1 {
             return 300
         } else {
             return 44
@@ -82,11 +82,11 @@ class ItemCustomTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 1 {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 1 {
             noteTakingTextView.becomeFirstResponder()
         } else {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
             noteTakingTextView.resignFirstResponder()
         }
     }
@@ -95,7 +95,7 @@ class ItemCustomTableViewController: UITableViewController {
 // MARK: - UITextViewDelegate
 
 extension ItemCustomTableViewController: UITextViewDelegate {
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         noteToDisplay = textView.text
     }
 }

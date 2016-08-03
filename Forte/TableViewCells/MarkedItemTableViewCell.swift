@@ -14,20 +14,20 @@ class MarkedItemTableViewCell: UITableViewCell {
     @IBOutlet weak var markedMeaningLabel: UILabel!
     var origin: String?
     var markedItemNote: String?
-    var cellIndexPath: NSIndexPath?
+    var cellIndexPath: IndexPath?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
     
-    func configureForItem(item: GlossaryItem) {
+    func configureForItem(_ item: GlossaryItem) {
         if item.term.isEmpty {
             markedTermLabel.text = "(No Term)"
         } else {

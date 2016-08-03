@@ -40,9 +40,9 @@ let followMeSection = Section(items: followMe, name:"Follow Me", sectionNumber: 
 
 let aboutPageMenu: [Section] = [aboutSection, feedbackSection, followMeSection]
 
-func aboutPageMenuItemForIndexPath(index: NSIndexPath) -> MenuItem? {
-    for sec in aboutPageMenu where sec.sectionNumber == index.section {
-        for item in sec.items where item.row == index.row {
+func aboutPageMenuItemForIndexPath(_ index: IndexPath) -> MenuItem? {
+    for sec in aboutPageMenu where sec.sectionNumber == (index as NSIndexPath).section {
+        for item in sec.items where item.row == (index as NSIndexPath).row {
             return item
         }
     }
@@ -73,18 +73,18 @@ class SettingsTableViewController: UITableViewController {
     
     
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cellItem = aboutPageMenuItemForIndexPath(indexPath) {
             switch cellItem.text{
             case wikiPage.text:
-                if let url = NSURL(string: links[wikiPage.text]!) {
-                    let safariController = SFSafariViewController(URL: url, entersReaderIfAvailable: false)
-                    presentViewController(safariController, animated: true, completion: nil)
+                if let url = URL(string: links[wikiPage.text]!) {
+                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    present(safariController, animated: true, completion: nil)
                 }
                 
             case rate.text:
-                if let url = NSURL(string:links[rate.text]!) {
-                    UIApplication.sharedApplication().openURL(url)
+                if let url = URL(string:links[rate.text]!) {
+                    UIApplication.shared().openURL(url)
                 }
                 
             case sendFeedback.text:
@@ -94,24 +94,24 @@ class SettingsTableViewController: UITableViewController {
                 showEmailForKey(sendFeedback.text)
                 
             case myTwitter.text:
-                if let url = NSURL(string: links[myTwitter.text]!) {
-                    let safariController = SFSafariViewController(URL: url, entersReaderIfAvailable: false)
-                    presentViewController(safariController, animated: true, completion: nil)
+                if let url = URL(string: links[myTwitter.text]!) {
+                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    present(safariController, animated: true, completion: nil)
                 }
             case myWeibo.text:
-                if let url = NSURL(string: links[myWeibo.text]!) {
-                    let safariController = SFSafariViewController(URL: url, entersReaderIfAvailable: false)
-                    presentViewController(safariController, animated: true, completion: nil)
+                if let url = URL(string: links[myWeibo.text]!) {
+                    let safariController = SFSafariViewController(url: url, entersReaderIfAvailable: false)
+                    present(safariController, animated: true, completion: nil)
                 }
                 
             default:
                 break
             }
         }
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func showEmailForKey(key: String) {
+    func showEmailForKey(_ key: String) {
         print("*** sending mails .....")
         guard MFMailComposeViewController.canSendMail() else {
             return
@@ -132,26 +132,26 @@ class SettingsTableViewController: UITableViewController {
         mailComposer.setMessageBody(messageBody, isHTML: false)
         mailComposer.setToRecipients(toRecipients)
         
-        presentViewController(mailComposer, animated: true, completion: nil)
+        present(mailComposer, animated: true, completion: nil)
     }
 }
 
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
         
         switch result.rawValue {
-        case MFMailComposeResultCancelled.rawValue:
+        case MFMailComposeResult.cancelled.rawValue:
             print("Mail cancelled")
-        case MFMailComposeResultSaved.rawValue:
+        case MFMailComposeResult.saved.rawValue:
             print("Mail saved")
-        case MFMailComposeResultSent.rawValue:
+        case MFMailComposeResult.sent.rawValue:
             print("Mail sent")
-        case MFMailComposeResultFailed.rawValue:
+        case MFMailComposeResult.failed.rawValue:
             print("Failed to send: \(error)")
         default: break
             
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }

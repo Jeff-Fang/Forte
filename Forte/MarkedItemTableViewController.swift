@@ -14,7 +14,7 @@ class MarkedItemTableViewController: UITableViewController {
     // MARK: - Class Properties
     
     var managedObjectContext: NSManagedObjectContext!
-    var fetchedResultsController: NSFetchedResultsController!
+    var fetchedResultsController: NSFetchedResultsController<AnyObject>!
     
     // MARK: - Class Settings
     
@@ -33,10 +33,10 @@ class MarkedItemTableViewController: UITableViewController {
         var fetchRequest = NSFetchRequest()
         if let moc = managedObjectContext {
             let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
-            fetchRequest = managedObjectModel.fetchRequestTemplateForName("MarkedItem")!.copy() as! NSFetchRequest
+            fetchRequest = managedObjectModel.fetchRequestTemplate(forName: "MarkedItem")!.copy() as! NSFetchRequest
             
-            let sortDescriptor1 = NSSortDescriptor(key: "markedDate", ascending: false)
-            let sortDescriptor2 = NSSortDescriptor(key: "term", ascending: true)
+            let sortDescriptor1 = SortDescriptor(key: "markedDate", ascending: false)
+            let sortDescriptor2 = SortDescriptor(key: "term", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
             fetchRequest.fetchBatchSize = 20
             
@@ -58,7 +58,7 @@ class MarkedItemTableViewController: UITableViewController {
 
     // MARK: - Dealing with Segues
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItemCustomVC" {
             let cell = sender as! MarkedItemTableViewCell
             let controller = segue.destinationViewController as! ItemCustomTableViewController
@@ -70,16 +70,16 @@ class MarkedItemTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func itemCustomVCDidFinishEditing(segue: UIStoryboardSegue) {
+    @IBAction func itemCustomVCDidFinishEditing(_ segue: UIStoryboardSegue) {
         let controller = segue.sourceViewController as! ItemCustomTableViewController
         let itemNote = controller.noteToDisplay
         let itemIndex = controller.itemIndex
         
-        saveNote(itemNote, atIndexPath: itemIndex!)
+        saveNote(itemNote, atIndexPath: itemIndex! as IndexPath)
     }
     
-    func saveNote(note: String?, atIndexPath path: NSIndexPath) {
-        let item = fetchedResultsController.objectAtIndexPath(path) as! GlossaryItem
+    func saveNote(_ note: String?, atIndexPath path: IndexPath) {
+        let item = fetchedResultsController.object(at: path) as! GlossaryItem
         item.note = note
         
         do {
@@ -91,24 +91,24 @@ class MarkedItemTableViewController: UITableViewController {
     
     // MARK: - UITableViewDataSourceDelegate
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (fetchedResultsController.fetchedObjects?.count)!
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MarkedItemCell", forIndexPath: indexPath) as! MarkedItemTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MarkedItemCell", for: indexPath) as! MarkedItemTableViewCell
         
-        let markedItem = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+        let markedItem = fetchedResultsController.object(at: indexPath) as! GlossaryItem
         cell.cellIndexPath = indexPath
         cell.configureForItem(markedItem)
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            let item = fetchedResultsController.objectAtIndexPath(indexPath) as! GlossaryItem
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let item = fetchedResultsController.object(at: indexPath) as! GlossaryItem
             
             item.isMarked = false
             item.markedDate = nil
@@ -123,41 +123,41 @@ class MarkedItemTableViewController: UITableViewController {
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
 extension MarkedItemTableViewController: NSFetchedResultsControllerDelegate {
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
-        case .Insert:
+        case .insert:
             print("*** NSFetchedResultsChangeInsert (object)")
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
             
-        case .Delete:
+        case .delete:
             print("*** NSFetchedResultsChangeDelete (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
             
-        case .Update:
+        case .update:
             print("*** NSFetchedResultsChangeUpdate (object)")
-            if let cell = tableView.cellForRowAtIndexPath(indexPath!) as? MarkedItemTableViewCell {
-                let markedItem = controller.objectAtIndexPath(indexPath!) as! GlossaryItem
+            if let cell = tableView.cellForRow(at: indexPath!) as? MarkedItemTableViewCell {
+                let markedItem = controller.object(at: indexPath!) as! GlossaryItem
                 cell.configureForItem(markedItem)
             }
-        case .Move:
+        case .move:
             print("*** NSFetchedResultsChangeMove (object)")
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         print("*** controllerDidChangeContent")
         tableView.endUpdates()
     }
