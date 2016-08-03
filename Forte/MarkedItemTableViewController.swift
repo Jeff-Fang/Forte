@@ -14,7 +14,7 @@ class MarkedItemTableViewController: UITableViewController {
     // MARK: - Class Properties
     
     var managedObjectContext: NSManagedObjectContext!
-    var fetchedResultsController: NSFetchedResultsController<AnyObject>!
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
     
     // MARK: - Class Settings
     
@@ -30,7 +30,7 @@ class MarkedItemTableViewController: UITableViewController {
     }
     
     func performFetch() {
-        var fetchRequest = NSFetchRequest()
+        var fetchRequest = NSFetchRequest<NSFetchRequestResult>()
         if let moc = managedObjectContext {
             let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
             fetchRequest = managedObjectModel.fetchRequestTemplate(forName: "MarkedItem")!.copy() as! NSFetchRequest
@@ -110,7 +110,7 @@ class MarkedItemTableViewController: UITableViewController {
         if editingStyle == .delete {
             let item = fetchedResultsController.object(at: indexPath) as! GlossaryItem
             
-            item.isMarked = false
+            item.setValue(false, forKey: "isMarked")
             item.markedDate = nil
             
             do {

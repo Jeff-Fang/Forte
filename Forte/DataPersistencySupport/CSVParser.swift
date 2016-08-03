@@ -29,7 +29,8 @@ class Parser {
         var items: [ParseItem] = []
         
         do {
-            let content = try String(contentsOfURL: contentsOfURL, encoding: encoding)
+            let content = try String(contentsOf: contentsOfURL, encoding: encoding)
+            print(content)
             let lines:[String] = content.components(separatedBy: CharacterSet.newlines) as [String]
             
             for line in lines {

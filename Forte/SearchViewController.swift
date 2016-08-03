@@ -26,8 +26,8 @@ class SearchViewController: UIViewController {
     
     // Data preparation
     var managedObjectContext: NSManagedObjectContext!
-    private var fetchedResultsController: NSFetchedResultsController<AnyObject>!
-    private var searchFetchedResultsController: NSFetchedResultsController<AnyObject>!
+    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    private var searchFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
 
     private var entityName = "GlossaryItem"
     private var hasSearched = false
@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
         
         for view in searchBar.subviews {
             for subview in view.subviews {
-                if subview.isKind(UITextField) {
+                if subview is UITextField {
                     let textField: UITextField = subview as! UITextField
                     textField.backgroundColor = UIColor(colorLiteralRed: 230/255 , green: 230/255 , blue: 230/255 , alpha: 1)
                 }
@@ -87,7 +87,7 @@ class SearchViewController: UIViewController {
     func performFetch() {
         if let moc = managedObjectContext {
             // Fetch glossary items
-            let fetchRequest = NSFetchRequest(entityName: entityName)
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
             fetchRequest.sortDescriptors = [sortDescriptor]
             fetchRequest.fetchBatchSize = 20
@@ -102,7 +102,7 @@ class SearchViewController: UIViewController {
             }
             
             // Fetch the number of items of glossary
-            let countFetchRequest = NSFetchRequest(entityName: entityName)
+            let countFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
             countFetchRequest.resultType = .countResultType
             
             do {
@@ -180,9 +180,9 @@ extension SearchViewController: UISearchBarDelegate {
     
     func performFetchSearchResultByText(_ text: String) {
         let cacheName = "searchGlossaryItemCache"
-        NSFetchedResultsController.deleteCache(withName: cacheName)
+        NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: cacheName)
         
-        let searchFetchRequest = NSFetchRequest(entityName: entityName)
+        let searchFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         let searchPredicate = Predicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
         let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
         searchFetchRequest.sortDescriptors = [sortDescriptor]
@@ -197,7 +197,7 @@ extension SearchViewController: UISearchBarDelegate {
             fatalError("Failed to initialize FetchedResultsController: \(error)")
         }
         
-        let countFetchRequest = NSFetchRequest(entityName: entityName)
+        let countFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         countFetchRequest.resultType = .countResultType
         countFetchRequest.predicate = searchPredicate
         
@@ -227,7 +227,7 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    @objc(tableView:heightForRowAtIndexPath:) func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let defaultRowHeight:CGFloat = 56.5
         
         if hasSearched && searchCount == 0 {
@@ -246,7 +246,7 @@ extension SearchViewController: UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    @objc(tableView:estimatedHeightForRowAtIndexPath:) func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
@@ -330,8 +330,8 @@ extension SearchViewController: InCellFunctionalityDelegate {
                 return pressedItem.isMarked.boolValue
             }
             set(value) {
-                pressedItem.isMarked = value
-                pressedItem.markedDate = Date()
+                pressedItem.setValue(value, forKey: "isMarked")
+                pressedItem.setValue(Date(), forKey: "markedDate")
             }
         }
         
