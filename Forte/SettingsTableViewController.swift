@@ -29,8 +29,8 @@ let aboutSection = Section(items: aboutForte, name: "About", sectionNumber:1)
 
 let rate = MenuItem(text: "Rate Forte on App Store", row: 0)
 let sendFeedback = MenuItem(text: "Tell me your feedback", row: 1)
-let reportProblem = MenuItem(text: "Report a problem", row: 2)
-let feedback: [MenuItem] = [rate, sendFeedback, reportProblem]
+//let reportProblem = MenuItem(text: "Report a problem", row: 2)
+let feedback: [MenuItem] = [rate, sendFeedback]
 let feedbackSection = Section(items: feedback, name: "Leave Feedback", sectionNumber: 2)
 
 let myTwitter = MenuItem(text: "Twitter", row: 0)
@@ -91,8 +91,8 @@ class SettingsTableViewController: UITableViewController {
             case sendFeedback.text:
                 showEmailForKey(sendFeedback.text)
                 
-            case reportProblem.text:
-                showEmailForKey(sendFeedback.text)
+//            case reportProblem.text:
+//                showEmailForKey(reportProblem.text)
                 
             case myTwitter.text:
                 if let url = URL(string: links[myTwitter.text]!) {
@@ -123,8 +123,8 @@ class SettingsTableViewController: UITableViewController {
         
         if key == sendFeedback.text {
             emailTitle = "Feedback of Forte"
-        } else if key == reportProblem.text {
-            emailTitle = "Problem of Forte"
+//        } else if key == reportProblem.text {
+//            emailTitle = "Problem of Forte"
         }
         
         let mailComposer = MFMailComposeViewController()
