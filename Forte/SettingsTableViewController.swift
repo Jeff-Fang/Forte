@@ -85,7 +85,7 @@ class SettingsTableViewController: UITableViewController {
             case rate.text:
                 if let url = URL(string:links[rate.text]!) {
 //                    UIApplication.shared().openURL(url)
-                    UIApplication.shared().open(url, options: ["url":url], completionHandler: nil)
+                    UIApplication.shared.open(url, options: ["url":url], completionHandler: nil)
                 }
                 
             case sendFeedback.text:
@@ -138,7 +138,7 @@ class SettingsTableViewController: UITableViewController {
 }
 
 extension SettingsTableViewController: MFMailComposeViewControllerDelegate {
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
+    private func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: NSError?) {
         
         switch result.rawValue {
         case MFMailComposeResult.cancelled.rawValue:

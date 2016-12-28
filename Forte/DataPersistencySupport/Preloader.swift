@@ -17,7 +17,7 @@ class Preloader {
     func preloadData () {
         print("Preloading!")
         // Load the data file. For any reasons it can't be loaded, we just return
-        guard let contentsOfURL = Bundle.main().urlForResource(dataSourceName, withExtension: "csv") else {
+        guard let contentsOfURL = Bundle.main.url(forResource:dataSourceName, withExtension: "csv") else {
             print("get contents URL failed! ")
             return
         }

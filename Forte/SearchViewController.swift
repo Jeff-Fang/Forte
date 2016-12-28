@@ -18,7 +18,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Identifiers for nib files
-    private struct cellID {
+    fileprivate struct cellID {
         static let brief = "GlossaryItemBriefTableViewCell"
         static let nothingFound = "NothingFoundTableViewCell"
         static let detailed = "GlossaryItemDetailedTableViewCell"
@@ -26,17 +26,17 @@ class SearchViewController: UIViewController {
     
     // Data preparation
     var managedObjectContext: NSManagedObjectContext!
-    private var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
-    private var searchFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    fileprivate var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
+    fileprivate var searchFetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>!
 
-    private var entityName = "GlossaryItem"
-    private var hasSearched = false
-    private var glossaryCount: Int = 0
-    private var searchCount: Int = 0
+    fileprivate var entityName = "GlossaryItem"
+    fileprivate var hasSearched = false
+    fileprivate var glossaryCount: Int = 0
+    fileprivate var searchCount: Int = 0
     
-    private var indexPathsToUpdate = [IndexPath] ()
-    private var prevSelectedIndexPath: IndexPath? = nil
-    private var selectedIndexPath: IndexPath? {
+    fileprivate var indexPathsToUpdate = [IndexPath] ()
+    fileprivate var prevSelectedIndexPath: IndexPath? = nil
+    fileprivate var selectedIndexPath: IndexPath? {
         willSet {
             prevSelectedIndexPath = selectedIndexPath
         }
@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
     }
     
     func customizeAppearance() {
-        searchBar.barTintColor = UIColor.white()
+        searchBar.barTintColor = UIColor.white
         //        searchBar.tintColor = UIColor.whiteColor()
         searchBar.tintColor = UIColor(colorLiteralRed: 255/255 , green: 80/255 , blue: 100/255 , alpha: 1)
         
@@ -88,7 +88,7 @@ class SearchViewController: UIViewController {
         if let moc = managedObjectContext {
             // Fetch glossary items
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-            let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
+            let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
             fetchRequest.sortDescriptors = [sortDescriptor]
             fetchRequest.fetchBatchSize = 20
             
@@ -183,8 +183,8 @@ extension SearchViewController: UISearchBarDelegate {
         NSFetchedResultsController<NSFetchRequestResult>.deleteCache(withName: cacheName)
         
         let searchFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        let searchPredicate = Predicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
-        let sortDescriptor = SortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
+        let searchPredicate = NSPredicate(format: "term BEGINSWITH [cd]%@", text)   // for [cd], the c means case insensitive, d to ignore accents (a & á)
+        let sortDescriptor = NSSortDescriptor(key: "term", ascending: true, selector: #selector(NSString.caseInsensitiveCompare(_:)) )
         searchFetchRequest.sortDescriptors = [sortDescriptor]
         searchFetchRequest.predicate = searchPredicate
         
@@ -357,7 +357,7 @@ extension SearchViewController: NSFetchedResultsControllerDelegate {
         tableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    fileprivate func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             print("*** NSFetchedResultsChangeInsert (object)")

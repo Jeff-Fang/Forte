@@ -35,8 +35,8 @@ class MarkedItemTableViewController: UITableViewController {
             let managedObjectModel = moc.persistentStoreCoordinator!.managedObjectModel
             fetchRequest = managedObjectModel.fetchRequestTemplate(forName: "MarkedItem")!.copy() as! NSFetchRequest
             
-            let sortDescriptor1 = SortDescriptor(key: "markedDate", ascending: false)
-            let sortDescriptor2 = SortDescriptor(key: "term", ascending: true)
+            let sortDescriptor1 = NSSortDescriptor(key: "markedDate", ascending: false)
+            let sortDescriptor2 = NSSortDescriptor(key: "term", ascending: true)
             fetchRequest.sortDescriptors = [sortDescriptor1, sortDescriptor2]
             fetchRequest.fetchBatchSize = 20
             
@@ -58,10 +58,10 @@ class MarkedItemTableViewController: UITableViewController {
 
     // MARK: - Dealing with Segues
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showItemCustomVC" {
             let cell = sender as! MarkedItemTableViewCell
-            let controller = segue.destinationViewController as! ItemCustomTableViewController
+            let controller = segue.destination as! ItemCustomTableViewController
             controller.termToDisplay = cell.markedTermLabel.text!
             controller.meaningToDisplay = cell.markedMeaningLabel.text!
             controller.noteToDisplay = cell.markedItemNote
@@ -71,7 +71,7 @@ class MarkedItemTableViewController: UITableViewController {
     }
     
     @IBAction func itemCustomVCDidFinishEditing(_ segue: UIStoryboardSegue) {
-        let controller = segue.sourceViewController as! ItemCustomTableViewController
+        let controller = segue.source as! ItemCustomTableViewController
         let itemNote = controller.noteToDisplay
         let itemIndex = controller.itemIndex
         
@@ -134,7 +134,7 @@ extension MarkedItemTableViewController: NSFetchedResultsControllerDelegate {
         tableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    fileprivate func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: AnyObject, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
             print("*** NSFetchedResultsChangeInsert (object)")

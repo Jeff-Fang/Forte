@@ -61,7 +61,7 @@ class ItemCustomTableViewController: UITableViewController {
     
     // MARK: - Dealing with Segues
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showItemCustomVC" {
             noteToDisplay = noteTakingTextView.text
         }

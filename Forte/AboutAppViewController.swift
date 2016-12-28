@@ -16,9 +16,9 @@ class AboutAppViewController: UIViewController {
         aboutWebView.delegate = self
 
         // Do any additional setup after loading the view.
-        if let htmlFile = Bundle.main().pathForResource("Forte 1.0", ofType: "html") {
+        if let htmlFile = Bundle.main.path(forResource: "Forte 1.0", ofType: "html") {
             if let htmlData = try? Data(contentsOf: URL(fileURLWithPath: htmlFile)) {
-                let baseURL = URL(fileURLWithPath: Bundle.main().bundlePath)
+                let baseURL = URL(fileURLWithPath: Bundle.main.bundlePath)
                 aboutWebView.load(htmlData, mimeType: "text/html", textEncodingName: "UTF-8", baseURL: baseURL)
             }
         }
@@ -35,7 +35,7 @@ extension AboutAppViewController: UIWebViewDelegate {
         if navigationType == UIWebViewNavigationType.linkClicked {
             if let url = request.url {
 //                UIApplication.shared().openURL(url)
-                UIApplication.shared().open(url, options: ["url":url], completionHandler: nil)
+                UIApplication.shared.open(url, options: ["url":url], completionHandler: nil)
             }
         }
         return true

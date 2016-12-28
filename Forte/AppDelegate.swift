@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     @available(iOS 10.0, *)
     lazy var coreDataStack = CoreDataStack()
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         customizeAppearance()
         checkUserDefaults()
         distributeManagedObjectController()
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func checkUserDefaults() {
-        let defaults = UserDefaults.standard()
+        let defaults = UserDefaults.standard
         let isPreloaded = defaults.bool(forKey: "isPreloaded")
         if !isPreloaded {
             let preloader = Preloader()

@@ -58,7 +58,7 @@ class Parser {
                                 for (origin, fullOrigin) in origins {
                                     if value!.contains(origin) {
                                         itemOriginDescription = fullOrigin
-                                        value = value!.replacingOccurrences(of: origin, with: "")
+                                        value = value!.replacingOccurrences(of: origin, with: "") as NSString?
                                     }
                                 }
                                 
