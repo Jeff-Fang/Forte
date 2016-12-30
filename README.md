@@ -2,7 +2,7 @@
 
 #### About the app
 
-__Forte__ is a glossary or a dictionary app of musical terminology. You can search and collect some frequently encountered terms and make notes for them. 
+__Forte__ is a glossary or a dictionary app of musical terminology. It allows you to search and collect some frequently encountered terms and make notes for them. 
 
 #### Content Source
 
