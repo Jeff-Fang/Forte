@@ -30,7 +30,26 @@
 		E5D7CC841CD611E800CC085A /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC831CD611E800CC085A /* CoreDataStack.swift */; };
 		E5D7CC861CD614C200CC085A /* CSVParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC851CD614C200CC085A /* CSVParser.swift */; };
 		E5D7CC881CD61E3800CC085A /* Preloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D7CC871CD61E3800CC085A /* Preloader.swift */; };
+		E5FC8DA21E17B6720099DE06 /* ForteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC8DA11E17B6720099DE06 /* ForteTests.swift */; };
+		E5FC8DB01E17B6A30099DE06 /* ForteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FC8DAF1E17B6A30099DE06 /* ForteUITests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E5FC8DA41E17B6720099DE06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E507AC6F1CA7CB7300EF850C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E507AC761CA7CB7300EF850C;
+			remoteInfo = Forte;
+		};
+		E5FC8DB21E17B6A30099DE06 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E507AC6F1CA7CB7300EF850C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E507AC761CA7CB7300EF850C;
+			remoteInfo = Forte;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		E501CBCB1CABCB91002D5E58 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -58,10 +77,30 @@
 		E5D7CC831CD611E800CC085A /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		E5D7CC851CD614C200CC085A /* CSVParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSVParser.swift; sourceTree = "<group>"; };
 		E5D7CC871CD61E3800CC085A /* Preloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preloader.swift; sourceTree = "<group>"; };
+		E5FC8D9F1E17B6710099DE06 /* ForteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5FC8DA11E17B6720099DE06 /* ForteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteTests.swift; sourceTree = "<group>"; };
+		E5FC8DA31E17B6720099DE06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5FC8DAD1E17B6A30099DE06 /* ForteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ForteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5FC8DAF1E17B6A30099DE06 /* ForteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForteUITests.swift; sourceTree = "<group>"; };
+		E5FC8DB11E17B6A30099DE06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E507AC741CA7CB7300EF850C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FC8D9C1E17B6710099DE06 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FC8DAA1E17B6A30099DE06 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -75,6 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				E507AC791CA7CB7300EF850C /* Forte */,
+				E5FC8DA01E17B6720099DE06 /* ForteTests */,
+				E5FC8DAE1E17B6A30099DE06 /* ForteUITests */,
 				E507AC781CA7CB7300EF850C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,6 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				E507AC771CA7CB7300EF850C /* Forte.app */,
+				E5FC8D9F1E17B6710099DE06 /* ForteTests.xctest */,
+				E5FC8DAD1E17B6A30099DE06 /* ForteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -142,6 +185,24 @@
 			path = DataPersistencySupport;
 			sourceTree = "<group>";
 		};
+		E5FC8DA01E17B6720099DE06 /* ForteTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC8DA11E17B6720099DE06 /* ForteTests.swift */,
+				E5FC8DA31E17B6720099DE06 /* Info.plist */,
+			);
+			path = ForteTests;
+			sourceTree = "<group>";
+		};
+		E5FC8DAE1E17B6A30099DE06 /* ForteUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E5FC8DAF1E17B6A30099DE06 /* ForteUITests.swift */,
+				E5FC8DB11E17B6A30099DE06 /* Info.plist */,
+			);
+			path = ForteUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,13 +223,49 @@
 			productReference = E507AC771CA7CB7300EF850C /* Forte.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E5FC8D9E1E17B6710099DE06 /* ForteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FC8DA81E17B6720099DE06 /* Build configuration list for PBXNativeTarget "ForteTests" */;
+			buildPhases = (
+				E5FC8D9B1E17B6710099DE06 /* Sources */,
+				E5FC8D9C1E17B6710099DE06 /* Frameworks */,
+				E5FC8D9D1E17B6710099DE06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5FC8DA51E17B6720099DE06 /* PBXTargetDependency */,
+			);
+			name = ForteTests;
+			productName = ForteTests;
+			productReference = E5FC8D9F1E17B6710099DE06 /* ForteTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E5FC8DAC1E17B6A30099DE06 /* ForteUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5FC8DB41E17B6A30099DE06 /* Build configuration list for PBXNativeTarget "ForteUITests" */;
+			buildPhases = (
+				E5FC8DA91E17B6A30099DE06 /* Sources */,
+				E5FC8DAA1E17B6A30099DE06 /* Frameworks */,
+				E5FC8DAB1E17B6A30099DE06 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5FC8DB31E17B6A30099DE06 /* PBXTargetDependency */,
+			);
+			name = ForteUITests;
+			productName = ForteUITests;
+			productReference = E5FC8DAD1E17B6A30099DE06 /* ForteUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E507AC6F1CA7CB7300EF850C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = swordx;
 				TargetAttributes = {
@@ -176,6 +273,18 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = Q7Y8V79W6L;
 						LastSwiftMigration = 0800;
+					};
+					E5FC8D9E1E17B6710099DE06 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q7Y8V79W6L;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E507AC761CA7CB7300EF850C;
+					};
+					E5FC8DAC1E17B6A30099DE06 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = Q7Y8V79W6L;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E507AC761CA7CB7300EF850C;
 					};
 				};
 			};
@@ -193,6 +302,8 @@
 			projectRoot = "";
 			targets = (
 				E507AC761CA7CB7300EF850C /* Forte */,
+				E5FC8D9E1E17B6710099DE06 /* ForteTests */,
+				E5FC8DAC1E17B6A30099DE06 /* ForteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -210,6 +321,20 @@
 				E576F89F1CAD242100DC6DA8 /* GlossaryItemDetailedTableViewCell.xib in Resources */,
 				E576F89B1CAD1C8B00DC6DA8 /* NothingFoundTableViewCell.xib in Resources */,
 				E507AC801CA7CB7300EF850C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FC8D9D1E17B6710099DE06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FC8DAB1E17B6A30099DE06 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +363,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5FC8D9B1E17B6710099DE06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FC8DA21E17B6720099DE06 /* ForteTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5FC8DA91E17B6A30099DE06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5FC8DB01E17B6A30099DE06 /* ForteUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5FC8DA51E17B6720099DE06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E507AC761CA7CB7300EF850C /* Forte */;
+			targetProxy = E5FC8DA41E17B6720099DE06 /* PBXContainerItemProxy */;
+		};
+		E5FC8DB31E17B6A30099DE06 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E507AC761CA7CB7300EF850C /* Forte */;
+			targetProxy = E5FC8DB21E17B6A30099DE06 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E507AC7E1CA7CB7300EF850C /* Main.storyboard */ = {
@@ -368,6 +522,72 @@
 			};
 			name = Release;
 		};
+		E5FC8DA61E17B6720099DE06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = Q7Y8V79W6L;
+				INFOPLIST_FILE = ForteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.practice.ForteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Forte.app/Forte";
+			};
+			name = Debug;
+		};
+		E5FC8DA71E17B6720099DE06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = Q7Y8V79W6L;
+				INFOPLIST_FILE = ForteTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.practice.ForteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Forte.app/Forte";
+			};
+			name = Release;
+		};
+		E5FC8DB51E17B6A30099DE06 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = Q7Y8V79W6L;
+				INFOPLIST_FILE = ForteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.practice.ForteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Forte;
+			};
+			name = Debug;
+		};
+		E5FC8DB61E17B6A30099DE06 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = Q7Y8V79W6L;
+				INFOPLIST_FILE = ForteUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.swordx.practice.ForteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = Forte;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -388,6 +608,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E5FC8DA81E17B6720099DE06 /* Build configuration list for PBXNativeTarget "ForteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FC8DA61E17B6720099DE06 /* Debug */,
+				E5FC8DA71E17B6720099DE06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E5FC8DB41E17B6A30099DE06 /* Build configuration list for PBXNativeTarget "ForteUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5FC8DB51E17B6A30099DE06 /* Debug */,
+				E5FC8DB61E17B6A30099DE06 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

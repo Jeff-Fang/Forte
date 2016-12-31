@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E5FC8D9E1E17B6710099DE06"
+               BuildableName = "ForteTests.xctest"
+               BlueprintName = "ForteTests"
+               ReferencedContainer = "container:Forte.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "E5FC8DAC1E17B6A30099DE06"
+               BuildableName = "ForteUITests.xctest"
+               BlueprintName = "ForteUITests"
+               ReferencedContainer = "container:Forte.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
